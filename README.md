@@ -25,13 +25,14 @@ Any static server works. Pages use relative paths, so the site can also be hoste
 | `site/logos/index.html` | All seven logo concepts with rationale, variants, theme colourways, co-branding and SVG download |
 | `site/logos/contour-studio.html` | Contour studio: reshape logo 3 (rings, terrain, summit, line, colour, wordmark), preview it everywhere, apply it site-wide, share or download it |
 | `site/palettes/index.html` | Member colours as observed, where they overlap, and every theme palette with WCAG contrast |
+| `site/results/index.html` | Organisers only (not linked from the hub): paste the review doc to tally everyone's top three picks |
 
 ### Review bar
 
 Every theme page has a small toolbar that switches **theme (A–F)**, **page (Home / Style guide / Collateral)** and **logo (1–7)**.
 
 - The logo choice is remembered across pages.
-- Share a combination with `?logo=<id>`, e.g. `themes/fieldwork/index.html?logo=tiles`.
+- Share a combination with `?logo=<id>`, e.g. `themes/fieldwork/index.html?logo=tiles`. **Copy link** always writes the explicit logo id, and adds `&contour=<code>` (or `reset`) when the logo is Contour, so the link fully describes what the reviewer saw.
 - `?logo=default` resets to the theme's paired logo.
 - On collateral pages, `?slides=all` shows every slide in a grid instead of the carousel.
 - `?clean` starts with the bar collapsed; `?shot` hides it completely.
@@ -42,6 +43,22 @@ The Contour studio saves only the settings that differ from the original, in `lo
 
 - `?contour=<code>` applies settings from a share link. The code is base64url-encoded JSON.
 - `?contour=reset` goes back to the original.
+
+### Running a review round
+
+1. Share a Google Doc where each reviewer adds their name and organisation, then pastes their **top three** links from **Copy link**, best first:
+   ```
+   Name — Organisation
+   1. https://hda.kobolabs.dev/themes/relief/index.html?logo=summits
+   2. …
+   3. …
+   Comments: optional, can run over several lines
+   ```
+2. When voting closes, open `results/index.html` (locally is fine) and paste the doc text, or drop in *File → Download → Plain text*. Click **Load example** (or open `results/index.html?example`) to see the expected format.
+3. The page turns each link back into a recipe (`{ theme, logo, page, contour? }`) and tallies themes, logos, exact combinations and theme × logo pairings. Rank 1/2/3 scores 3/2/1 by default. You can switch to 5/3/1 or to a plain count of mentions, and you can weight each organisation equally. Links it can't use, and ones it had to interpret (e.g. `logo=default` resolves to the theme's paired logo), are listed at the top.
+4. **Download recipes.json** for every resolved pick plus the tallies (the input for building the unified options). **Copy summary** gives a markdown table.
+
+Parsing rules: a line with no link starts a new reviewer (a second line straight after the name is taken as the organisation). Only the first three distinct links per reviewer count. If a name appears twice, the later entry wins. Everything runs in the browser. The pasted text is only kept in `localStorage`.
 
 ### How it's built
 

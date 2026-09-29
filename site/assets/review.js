@@ -2,6 +2,8 @@
  * Review toolbar: switch theme / page / logo on any themed page.
  * <body data-root="../../" data-theme-id="confluence" data-view="home">
  * The logo choice persists (localStorage) and can be shared with ?logo=<id>.
+ * "Copy link" writes the whole combination (?logo=<id>[&contour=<code>|reset]), which
+ * reviewers paste into the review doc and results/index.html reads back.
  * ?clean starts collapsed; ?shot hides the bar entirely (used for thumbnails).
  */
 (function () {
@@ -51,8 +53,12 @@
     select.addEventListener('change', () => { localStorage.setItem(KEY, select.value); applyLogo(); });
 
     bar.querySelector('.rb-copy').addEventListener('click', async (e) => {
+      // The link is the full recipe: theme and page from the path, plus the
+      // explicit logo id and any custom contour settings.
       const url = new URL(location.href);
-      url.search = ''; url.searchParams.set('logo', chosen() || 'default');
+      url.search = ''; url.hash = ''; url.searchParams.set('logo', effective());
+      const C = window.HDALogos.contour;
+      if (effective() === 'contour') url.searchParams.set('contour', C.isCustom() ? C.encode(C.diff(C.get())) : 'reset');
       try { await navigator.clipboard.writeText(url.toString()); e.target.textContent = 'Copied'; }
       catch { prompt('Copy this link', url.toString()); }
       setTimeout(() => (e.target.textContent = 'Copy link'), 1600);

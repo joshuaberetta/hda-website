@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Humanitarian Data Alliance · Review results</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/base.css">
+  <link rel="stylesheet" href="../assets/hub.css">
+  <link rel="icon" href="../assets/favicon.svg">
+  <style>
+    .rs-input textarea { width: 100%; min-height: 220px; padding: .9rem 1rem; border: 1px solid var(--h-line); border-radius: 10px; background: var(--h-surface); font: 13px/1.55 'IBM Plex Mono', ui-monospace, monospace; resize: vertical; }
+    .rs-input textarea.is-drop { border-color: var(--h-ink); background: #F3F1EA; }
+    .rs-controls { display: flex; flex-wrap: wrap; gap: .6rem 1.4rem; align-items: center; margin-top: .9rem; font-size: 14px; }
+    .rs-controls label { display: flex; gap: .45rem; align-items: center; }
+    .rs-controls select { padding: .35rem .5rem; border: 1px solid var(--h-line); border-radius: 7px; background: #fff; }
+    .rs-controls .spacer { flex: 1; }
+    .hub button.hbtn { cursor: pointer; }
+    .rs-stats { display: flex; flex-wrap: wrap; gap: .6rem; margin-bottom: 2rem; }
+    .rs-stats span { background: var(--h-surface); border: 1px solid var(--h-line); border-radius: 999px; padding: .3rem .8rem; font-size: 13px; }
+    .rs-stats b { color: var(--h-ink); }
+    .rs-block { margin-top: 2.6rem; }
+    .rs-block > h3 { font-size: 1.2rem; margin-bottom: .3rem; }
+    .rs-block > p { font-size: 14px; margin-bottom: 1rem; max-width: 46rem; }
+    .rs-table { width: 100%; border-collapse: collapse; background: var(--h-surface); border: 1px solid var(--h-line); border-radius: 12px; overflow: hidden; font-size: 14px; }
+    .rs-table th, .rs-table td { text-align: left; padding: .6rem .8rem; border-bottom: 1px solid var(--h-line); vertical-align: middle; }
+    .rs-table th { font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--h-ink-2); background: #F6F6F3; }
+    .rs-table tr:last-child td { border-bottom: 0; }
+    .rs-table td.num { font-variant-numeric: tabular-nums; color: var(--h-ink); white-space: nowrap; }
+    .rs-table td b { color: var(--h-ink); }
+    .rs-table small { display: block; color: var(--h-ink-2); font-size: 12.5px; }
+    .rs-bar { width: 140px; height: 8px; border-radius: 4px; background: #EEEEEA; overflow: hidden; }
+    .rs-bar i { display: block; height: 100%; background: var(--h-ink); }
+    .rs-thumb { width: 72px; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-radius: 5px; border: 1px solid var(--h-line); display: block; }
+    .rs-mark { width: 40px; height: 40px; display: grid; place-items: center; }
+    .rs-mark > span { width: 40px; height: 40px; }
+    .rs-pair { display: flex; gap: .6rem; align-items: center; }
+    .rs-matrix td, .rs-matrix th { text-align: center; }
+    .rs-matrix th:first-child, .rs-matrix td:first-child { text-align: left; }
+    .rs-matrix td.cell { font-variant-numeric: tabular-nums; color: var(--h-ink); min-width: 56px; }
+    .rs-variants { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1rem; }
+    .rs-variant { background: var(--h-surface); border: 1px solid var(--h-line); border-radius: 12px; padding: 1rem; font-size: 13px; display: grid; gap: .5rem; }
+    .rs-variant .stage { height: 96px; display: grid; place-items: center; }
+    .rs-variant .stage > span { height: 80px; width: 100%; }
+    .rs-variant code { font-size: 11.5px; word-break: break-all; color: var(--h-ink-2); }
+    .rs-reviewers { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1rem; }
+    .rs-reviewer { background: var(--h-surface); border: 1px solid var(--h-line); border-radius: 12px; padding: 1rem 1.1rem; font-size: 14px; }
+    .rs-reviewer h4 { color: var(--h-ink); font-size: 1rem; }
+    .rs-reviewer h4 small { font-weight: 400; color: var(--h-ink-2); }
+    .rs-reviewer ol { margin: .6rem 0 0; padding-left: 1.2rem; display: grid; gap: .3rem; }
+    .rs-reviewer blockquote { margin-top: .7rem; padding-left: .8rem; border-left: 2px solid var(--h-line); font-size: 13.5px; }
+    .rs-flag { display: inline-block; font-size: 11.5px; padding: .05rem .45rem; border-radius: 5px; background: #FBEFD9; color: #7A4B00; margin-left: .3rem; }
+    .rs-problems { background: #FFF7F5; border: 1px solid #F1D3CC; border-radius: 12px; padding: 1rem 1.2rem; font-size: 14px; }
+    .rs-problems li { margin-block: .3rem; }
+    .rs-problems code { font-size: 12px; word-break: break-all; }
+    .rs-empty { font-size: 15px; }
+    @media (max-width: 980px) { .rs-bar { width: 70px; } .rs-scroll { overflow-x: auto; } }
+  </style>
+</head>
+<body class="hub">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="hub-top"><div class="container">
+  <a class="hub-brand" href="../index.html">HDA <span>Design review</span></a>
+  <nav aria-label="Review pages"><a href="../index.html">Overview</a><a href="../logos/index.html">Logos</a><a href="../palettes/index.html">Colour</a><a href="index.html" aria-current="page">Results</a></nav>
+</div></header>
+
+<main id="main">
+  <section class="hub-hero"><div class="container">
+    <p class="hub-kicker">Organisers only · Runs in your browser, nothing is uploaded</p>
+    <h1>Review results</h1>
+    <p class="lede">Paste the review doc below. Each link reviewers copied from the review bar is turned back into the combination they chose, and ranked by the order they listed it in.</p>
+  </div></section>
+
+  <section class="hub-section"><div class="container rs-input">
+    <label for="doc" class="sr-only">Review doc text</label>
+    <textarea id="doc" spellcheck="false" placeholder="Name — Organisation&#10;1. https://hda.kobolabs.dev/themes/relief/index.html?logo=summits&#10;2. https://hda.kobolabs.dev/themes/fieldwork/index.html?logo=contour&amp;contour=…&#10;3. …&#10;Comments: …&#10;&#10;Next name — Organisation&#10;…"></textarea>
+    <div class="rs-controls">
+      <label>Scoring <select id="scoring">
+        <option value="3,2,1">3 / 2 / 1</option>
+        <option value="5,3,1">5 / 3 / 1 (favours first choices)</option>
+        <option value="1,1,1">1 / 1 / 1 (any mention)</option>
+      </select></label>
+      <label>Weighting <select id="weighting">
+        <option value="person">One person, one vote</option>
+        <option value="org">Each organisation counts equally</option>
+      </select></label>
+      <span class="spacer"></span>
+      <button class="hbtn" type="button" id="example">Load example</button>
+      <button class="hbtn" type="button" id="clear">Clear</button>
+      <button class="hbtn" type="button" id="copy-md" disabled>Copy summary</button>
+      <button class="hbtn hbtn--dark" type="button" id="download" disabled>Download recipes.json</button>
+    </div>
+    <p class="sub" style="margin-top:.8rem;font-size:13px">Tip: in Google Docs use File → Download → Plain text, then drop the file here, or just select all and paste. A line with no link starts a new reviewer; “Comments:” lines are kept as comments.</p>
+  </div></section>
+
+  <section class="hub-section hub-rule"><div class="container" id="out">
+    <p class="rs-empty">Paste the review doc above to see results.</p>
+  </div></section>
+</main>
+
+<footer class="hub-foot"><div class="container">Results are computed locally from the pasted text. The text is kept in this browser’s storage so it survives a reload.</div></footer>
+
+<script src="../assets/themes.js"></script>
+<script src="../assets/logos.js"></script>
+<script>
+(function () {
+  const T = Object.fromEntries(HDAThemes.map((t) => [t.id, t]));
+  const L = HDALogos.byId;
+  const C = HDALogos.contour;
+  const PAGES = { '': 'home', 'index.html': 'home', 'style-guide.html': 'guide', 'collateral.html': 'collateral' };
+  const PAGE_FILE = { home: 'index.html', guide: 'style-guide.html', collateral: 'collateral.html' };
+  const PAGE_NAME = { home: 'Home', guide: 'Style guide', collateral: 'Collateral' };
+  const KNOWN_PARAMS = new Set(['logo', 'contour', 'v', 'clean', 'shot', 'slides']);
+  const STORE = 'hda-results-input';
+
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const round = (n) => Math.round(n * 100) / 100;
+
+  // --- Parse the doc into reviewer blocks ----------------------------------
+  const URL_RE = /(?:https?:\/\/|localhost[:/]|(?:\.\.?\/)?themes\/)[^\s<>"'()\[\]]+/gi;
+  const EMPTY_LINE = /^[\s\d.)\-–—•*#]*$/;         // "1." or "-" with no link
+  const COMMENT = /^\s*(?:comments?|notes?|feedback)\s*[:\-–—]\s*/i;
+
+  function splitName(line) {
+    const s = line.replace(/^[\s#*•\-]+/, '').replace(/[\s:]+$/, '').trim();
+    let m = s.match(/^(.*?)\s*\(([^)]+)\)\s*$/);
+    if (m) return { name: m[1].trim(), org: m[2].trim() };
+    m = s.match(/^(.*?)\s+[—–\-|·]\s+(.+)$/) || s.match(/^(.*?)\s*[,|]\s*(.+)$/);
+    if (m) return { name: m[1].trim(), org: m[2].trim() };
+    return { name: s, org: '' };
+  }
+
+  function parseDoc(text) {
+    const blocks = [];
+    let cur = null, inComment = false;
+    text.replace(/\r\n?/g, '\n').split('\n').forEach((raw, i) => {
+      const line = raw.trim();
+      if (!line) { inComment = false; if (cur) cur.sealed = true; return; }
+      const urls = line.match(URL_RE) || [];
+      if (urls.length) {
+        inComment = false;
+        if (!cur) blocks.push((cur = { name: '(no name)', org: '', line: i + 1, links: [], comments: [], notes: [] }));
+        urls.forEach((u) => cur.links.push({ raw: u.replace(/[.,;:!?]+$/, ''), line: i + 1 }));
+        return;
+      }
+      if (COMMENT.test(line)) {
+        if (!cur) blocks.push((cur = { name: '(no name)', org: '', line: i + 1, links: [], comments: [], notes: [] }));
+        cur.comments.push(line.replace(COMMENT, ''));
+        inComment = true;
+        return;
+      }
+      if (inComment && cur) { cur.comments.push(line); return; }
+      if (EMPTY_LINE.test(line)) return;
+      if (cur && !cur.links.length && !cur.comments.length && !cur.sealed) {
+        // A second line before any links: take it as the organisation if missing, otherwise a note.
+        if (!cur.org && line.length < 60) cur.org = line; else cur.notes.push(line);
+        return;
+      }
+      const { name, org } = splitName(line);
+      blocks.push((cur = { name, org, line: i + 1, links: [], comments: [], notes: [] }));
+    });
+    return blocks;
+  }
+
+  // --- Resolve one link to a recipe ----------------------------------------
+  const sortedJSON = (o) => JSON.stringify(Object.keys(o).sort().reduce((a, k) => ((a[k] = o[k]), a), {}));
+
+  function resolve(raw) {
+    const flags = [];
+    let url;
+    try {
+      const s = /^https?:\/\//i.test(raw) ? raw : /^localhost/i.test(raw) ? 'http://' + raw : 'http://x/' + raw.replace(/^(\.\.?\/)+/, '');
+      url = new URL(s);
+    } catch { return { error: 'Not a valid URL' }; }
+    const m = url.pathname.match(/\/themes\/([^/]+)\/?([^/]*)$/);
+    if (!m) return { error: 'Not a theme page link' };
+    const theme = T[m[1]];
+    if (!theme) return { error: `Unknown theme “${m[1]}”` };
+    const page = PAGES[m[2]] || m[2].replace(/\.html$/, '');
+
+    let logo = url.searchParams.get('logo');
+    if (!logo || logo === 'default') {
+      logo = theme.defaultLogo;
+      flags.push(url.searchParams.has('logo') ? 'logo=default, used theme’s paired logo' : 'no logo in link, used theme’s paired logo');
+    } else if (!L[logo]) {
+      return { error: `Unknown logo “${logo}”` };
+    }
+
+    let contour = null;
+    if (logo === 'contour') {
+      const code = url.searchParams.get('contour');
+      contour = {};
+      if (code && code !== 'reset') {
+        try { contour = C.diff(Object.assign({}, C.defaults, C.decode(code))); }
+        catch { flags.push('contour code unreadable, used original'); }
+      } else if (!code) {
+        flags.push('no contour code; the original Contour is assumed');
+      }
+    }
+
+    const extra = {};
+    url.searchParams.forEach((v, k) => { if (!KNOWN_PARAMS.has(k)) extra[k] = v; });
+    if (Object.keys(extra).length) flags.push('extra params: ' + Object.keys(extra).join(', '));
+
+    const recipe = { theme: theme.id, logo, page };
+    if (contour && Object.keys(contour).length) recipe.contour = contour;
+    if (Object.keys(extra).length) recipe.extra = extra;
+    return { recipe, flags };
+  }
+
+  const contourKey = (r) => (r.contour ? sortedJSON(r.contour) : '');
+  const comboKey = (r) => `${r.theme}|${r.logo}|${contourKey(r)}|${r.extra ? sortedJSON(r.extra) : ''}`;
+
+  function recipeHref(r) {
+    const q = new URLSearchParams({ logo: r.logo });
+    if (r.logo === 'contour') q.set('contour', r.contour ? C.encode(r.contour) : 'reset');
+    if (r.extra) Object.entries(r.extra).forEach(([k, v]) => q.set(k, v));
+    return `../themes/${r.theme}/${PAGE_FILE[r.page] || 'index.html'}?${q}`;
+  }
+
+  // --- Analyse --------------------------------------------------------------
+  function analyse(text, points, weighting) {
+    const problems = [];
+    const reviewers = [];
+    parseDoc(text).forEach((b) => {
+      const picks = [];
+      const seen = new Set();
+      const bflags = [];
+      b.links.forEach((l) => {
+        const res = resolve(l.raw);
+        if (res.error) { problems.push({ who: b.name, line: l.line, raw: l.raw, msg: res.error }); return; }
+        const key = comboKey(res.recipe);
+        if (seen.has(key)) { bflags.push('duplicate link ignored'); return; }
+        seen.add(key);
+        picks.push({ recipe: res.recipe, flags: res.flags, raw: l.raw, line: l.line });
+      });
+      if (!picks.length) {
+        if (b.links.length || b.comments.length) problems.push({ who: b.name, line: b.line, raw: '', msg: 'No usable links for this reviewer' });
+        return;
+      }
+      if (picks.length > 3) bflags.push(`${picks.length} links, only the first 3 counted`);
+      picks.slice(0, 3).forEach((p) => p.flags.forEach((f) => problems.push({ who: b.name, line: p.line, raw: p.raw, msg: f, soft: true })));
+      reviewers.push({ name: b.name, org: b.org, orgKey: (b.org || b.name).trim().toLowerCase(), comments: b.comments.join('\n'), notes: b.notes, flags: bflags, picks: picks.slice(0, 3).map((p, i) => Object.assign(p, { rank: i + 1 })) });
+    });
+
+    // Same name twice: keep the later block (a reviewer re-posting their picks).
+    const byName = new Map();
+    reviewers.forEach((r) => {
+      const k = r.name.toLowerCase();
+      if (byName.has(k)) problems.push({ who: r.name, line: r.picks[0].line, raw: '', msg: 'Name appears more than once; the later entry is used', soft: true });
+      byName.set(k, r);
+    });
+    const voters = [...byName.values()];
+
+    const orgSize = {};
+    voters.forEach((r) => (orgSize[r.orgKey] = (orgSize[r.orgKey] || 0) + 1));
+    const orgCount = Object.keys(orgSize).length;
+    voters.forEach((r) => (r.weight = weighting === 'org' ? 1 / orgSize[r.orgKey] : 1));
+
+    const tally = () => new Map();
+    const add = (map, key, pick, r, extra) => {
+      const e = map.get(key) || Object.assign({ key, points: 0, firsts: 0, who: new Set() }, extra);
+      e.points += points[pick.rank - 1] * r.weight;
+      if (pick.rank === 1) e.firsts += r.weight;
+      e.who.add(r.name);
+      map.set(key, e);
+    };
+    const themes = tally(), logos = tally(), combos = tally(), matrix = tally(), variants = tally();
+    voters.forEach((r) => r.picks.forEach((p) => {
+      const rc = p.recipe;
+      add(themes, rc.theme, p, r, { theme: rc.theme });
+      add(logos, rc.logo, p, r, { logo: rc.logo });
+      add(combos, comboKey(rc), p, r, { recipe: rc });
+      add(matrix, `${rc.theme}|${rc.logo}`, p, r);
+      if (rc.contour) add(variants, contourKey(rc), p, r, { contour: rc.contour, themes: new Set() });
+      if (rc.contour) variants.get(contourKey(rc)).themes.add(rc.theme);
+    }));
+    const sorted = (m) => [...m.values()].sort((a, b) => b.points - a.points || b.firsts - a.firsts || b.who.size - a.who.size);
+
+    return {
+      voters, problems, orgCount, points, weighting,
+      themes: sorted(themes), logos: sorted(logos), combos: sorted(combos), variants: sorted(variants), matrix,
+    };
+  }
+
+  // --- Render ---------------------------------------------------------------
+  const themeLabel = (id) => `${T[id].letter} · ${T[id].name}`;
+  const logoLabel = (id) => `${L[id].num} · ${L[id].name}`;
+  const thumb = (id) => `<img class="rs-thumb" src="../assets/thumbs/${id}.jpg" alt="" loading="lazy">`;
+  const mark = (id, contour) => `<span class="rs-mark">${HDALogos.render(id, 'mark', id === 'contour' ? (contour || {}) : undefined)}</span>`;
+  const bar = (v, max) => `<div class="rs-bar"><i style="width:${max ? (100 * v) / max : 0}%"></i></div>`;
+  const whoList = (set) => [...set].map(esc).join(', ');
+
+  function render(res) {
+    const out = $('out');
+    if (!res.voters.length) {
+      out.innerHTML = `<p class="rs-empty">No reviewers with usable links found yet.</p>${problemsHtml(res)}`;
+      return;
+    }
+    const maxT = res.themes[0].points, maxL = res.logos[0].points, maxC = res.combos[0].points;
+    const pts = res.points.join(' / ');
+    const wLabel = res.weighting === 'org' ? 'each organisation’s points averaged across its reviewers' : 'one person, one vote';
+
+    const themeRows = res.themes.map((e, i) => `<tr><td class="num">${i + 1}</td>
+      <td><div class="rs-pair">${thumb(e.theme)}<div><b>${themeLabel(e.theme)}</b><small>${esc(T[e.theme].tagline)}</small></div></div></td>
+      <td class="num">${round(e.points)}</td><td>${bar(e.points, maxT)}</td><td class="num">${round(e.firsts)}</td><td class="num">${e.who.size}</td></tr>`).join('');
+
+    const logoRows = res.logos.map((e, i) => `<tr><td class="num">${i + 1}</td>
+      <td><div class="rs-pair">${mark(e.logo)}<b>${logoLabel(e.logo)}</b></div></td>
+      <td class="num">${round(e.points)}</td><td>${bar(e.points, maxL)}</td><td class="num">${round(e.firsts)}</td><td class="num">${e.who.size}</td></tr>`).join('');
+
+    const comboRows = res.combos.map((e, i) => {
+      const r = e.recipe;
+      const custom = r.contour ? ' <span class="rs-flag">custom contour</span>' : '';
+      const extra = r.extra ? ` <span class="rs-flag">${esc(Object.entries(r.extra).map(([k, v]) => `${k}=${v}`).join(' '))}</span>` : '';
+      return `<tr><td class="num">${i + 1}</td>
+        <td><div class="rs-pair">${thumb(r.theme)}${mark(r.logo, r.contour)}<div><b>${themeLabel(r.theme)} + ${logoLabel(r.logo)}</b>${custom}${extra}<small>${whoList(e.who)}</small></div></div></td>
+        <td class="num">${round(e.points)}</td><td>${bar(e.points, maxC)}</td><td class="num">${round(e.firsts)}</td><td class="num">${e.who.size}</td>
+        <td><a href="${esc(recipeHref(r))}" target="_blank" rel="noopener">Open</a></td></tr>`;
+    }).join('');
+
+    const usedLogos = HDALogos.list.filter((l) => res.logos.some((e) => e.logo === l.id));
+    const maxCell = Math.max(...[...res.matrix.values()].map((e) => e.points));
+    const matrixRows = HDAThemes.filter((t) => res.themes.some((e) => e.theme === t.id)).map((t) => `<tr><td><b>${themeLabel(t.id)}</b></td>${usedLogos.map((l) => {
+      const e = res.matrix.get(`${t.id}|${l.id}`);
+      const a = e ? 0.08 + 0.55 * (e.points / maxCell) : 0;
+      return `<td class="cell" style="background:rgb(22 24 29 / ${a});color:${a > 0.4 ? '#fff' : ''}" title="${e ? whoList(e.who) : ''}">${e ? round(e.points) : ''}</td>`;
+    }).join('')}</tr>`).join('');
+
+    const variantCards = res.variants.map((e) => `<div class="rs-variant">
+      <div class="stage">${HDALogos.render('contour', 'mark', e.contour)}</div>
+      <b>${round(e.points)} pts · ${e.who.size} reviewer${e.who.size > 1 ? 's' : ''}</b>
+      <small>${whoList(e.who)} · in ${[...e.themes].map((id) => T[id].name).join(', ')}</small>
+      <code>${esc(sortedJSON(e.contour))}</code>
+      <a href="../logos/contour-studio.html?contour=${C.encode(e.contour)}" target="_blank" rel="noopener">Open in studio</a></div>`).join('');
+
+    const reviewerCards = res.voters.map((r) => `<div class="rs-reviewer">
+      <h4>${esc(r.name)} ${r.org ? `<small>· ${esc(r.org)}</small>` : ''}${r.flags.map((f) => `<span class="rs-flag">${esc(f)}</span>`).join('')}</h4>
+      <ol>${r.picks.map((p) => `<li><a href="${esc(recipeHref(p.recipe))}" target="_blank" rel="noopener">${themeLabel(p.recipe.theme)} + ${logoLabel(p.recipe.logo)}</a>${p.recipe.contour ? ' <span class="rs-flag">custom contour</span>' : ''}${p.recipe.page !== 'home' ? ` <small>(${esc(PAGE_NAME[p.recipe.page] || p.recipe.page)})</small>` : ''}</li>`).join('')}</ol>
+      ${r.comments ? `<blockquote>${esc(r.comments).replace(/\n/g, '<br>')}</blockquote>` : ''}
+      ${r.notes.length ? `<blockquote>${r.notes.map(esc).join('<br>')}</blockquote>` : ''}</div>`).join('');
+
+    out.innerHTML = `
+      <div class="rs-stats">
+        <span><b>${res.voters.length}</b> reviewers</span>
+        <span><b>${res.orgCount}</b> organisations</span>
+        <span><b>${res.voters.reduce((n, r) => n + r.picks.length, 0)}</b> picks</span>
+        <span><b>${res.combos.length}</b> distinct combinations</span>
+        <span>Scoring <b>${pts}</b> · ${wLabel}</span>
+      </div>
+      ${problemsHtml(res)}
+      <div class="rs-block"><h3>Themes</h3><p>Every pick counts towards its theme, whichever logo it used.</p>
+        <div class="rs-scroll"><table class="rs-table"><thead><tr><th>#</th><th>Theme</th><th>Points</th><th></th><th>1st choices</th><th>Reviewers</th></tr></thead><tbody>${themeRows}</tbody></table></div></div>
+      <div class="rs-block"><h3>Logos</h3><p>Every pick counts towards its logo, whichever theme it was shown in.</p>
+        <div class="rs-scroll"><table class="rs-table"><thead><tr><th>#</th><th>Logo</th><th>Points</th><th></th><th>1st choices</th><th>Reviewers</th></tr></thead><tbody>${logoRows}</tbody></table></div></div>
+      <div class="rs-block"><h3>Exact combinations</h3><p>Theme + logo (+ Contour settings) exactly as linked. Several reviewers on one row means they picked the same thing independently.</p>
+        <div class="rs-scroll"><table class="rs-table"><thead><tr><th>#</th><th>Combination</th><th>Points</th><th></th><th>1st choices</th><th>Reviewers</th><th></th></tr></thead><tbody>${comboRows}</tbody></table></div></div>
+      <div class="rs-block"><h3>Theme × logo</h3><p>Points for each pairing. Hover a cell to see who chose it.</p>
+        <div class="rs-scroll"><table class="rs-table rs-matrix"><thead><tr><th>Theme</th>${usedLogos.map((l) => `<th>${l.num} ${esc(l.name)}</th>`).join('')}</tr></thead><tbody>${matrixRows}</tbody></table></div></div>
+      ${res.variants.length ? `<div class="rs-block"><h3>Custom Contour logos</h3><p>Contour studio settings reviewers linked, with the values that differ from the original.</p><div class="rs-variants">${variantCards}</div></div>` : ''}
+      <div class="rs-block"><h3>By reviewer</h3><p>Each reviewer’s picks in order, with their comments.</p><div class="rs-reviewers">${reviewerCards}</div></div>`;
+  }
+
+  function problemsHtml(res) {
+    if (!res.problems.length) return '';
+    const hard = res.problems.filter((p) => !p.soft), soft = res.problems.filter((p) => p.soft);
+    const li = (p) => `<li><b>${esc(p.who)}</b>, line ${p.line}: ${esc(p.msg)}${p.raw ? `<br><code>${esc(p.raw)}</code>` : ''}</li>`;
+    return `<div class="rs-problems">
+      ${hard.length ? `<b>${hard.length} link${hard.length > 1 ? 's' : ''} couldn’t be used</b><ul>${hard.map(li).join('')}</ul>` : ''}
+      ${soft.length ? `<details${hard.length ? '' : ' open'}><summary><b>${soft.length} note${soft.length > 1 ? 's' : ''}</b> (counted, but worth a look)</summary><ul>${soft.map(li).join('')}</ul></details>` : ''}
+    </div>`;
+  }
+
+  // --- Exports --------------------------------------------------------------
+  const plainSet = (e) => Object.assign({}, e, { who: [...e.who], themes: e.themes ? [...e.themes] : undefined, key: undefined });
+
+  function exportJSON(res) {
+    return {
+      generatedAt: new Date().toISOString(),
+      scoring: res.points, weighting: res.weighting,
+      reviewers: res.voters.map((r) => ({
+        name: r.name, org: r.org, weight: round(r.weight), comments: r.comments, notes: r.notes, flags: r.flags,
+        picks: r.picks.map((p) => ({ rank: p.rank, recipe: p.recipe, link: p.raw, flags: p.flags })),
+      })),
+      tallies: {
+        themes: res.themes.map(plainSet), logos: res.logos.map(plainSet),
+        combinations: res.combos.map((e) => Object.assign(plainSet(e), { link: recipeHref(e.recipe).replace(/^\.\.\//, '') })),
+        contourVariants: res.variants.map((e) => Object.assign(plainSet(e), { code: C.encode(e.contour) })),
+      },
+      problems: res.problems,
+    };
+  }
+
+  function summaryMarkdown(res) {
+    const rows = (list, label) => list.slice(0, 5).map((e, i) => `| ${i + 1} | ${label(e)} | ${round(e.points)} | ${round(e.firsts)} | ${e.who.size} |`).join('\n');
+    const head = '| # | Option | Points | 1st choices | Reviewers |\n|---|---|---|---|---|';
+    return `**HDA design review: ${res.voters.length} reviewers, ${res.orgCount} organisations** (scoring ${res.points.join('/')}, ${res.weighting === 'org' ? 'weighted by organisation' : 'one person, one vote'})
+
+**Themes**
+${head}
+${rows(res.themes, (e) => themeLabel(e.theme))}
+
+**Logos**
+${head}
+${rows(res.logos, (e) => logoLabel(e.logo))}
+
+**Top combinations**
+${head}
+${rows(res.combos, (e) => `${themeLabel(e.recipe.theme)} + ${logoLabel(e.recipe.logo)}${e.recipe.contour ? ' (custom contour)' : ''}`)}
+`;
+  }
+
+  // --- Wiring ---------------------------------------------------------------
+  let last = null;
+  function run() {
+    const text = $('doc').value;
+    localStorage.setItem(STORE, text);
+    if (!text.trim()) {
+      last = null;
+      $('out').innerHTML = '<p class="rs-empty">Paste the review doc above to see results.</p>';
+    } else {
+      last = analyse(text, $('scoring').value.split(',').map(Number), $('weighting').value);
+      render(last);
+    }
+    const ok = !!(last && last.voters.length);
+    $('download').disabled = !ok;
+    $('copy-md').disabled = !ok;
+  }
+
+  let t;
+  $('doc').addEventListener('input', () => { clearTimeout(t); t = setTimeout(run, 250); });
+  $('scoring').addEventListener('change', run);
+  $('weighting').addEventListener('change', run);
+  $('clear').addEventListener('click', () => { $('doc').value = ''; run(); });
+
+  $('download').addEventListener('click', () => {
+    const blob = new Blob([JSON.stringify(exportJSON(last), null, 2)], { type: 'application/json' });
+    const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: 'recipes.json' });
+    a.click(); URL.revokeObjectURL(a.href);
+  });
+  $('copy-md').addEventListener('click', async (e) => {
+    const md = summaryMarkdown(last);
+    try { await navigator.clipboard.writeText(md); e.target.textContent = 'Copied'; }
+    catch { prompt('Copy this summary', md); }
+    setTimeout(() => (e.target.textContent = 'Copy summary'), 1600);
+  });
+
+  const ta = $('doc');
+  ['dragenter', 'dragover'].forEach((ev) => ta.addEventListener(ev, (e) => { e.preventDefault(); ta.classList.add('is-drop'); }));
+  ['dragleave', 'drop'].forEach((ev) => ta.addEventListener(ev, () => ta.classList.remove('is-drop')));
+  ta.addEventListener('drop', async (e) => {
+    const f = e.dataTransfer.files[0];
+    if (!f) return;
+    e.preventDefault();
+    ta.value = await f.text();
+    run();
+  });
+
+  $('example').addEventListener('click', () => {
+    const base = 'https://hda.kobolabs.dev/themes';
+    const custom = C.encode({ rings: 5, wobble: 1.6, seed: 7 });
+    ta.value = `HDA design review: top three picks
+
+Amira Haddad — iMMAP
+1. ${base}/relief/index.html?logo=summits
+2. ${base}/fieldwork/index.html?logo=contour&contour=${custom}
+3. ${base}/confluence/style-guide.html?logo=convergence
+Comments: Relief feels the most distinctive. Summits reads well small.
+
+Tom Becker (CartONG)
+1. ${base}/fieldwork/index.html?logo=contour&contour=${custom}
+2. ${base}/relief/index.html?logo=summits
+3. ${base}/atlas/collateral.html?logo=strata&slides=all
+
+Priya Nair, HOT
+1. ${base}/relief/index.html?logo=summits
+2. ${base}/signal/index.html?logo=default
+3. https://example.com/not-a-theme
+
+Leo Martin
+Kobo
+1. http://localhost:8787/themes/commons/index.html?logo=monogram
+2. ${base}/relief/index.html?logo=contour&contour=reset
+3. ${base}/fieldwork/index.html?logo=nope
+Comments: Commons lets the member brands lead.
+Would like to see A's layout with C's colours.
+`;
+    run();
+  });
+
+  ta.value = localStorage.getItem(STORE) || '';
+  if (new URLSearchParams(location.search).has('example')) $('example').click();
+  else run();
+})();
+</script>
+</body>
+</html>
