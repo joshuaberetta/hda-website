@@ -1,0 +1,30 @@
+[data-theme="fieldwork"] {
+  --c-bg: #FBF8F1;
+  --c-surface: #F3ECDC;
+  --c-surface-2: #E1ECE6;
+  --c-surface-3: #F6E3DA;
+  --c-surface-4: #E3ECF3;
+  --c-ink: #1D3B3F;
+  --c-ink-2: #4C5E5C;
+  --c-line: #E2D9C5;
+  --c-primary: #1F5A5C;
+  --c-primary-ink: #FFFFFF;
+  --c-accent: #B4472E;
+  --c-accent-ink: #FFFFFF;
+  --c-accent-2: #6F7F22;
+  --c-accent-3: #D39C35;
+  --c-accent-4: #2F72A3;
+
+  --logo-a: #C0533A; --logo-b: #1D3B3F; --logo-c: #3B82B5; --logo-d: #7C8D2A;
+  --logo-ink: #1D3B3F; --logo-bg: #FBF8F1;
+
+  --font-head: 'Lora', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --radius: 18px;
+}
+[data-theme="fieldwork"] .inverse {
+  --c-bg: #1D3B3F; --c-surface: #234649; --c-surface-2: #2A5256;
+  --c-ink: #FBF8F1; --c-ink-2: #C6D3CF; --c-line: #3A5E61;
+  --c-primary: #FBF8F1; --c-primary-ink: #1D3B3F; --c-accent-4: #8CC0E6;
+  --logo-b: #FBF8F1; --logo-ink: #FBF8F1; --logo-bg: #1D3B3F;
+}

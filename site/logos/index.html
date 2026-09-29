@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Humanitarian Data Alliance · Logo concepts</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Barlow+Semi+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="../assets/base.css">
+  <link rel="stylesheet" href="../themes/confluence/tokens.css">
+  <link rel="stylesheet" href="../themes/fieldwork/tokens.css">
+  <link rel="stylesheet" href="../themes/signal/tokens.css">
+  <link rel="stylesheet" href="../themes/commons/tokens.css">
+  <link rel="stylesheet" href="../assets/hub.css">
+  <link rel="icon" href="../assets/favicon.svg">
+  <style>
+    .lg { padding-block: 3.5rem; border-top: 1px solid var(--h-line); scroll-margin-top: 1rem; }
+    .lg-head { display: grid; grid-template-columns: 1fr 1.4fr; gap: 3rem; align-items: start; margin-bottom: 2rem; }
+    .lg-num { font: 500 13px 'IBM Plex Mono', monospace; color: var(--h-ink-2); }
+    .lg-head h2 { font-size: 2.2rem; margin: .3rem 0 .4rem; }
+    .lg-head .summary { color: var(--h-ink); font-size: 1.1rem; }
+    .lg-head .rationale { font-size: 1rem; }
+    .lg-head .paired { margin-top: 1rem; font-size: 14px; }
+    .lg-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 1rem; }
+    .lg-cell { margin: 0; }
+    .lg-stage { min-height: 180px; display: flex; align-items: center; justify-content: center; gap: 1.6rem; padding: 1.8rem; background: var(--h-surface); border: 1px solid var(--h-line); border-radius: 12px; }
+    .lg-cell figcaption { font-size: 13px; margin-top: .5rem; }
+    .lg-dark { background: #0E2A47; border-color: #0E2A47; --logo-b: #FFFFFF; --logo-ink: #FFFFFF; --logo-bg: #0E2A47; }
+    .lg-mono { --logo-a: #16181D; --logo-b: #16181D; --logo-c: #16181D; --logo-d: #16181D; --logo-ink: #16181D; }
+    .lg-mono-rev { background: #16181D; border-color: #16181D; --logo-a: #fff; --logo-b: #fff; --logo-c: #fff; --logo-d: #fff; --logo-ink: #fff; --logo-bg: #16181D; }
+    .lg-sizes { align-items: flex-end; }
+    .lg-sizes span { display: inline-block; }
+    .lg-fav { display: flex; gap: .8rem; align-items: center; }
+    .lg-fav i { display: grid; place-items: center; background: #EDEDEA; border-radius: 8px 8px 0 0; padding: .45rem .7rem; font: 500 12px Inter, sans-serif; color: var(--h-ink); font-style: normal; gap: .45rem; grid-auto-flow: column; }
+    .lg-fav i span { width: 16px; height: 16px; }
+    .lg-themes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1rem; }
+    .lg-themes .lg-stage { min-height: 130px; background: var(--c-bg); border-color: transparent; flex-direction: column; gap: .6rem; }
+    .lg-themes .lg-stage.inverse { background: var(--c-bg); }
+    .lg-cobrand { margin-top: 1rem; }
+    .lg-cobrand .lg-stage { justify-content: flex-start; min-height: 0; padding-block: 1.3rem; flex-wrap: wrap; }
+    .lg-cobrand .members { display: flex; gap: 1.2rem; align-items: center; padding-left: 1.6rem; border-left: 1px solid var(--h-line); flex-wrap: wrap; }
+    .lg-cobrand small { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+    .lg-cobrand b { color: var(--h-ink); font-weight: 650; }
+    .lg-tools { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1.2rem; }
+    .lg-toc { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: 2rem; }
+    @media (max-width: 980px) { .lg-head, .lg-grid { grid-template-columns: 1fr; } .lg-themes { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body class="hub">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="hub-top"><div class="container">
+  <a class="hub-brand" href="../index.html">HDA <span>Design review</span></a>
+  <nav aria-label="Review pages"><a href="../index.html">Overview</a><a href="index.html" aria-current="page">Logos</a><a href="../palettes/index.html">Colour</a></nav>
+</div></header>
+
+<main id="main">
+  <section class="hub-hero"><div class="container">
+    <p class="hub-kicker">Logo concepts</p>
+    <h1>Five marks, four equal parts.</h1>
+    <p class="lede">Each concept has four elements of equal weight, so no member leads. The four colours are fixed per concept but never assigned to specific organisations. Every mark is simple enough for a 16px favicon and quiet enough to sit next to four member logos.</p>
+    <nav class="lg-toc" id="toc" aria-label="Concepts"></nav>
+  </div></section>
+  <div id="concepts"></div>
+</main>
+
+<footer class="hub-foot"><div class="container">Concepts for discussion. Final artwork would be redrawn and optically adjusted once a direction is chosen.</div></footer>
+
+<script src="../assets/themes.js"></script>
+<script src="../assets/logos.js"></script>
+<script>
+  const pairedWith = (id) => HDAThemes.filter((t) => t.defaultLogo === id);
+  const L = (id, layout, style = '') => `<span data-hda-logo="${layout}" data-logo-fixed="${id}" style="${style}"></span>`;
+
+  document.getElementById('toc').innerHTML = HDALogos.list.map((l) => `<a class="hbtn" href="#${l.id}">${l.num} · ${l.name}</a>`).join('');
+
+  document.getElementById('concepts').innerHTML = HDALogos.list.map((l) => {
+    const paired = pairedWith(l.id).map((t) => `<a href="../themes/${t.id}/index.html?logo=default">Theme ${t.letter} ${t.name}</a>`).join(', ');
+    const themes = HDAThemes.map((t) => `
+      <figure class="lg-cell" data-theme="${t.id}"><div class="lg-stage">${L(l.id, 'horizontal', 'font-size:17px')}</div><figcaption>${t.letter} · ${t.name}</figcaption></figure>`).join('');
+    const tryIn = HDAThemes.map((t) => `<a class="hbtn" href="../themes/${t.id}/index.html?logo=${l.id}">Try in ${t.letter}</a>`).join('');
+    return `
+    <section class="lg" id="${l.id}"><div class="container">
+      <div class="lg-head">
+        <div><span class="lg-num">Concept ${l.num}</span><h2>${l.name}</h2><p class="summary">${l.summary}</p></div>
+        <div><p class="rationale">${l.rationale}</p>
+          <p class="paired">${paired ? `Paired by default with ${paired}.` : 'Not paired with a theme by default, but works with all of them.'}</p>
+          <div class="lg-tools">${tryIn}<button class="hbtn" type="button" data-download="${l.id}">Download SVG mark</button></div></div>
+      </div>
+      <div class="lg-grid">
+        <figure class="lg-cell"><div class="lg-stage" data-mark-source="${l.id}">${L(l.id, 'horizontal', 'font-size:30px')}</div><figcaption>Primary lockup</figcaption></figure>
+        <figure class="lg-cell"><div class="lg-stage">${L(l.id, 'stacked', 'font-size:16px')}</div><figcaption>Stacked</figcaption></figure>
+        <figure class="lg-cell"><div class="lg-stage lg-dark">${L(l.id, 'horizontal', 'font-size:18px')}</div><figcaption>Reversed</figcaption></figure>
+        <figure class="lg-cell"><div class="lg-stage lg-mono">${L(l.id, 'horizontal', 'font-size:22px')}<span style="width:1px;align-self:stretch;background:var(--h-line)"></span><div class="lg-mono-rev" style="padding:1rem;border-radius:8px">${L(l.id, 'mark', 'display:block;width:56px;height:40px')}</div></div><figcaption>One colour, positive and reversed</figcaption></figure>
+        <figure class="lg-cell"><div class="lg-stage lg-sizes">${L(l.id, 'mark', 'width:64px;height:64px')}${L(l.id, 'mark', 'width:32px;height:32px')}${L(l.id, 'mark', 'width:16px;height:16px')}</div><figcaption>Mark at 64 / 32 / 16 px</figcaption></figure>
+        <figure class="lg-cell"><div class="lg-stage"><div class="lg-fav"><i>${L(l.id, 'mark')}HDA · Home</i></div></div><figcaption>Browser tab</figcaption></figure>
+      </div>
+      <div class="lg-themes">${themes}</div>
+      <figure class="lg-cell lg-cobrand"><div class="lg-stage">${L(l.id, 'horizontal', 'font-size:20px')}<span class="members"><small>An alliance of</small><b>iMMAP</b><b>CartONG</b><b>HOT</b><b>Kobo</b></span></div><figcaption>Co-branding line for slides, reports and email signatures</figcaption></figure>
+    </div></section>`;
+  }).join('');
+  HDALogos.hydrate(document);
+
+  // Download the mark as a standalone SVG with the colours resolved.
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-download]');
+    if (!btn) return;
+    const src = document.querySelector(`[data-mark-source="${btn.dataset.download}"]`);
+    const svg = src.querySelector('svg.hda-mark').cloneNode(true);
+    const cs = getComputedStyle(src);
+    svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    svg.removeAttribute('class'); svg.removeAttribute('aria-hidden');
+    const out = svg.outerHTML.replace(/var\(--logo-([a-z]+),\s*([^)]+)\)/g, (_, k, fb) => cs.getPropertyValue('--logo-' + k).trim() || fb);
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([out], { type: 'image/svg+xml' }));
+    a.download = `hda-logo-${btn.dataset.download}.svg`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  });
+</script>
+</body>
+</html>

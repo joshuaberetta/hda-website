@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Humanitarian Data Alliance · Colour palettes</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Barlow+Semi+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="../assets/base.css">
+  <link rel="stylesheet" href="../themes/confluence/tokens.css">
+  <link rel="stylesheet" href="../themes/fieldwork/tokens.css">
+  <link rel="stylesheet" href="../themes/signal/tokens.css">
+  <link rel="stylesheet" href="../themes/commons/tokens.css">
+  <link rel="stylesheet" href="../assets/hub.css">
+  <link rel="icon" href="../assets/favicon.svg">
+  <style>
+    .members-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .member-card { background: var(--h-surface); border: 1px solid var(--h-line); border-radius: 12px; padding: 1.2rem; }
+    .member-card h3 { font-size: 1.15rem; margin-bottom: .2rem; }
+    .member-card > p { font-size: 13px; margin-bottom: 1rem; }
+    .chip-row { display: grid; gap: .45rem; }
+    .chip { display: grid; grid-template-columns: 36px 1fr auto; gap: .7rem; align-items: center; font-size: 13px; }
+    .chip i { height: 28px; border-radius: 6px; border: 1px solid rgb(0 0 0 / .08); }
+    .chip span { color: var(--h-ink); }
+    .chip code { font-size: 12px; color: var(--h-ink-2); }
+    .overlaps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .overlap { background: var(--h-surface); border: 1px solid var(--h-line); border-radius: 12px; overflow: hidden; }
+    .overlap .bars { display: flex; height: 70px; }
+    .overlap .bars i { flex: 1; position: relative; }
+    .overlap .bars i b { position: absolute; left: .6rem; bottom: .45rem; font: 600 11px Inter, sans-serif; color: #fff; text-shadow: 0 1px 2px rgb(0 0 0 / .3); }
+    .overlap .body { padding: 1rem 1.2rem 1.2rem; font-size: 14px; }
+    .overlap h3 { font-size: 1.05rem; margin-bottom: .3rem; }
+    .overlap .becomes { display: flex; gap: .4rem; margin-top: .8rem; align-items: center; flex-wrap: wrap; font-size: 12px; }
+    .overlap .becomes i { width: 20px; height: 20px; border-radius: 5px; display: inline-block; vertical-align: middle; }
+    .pal { background: var(--h-surface); border: 1px solid var(--h-line); border-radius: 14px; padding: 1.6rem; margin-bottom: 1.2rem; }
+    .pal-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
+    .pal-head h3 { font-size: 1.4rem; }
+    .pal-head p { font-size: 14px; max-width: 42rem; }
+    .pal-swatches { display: grid; grid-template-columns: repeat(8, 1fr); gap: .6rem; }
+    .pal-sw i { display: block; height: 74px; border-radius: 8px; border: 1px solid rgb(0 0 0 / .08); }
+    .pal-sw b { display: block; color: var(--h-ink); font-size: 13px; margin-top: .45rem; line-height: 1.25; }
+    .pal-sw code { display: block; font-size: 11.5px; }
+    .pal-sw .ct { display: block; font-size: 11px; margin-top: .2rem; }
+    .pal-sw .ct.bad { opacity: .6; }
+    .pal-demo { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; margin-top: 1.2rem; }
+    .pal-demo > div { border-radius: 10px; padding: 1.1rem 1.3rem; background: var(--c-bg); color: var(--c-ink-2); display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; font-family: var(--font-body); }
+    .pal-demo strong { color: var(--c-ink); font: 600 1.25rem/1.1 var(--font-head); }
+    .pal-demo .btn-demo { background: var(--c-accent); color: var(--c-accent-ink, #fff); padding: .5rem .9rem; border-radius: var(--radius, 6px); font-size: 13px; font-weight: 600; margin-left: auto; }
+    .source { font-size: 13px; margin-top: 1rem; }
+    @media (max-width: 980px) { .members-grid, .overlaps { grid-template-columns: 1fr 1fr; } .pal-swatches { grid-template-columns: repeat(4, 1fr); } .pal-demo { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body class="hub">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="hub-top"><div class="container">
+  <a class="hub-brand" href="../index.html">HDA <span>Design review</span></a>
+  <nav aria-label="Review pages"><a href="../index.html">Overview</a><a href="../logos/index.html">Logos</a><a href="index.html" aria-current="page">Colour</a></nav>
+</div></header>
+
+<main id="main">
+  <section class="hub-hero"><div class="container">
+    <p class="hub-kicker">Colour</p>
+    <h1>Starting from the colours we already share.</h1>
+    <p class="lede">The four member sites already overlap: three use a deep navy, two lead with red and two use teal. Each theme builds on those overlaps, so the alliance looks related to every member without copying any one of them.</p>
+  </div></section>
+
+  <section class="hub-section"><div class="container">
+    <h2>Member colours, as observed</h2>
+    <p class="sub">Sampled from the member website screenshots. Kobo values are taken from its site’s <code>colors.scss</code>. These are not official brand specifications, so each member should confirm them.</p>
+    <div class="members-grid" id="members"></div>
+  </div></section>
+
+  <section class="hub-section hub-rule"><div class="container">
+    <h2>Where we overlap</h2>
+    <p class="sub">These shared families become the backbone of every theme. Each theme tunes them slightly so no member’s exact colour is “the alliance colour”.</p>
+    <div class="overlaps" id="overlaps"></div>
+  </div></section>
+
+  <section class="hub-section hub-rule"><div class="container">
+    <h2>Theme palettes</h2>
+    <p class="sub">Values are read live from each theme’s <code>tokens.css</code>. Contrast is against the theme’s page background, where 4.5:1 is needed for body text (AA) and 3:1 for large text and UI elements.</p>
+    <div id="palettes"></div>
+  </div></section>
+</main>
+
+<footer class="hub-foot"><div class="container">Colour values are drafts. Final values would be checked on print (CMYK) and in each member’s templates before sign-off.</div></footer>
+
+<script src="../assets/themes.js"></script>
+<script>
+  const MEMBERS = [
+    { name: 'iMMAP', note: 'Deep navy with a strong red, clean white layouts.', chips: [['Navy', '#0F1A2E'], ['Red', '#992B2A'], ['White', '#FFFFFF']] },
+    { name: 'CartONG', note: 'Slate teal on cream, with a soft pastel system.', chips: [['Deep slate', '#1A2E3C'], ['Slate', '#2F495A'], ['Teal', '#449996'], ['Ochre', '#E5B661'], ['Olive', '#6D7C2C'], ['Cream', '#FCFAF1']] },
+    { name: 'HOT', note: 'Signature red, near-black and photography.', chips: [['HOT red', '#C64B46'], ['Charcoal', '#1E1D23'], ['Light grey', '#F2F2F2']] },
+    { name: 'Kobo', note: 'Blues and teal from the product UI, Lora headings.', chips: [['Yale blue', '#003870'], ['Dark blue', '#00599D'], ['Kobo blue', '#2095F3'], ['Dark teal', '#1C6D74'], ['Gray 24', '#333847']] },
+  ];
+  const OVERLAPS = [
+    { title: 'Navy', who: 'iMMAP · CartONG · Kobo', text: 'Structure, headings and dark sections in every theme.', bars: [['iMMAP', '#0F1A2E'], ['CartONG', '#1A2E3C'], ['Kobo', '#003870']], becomes: [['A', '#0E2A47'], ['B', '#1D3B3F'], ['C', '#0A1522'], ['D', '#121417']] },
+    { title: 'Red', who: 'iMMAP · HOT', text: 'The call-to-action colour, used sparingly: urgency without alarm.', bars: [['iMMAP', '#992B2A'], ['HOT', '#C64B46']], becomes: [['A', '#C8363B'], ['B', '#B4472E'], ['C', '#E5484D'], ['D', '#D63E3A']] },
+    { title: 'Teal & blue', who: 'CartONG · Kobo', text: 'Supporting data colours: links, charts, map layers.', bars: [['CartONG', '#449996'], ['Kobo', '#1C6D74'], ['Kobo', '#2095F3']], becomes: [['A', '#22857A'], ['B', '#1F5A5C'], ['C', '#12A087'], ['D', '#1E6BD6']] },
+  ];
+
+  document.getElementById('members').innerHTML = MEMBERS.map((m) => `
+    <div class="member-card"><h3>${m.name}</h3><p>${m.note}</p><div class="chip-row">
+      ${m.chips.map(([n, h]) => `<div class="chip"><i style="background:${h}"></i><span>${n}</span><code>${h}</code></div>`).join('')}
+    </div></div>`).join('');
+
+  document.getElementById('overlaps').innerHTML = OVERLAPS.map((o) => `
+    <div class="overlap"><div class="bars">${o.bars.map(([n, h]) => `<i style="background:${h}"><b>${n}</b></i>`).join('')}</div>
+      <div class="body"><h3>${o.title}</h3><p><b style="color:var(--h-ink)">${o.who}.</b> ${o.text}</p>
+        <div class="becomes">In themes: ${o.becomes.map(([l, h]) => `<span><i style="background:${h}"></i> ${l}</span>`).join(' ')}</div></div></div>`).join('');
+
+  // Theme palettes, resolved from tokens.css.
+  const hex = (rgb) => '#' + rgb.map((v) => v.toString(16).padStart(2, '0')).join('').toUpperCase();
+  const lum = (rgb) => { const [r, g, b] = rgb.map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
+  const contrast = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); };
+  const grade = (c) => (c >= 7 ? 'AAA' : c >= 4.5 ? 'AA' : c >= 3 ? 'AA large' : 'decorative');
+
+  const wrap = document.getElementById('palettes');
+  wrap.innerHTML = HDAThemes.map((t) => `
+    <article class="pal" data-theme="${t.id}">
+      <div class="pal-head"><h3>${t.letter} · ${t.name}</h3><p>${t.blend}</p></div>
+      <div class="pal-swatches">${t.swatches.map(([tok, name]) => `<div class="pal-sw" data-tok="${tok}"><i style="background:var(${tok})"></i><b>${name}</b><code></code><span class="ct"></span></div>`).join('')}</div>
+      <div class="pal-demo">
+        <div><strong>People before data</strong><span>Body text sample</span><span class="btn-demo">Request support</span></div>
+        <div class="inverse"><strong>People before data</strong><span>Body text sample</span><span class="btn-demo">Request support</span></div>
+      </div>
+    </article>`).join('');
+
+  const probe = document.createElement('i');
+  const resolve = (el, tok) => { probe.style.color = `var(${tok})`; el.appendChild(probe); const v = getComputedStyle(probe).color.match(/[\d.]+/g).slice(0, 3).map(Number); probe.remove(); return v; };
+  wrap.querySelectorAll('.pal').forEach((pal) => {
+    const bg = resolve(pal, '--c-bg');
+    pal.querySelectorAll('.pal-sw').forEach((sw) => {
+      const rgb = resolve(pal, sw.dataset.tok);
+      sw.querySelector('code').textContent = hex(rgb);
+      const same = hex(rgb) === hex(bg);
+      const c = same ? contrast(resolve(pal, '--c-ink'), rgb) : contrast(rgb, bg);
+      const ct = sw.querySelector('.ct');
+      ct.textContent = same ? `Page bg · ink ${c.toFixed(1)}:1` : `${c.toFixed(1)}:1 · ${grade(c)}`;
+      ct.classList.toggle('bad', c < 3 && !same);
+    });
+  });
+</script>
+</body>
+</html>

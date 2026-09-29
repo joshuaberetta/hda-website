@@ -1,0 +1,36 @@
+/* Shared reset and utilities used by every page. Themes layer on top. */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body { margin: 0; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+img, svg { max-width: 100%; }
+h1, h2, h3, h4, p, ul, ol, figure, blockquote { margin: 0; }
+ul[role="list"], ol[role="list"] { list-style: none; padding: 0; }
+a { color: inherit; }
+button, input, textarea, select { font: inherit; color: inherit; }
+
+.container { width: min(100% - 2.5rem, var(--container, 1200px)); margin-inline: auto; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip-link { position: absolute; left: 1rem; top: -3rem; padding: .5rem 1rem; background: #000; color: #fff; z-index: 100; }
+.skip-link:focus { top: 1rem; }
+
+/* Placeholder content marker: visible to reviewers, easy to strip later. */
+.tbc { font-size: .72em; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; opacity: .6; white-space: nowrap; }
+
+/* Map graphics defaults (themes override the custom properties). */
+.worldmap { display: block; width: 100%; height: auto; }
+.worldmap-dots { fill: var(--map-dot, #b8c4d2); }
+.worldmap-arcs path { stroke: var(--map-arc, #d23b3f); stroke-width: var(--map-arc-width, .32); stroke-dasharray: 3 2.2; animation: hda-dash 14s linear infinite; }
+.hub-core { fill: var(--map-hub, #0e2a47); }
+.hub-halo { fill: var(--map-halo, rgb(31 143 229 / .18)); }
+.hub--a .hub-core { fill: var(--map-hub-a, var(--map-hub)); }
+.hub--b .hub-core { fill: var(--map-hub-b, var(--map-hub)); }
+.hub--c .hub-core { fill: var(--map-hub-c, var(--map-hub)); }
+.hub--d .hub-core { fill: var(--map-hub-d, var(--map-hub)); }
+.contours { display: block; width: 100%; height: 100%; }
+.contours path { stroke: var(--contour-line, currentColor); stroke-width: var(--contour-width, 1px); vector-effect: non-scaling-stroke; }
+.contours path.contour-index { stroke-width: var(--contour-index-width, 1.8px); }
+@keyframes hda-dash { to { stroke-dashoffset: -52; } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .worldmap-arcs path { animation: none; }
+}

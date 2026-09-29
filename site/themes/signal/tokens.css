@@ -1,0 +1,30 @@
+[data-theme="signal"] {
+  --c-night: #0A1522;
+  --c-bg: #F2F5F8;
+  --c-surface: #FFFFFF;
+  --c-surface-2: #E6ECF2;
+  --c-ink: #0A1522;
+  --c-ink-2: #4A5A6D;
+  --c-line: #D2DBE5;
+  --c-primary: #1C6FD1;
+  --c-primary-ink: #FFFFFF;
+  --c-accent: #E5484D;
+  --c-accent-ink: #FFFFFF;
+  --c-accent-2: #1C6FD1;
+  --c-accent-3: #12A087;
+  --c-accent-4: #E0A21B;
+
+  --logo-a: #F2544F; --logo-b: #0A1522; --logo-c: #3D9BFF; --logo-d: #1FBF9F;
+  --logo-ink: #0A1522; --logo-bg: #F2F5F8;
+
+  --font-head: 'Barlow Semi Condensed', 'Barlow', system-ui, sans-serif;
+  --font-body: 'Barlow', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --radius: 4px;
+}
+[data-theme="signal"] .inverse {
+  --c-bg: #0A1522; --c-surface: #0F1E30; --c-surface-2: #142840;
+  --c-ink: #EAF0F7; --c-ink-2: #9DB0C6; --c-line: #1E3450;
+  --c-primary: #4DA8FF; --c-primary-ink: #04101C; --c-accent: #FF6A60; --c-accent-2: #4DA8FF; --c-accent-3: #3FD6B8; --c-accent-4: #F5BE4B;
+  --logo-b: #EAF0F7; --logo-ink: #FFFFFF; --logo-bg: #0A1522;
+}

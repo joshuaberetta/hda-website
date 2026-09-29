@@ -1,0 +1,28 @@
+[data-theme="confluence"] {
+  --c-bg: #FFFFFF;
+  --c-surface: #F5F3EE;
+  --c-surface-2: #EAF2FA;
+  --c-ink: #0E2A47;
+  --c-ink-2: #4A5B6E;
+  --c-line: #DCE2E9;
+  --c-primary: #0E2A47;
+  --c-primary-ink: #FFFFFF;
+  --c-accent: #C8363B;
+  --c-accent-ink: #FFFFFF;
+  --c-accent-2: #1A72BF;
+  --c-accent-3: #22857A;
+
+  --logo-a: #C8363B; --logo-b: #0E2A47; --logo-c: #2B8FE0; --logo-d: #2A9D8F;
+  --logo-ink: #0E2A47; --logo-bg: #FFFFFF;
+
+  --font-head: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --radius: 10px;
+  --shadow: 0 1px 2px rgb(14 42 71 / .06), 0 8px 24px rgb(14 42 71 / .06);
+}
+[data-theme="confluence"] .inverse {
+  --c-bg: #0E2A47; --c-surface: #12345A; --c-surface-2: #173E69;
+  --c-ink: #FFFFFF; --c-ink-2: #B9C7D8; --c-line: #2A4B70;
+  --c-primary: #FFFFFF; --c-primary-ink: #0E2A47; --c-accent-2: #6CB6F5;
+  --logo-b: #FFFFFF; --logo-ink: #FFFFFF; --logo-bg: #0E2A47;
+}
