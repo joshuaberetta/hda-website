@@ -6,12 +6,14 @@
   <title>Humanitarian Data Alliance · Logo concepts</title>
   <meta name="robots" content="noindex">
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Barlow+Semi+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Barlow+Semi+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Sora:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="../assets/base.css">
   <link rel="stylesheet" href="../themes/confluence/tokens.css">
   <link rel="stylesheet" href="../themes/fieldwork/tokens.css">
   <link rel="stylesheet" href="../themes/signal/tokens.css">
   <link rel="stylesheet" href="../themes/commons/tokens.css">
+  <link rel="stylesheet" href="../themes/relief/tokens.css">
+  <link rel="stylesheet" href="../themes/atlas/tokens.css">
   <link rel="stylesheet" href="../assets/hub.css">
   <link rel="icon" href="../assets/favicon.svg">
   <style>
@@ -34,7 +36,7 @@
     .lg-fav { display: flex; gap: .8rem; align-items: center; }
     .lg-fav i { display: grid; place-items: center; background: #EDEDEA; border-radius: 8px 8px 0 0; padding: .45rem .7rem; font: 500 12px Inter, sans-serif; color: var(--h-ink); font-style: normal; gap: .45rem; grid-auto-flow: column; }
     .lg-fav i span { width: 16px; height: 16px; }
-    .lg-themes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1rem; }
+    .lg-themes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
     .lg-themes .lg-stage { min-height: 130px; background: var(--c-bg); border-color: transparent; flex-direction: column; gap: .6rem; }
     .lg-themes .lg-stage.inverse { background: var(--c-bg); }
     .lg-cobrand { margin-top: 1rem; }
@@ -44,6 +46,8 @@
     .lg-cobrand b { color: var(--h-ink); font-weight: 650; }
     .lg-tools { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1.2rem; }
     .lg-toc { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: 2rem; }
+    .lg-studio { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem; margin-top: 1rem; padding: .9rem 1rem; border: 1px dashed var(--h-line); border-radius: 10px; font-size: 14px; color: var(--h-ink-2); }
+    .lg-studio span { display: inline-flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
     @media (max-width: 980px) { .lg-head, .lg-grid { grid-template-columns: 1fr; } .lg-themes { grid-template-columns: 1fr 1fr; } }
   </style>
 </head>
@@ -57,7 +61,7 @@
 <main id="main">
   <section class="hub-hero"><div class="container">
     <p class="hub-kicker">Logo concepts</p>
-    <h1>Five marks, four equal parts.</h1>
+    <h1>Seven marks, four equal parts.</h1>
     <p class="lede">Each concept has four elements of equal weight, so no member leads. The four colours are fixed per concept but never assigned to specific organisations. Every mark is simple enough for a 16px favicon and quiet enough to sit next to four member logos.</p>
     <nav class="lg-toc" id="toc" aria-label="Concepts"></nav>
   </div></section>
@@ -72,6 +76,10 @@
   const pairedWith = (id) => HDAThemes.filter((t) => t.defaultLogo === id);
   const L = (id, layout, style = '') => `<span data-hda-logo="${layout}" data-logo-fixed="${id}" style="${style}"></span>`;
 
+  const custom = HDALogos.contour.isCustom();
+  const studio = `<div class="lg-studio"><a class="hbtn hbtn--dark" href="contour-studio.html">Customise in Contour studio →</a>
+    ${custom ? '<span>You’re viewing a customised contour. <button class="hbtn" type="button" data-contour-reset>Show the original</button></span>' : '<span>Adjust rings, terrain, summit, line and colour, then apply it across the site.</span>'}</div>`;
+
   document.getElementById('toc').innerHTML = HDALogos.list.map((l) => `<a class="hbtn" href="#${l.id}">${l.num} · ${l.name}</a>`).join('');
 
   document.getElementById('concepts').innerHTML = HDALogos.list.map((l) => {
@@ -85,7 +93,7 @@
         <div><span class="lg-num">Concept ${l.num}</span><h2>${l.name}</h2><p class="summary">${l.summary}</p></div>
         <div><p class="rationale">${l.rationale}</p>
           <p class="paired">${paired ? `Paired by default with ${paired}.` : 'Not paired with a theme by default, but works with all of them.'}</p>
-          <div class="lg-tools">${tryIn}<button class="hbtn" type="button" data-download="${l.id}">Download SVG mark</button></div></div>
+          <div class="lg-tools">${tryIn}<button class="hbtn" type="button" data-download="${l.id}">Download SVG mark</button></div>${l.customisable ? studio : ''}</div>
       </div>
       <div class="lg-grid">
         <figure class="lg-cell"><div class="lg-stage" data-mark-source="${l.id}">${L(l.id, 'horizontal', 'font-size:30px')}</div><figcaption>Primary lockup</figcaption></figure>
@@ -100,6 +108,12 @@
     </div></section>`;
   }).join('');
   HDALogos.hydrate(document);
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('[data-contour-reset]')) return;
+    HDALogos.contour.reset();
+    location.reload();
+  });
 
   // Download the mark as a standalone SVG with the colours resolved.
   document.addEventListener('click', (e) => {

@@ -6,12 +6,14 @@
   <title>Humanitarian Data Alliance · Colour palettes</title>
   <meta name="robots" content="noindex">
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Barlow+Semi+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Barlow+Semi+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Sora:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="../assets/base.css">
   <link rel="stylesheet" href="../themes/confluence/tokens.css">
   <link rel="stylesheet" href="../themes/fieldwork/tokens.css">
   <link rel="stylesheet" href="../themes/signal/tokens.css">
   <link rel="stylesheet" href="../themes/commons/tokens.css">
+  <link rel="stylesheet" href="../themes/relief/tokens.css">
+  <link rel="stylesheet" href="../themes/atlas/tokens.css">
   <link rel="stylesheet" href="../assets/hub.css">
   <link rel="icon" href="../assets/favicon.svg">
   <style>
@@ -95,9 +97,9 @@
     { name: 'Kobo', note: 'Blues and teal from the product UI, Lora headings.', chips: [['Yale blue', '#003870'], ['Dark blue', '#00599D'], ['Kobo blue', '#2095F3'], ['Dark teal', '#1C6D74'], ['Gray 24', '#333847']] },
   ];
   const OVERLAPS = [
-    { title: 'Navy', who: 'iMMAP · CartONG · Kobo', text: 'Structure, headings and dark sections in every theme.', bars: [['iMMAP', '#0F1A2E'], ['CartONG', '#1A2E3C'], ['Kobo', '#003870']], becomes: [['A', '#0E2A47'], ['B', '#1D3B3F'], ['C', '#0A1522'], ['D', '#121417']] },
-    { title: 'Red', who: 'iMMAP · HOT', text: 'The call-to-action colour, used sparingly: urgency without alarm.', bars: [['iMMAP', '#992B2A'], ['HOT', '#C64B46']], becomes: [['A', '#C8363B'], ['B', '#B4472E'], ['C', '#E5484D'], ['D', '#D63E3A']] },
-    { title: 'Teal & blue', who: 'CartONG · Kobo', text: 'Supporting data colours: links, charts, map layers.', bars: [['CartONG', '#449996'], ['Kobo', '#1C6D74'], ['Kobo', '#2095F3']], becomes: [['A', '#22857A'], ['B', '#1F5A5C'], ['C', '#12A087'], ['D', '#1E6BD6']] },
+    { title: 'Navy', who: 'iMMAP · CartONG · Kobo', text: 'Structure, headings and dark sections in every theme.', bars: [['iMMAP', '#0F1A2E'], ['CartONG', '#1A2E3C'], ['Kobo', '#003870']], becomes: [['A', '#0E2A47'], ['B', '#1D3B3F'], ['C', '#0A1522'], ['D', '#121417'], ['E', '#16292B'], ['F', '#0D1B2E']] },
+    { title: 'Red', who: 'iMMAP · HOT', text: 'The call-to-action colour, used sparingly: urgency without alarm.', bars: [['iMMAP', '#992B2A'], ['HOT', '#C64B46']], becomes: [['A', '#C8363B'], ['B', '#B4472E'], ['C', '#E5484D'], ['D', '#D63E3A'], ['E', '#BD4430'], ['F', '#D8453B']] },
+    { title: 'Teal & blue', who: 'CartONG · Kobo', text: 'Supporting data colours: links, charts, map layers.', bars: [['CartONG', '#449996'], ['Kobo', '#1C6D74'], ['Kobo', '#2095F3']], becomes: [['A', '#22857A'], ['B', '#1F5A5C'], ['C', '#12A087'], ['D', '#1E6BD6'], ['E', '#2C6E9E'], ['F', '#17897B']] },
   ];
 
   document.getElementById('members').innerHTML = MEMBERS.map((m) => `

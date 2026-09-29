@@ -1,0 +1,30 @@
+[data-theme="atlas"] {
+  --c-bg: #F5F7FA;
+  --c-surface: #EAEFF5;
+  --c-surface-2: #FFFFFF;
+  --c-ink: #0D1B2E;
+  --c-ink-2: #4B5A6E;
+  --c-line: #D5DDE8;
+  --c-primary: #1B5FCC;
+  --c-primary-ink: #FFFFFF;
+  --c-accent: #D8453B;
+  --c-accent-ink: #FFFFFF;
+  --c-accent-2: #17897B;
+  --c-accent-3: #E3A72F;
+  --c-accent-4: #7A8CA3;
+  --c-night: #0D1B2E;
+
+  --logo-a: #D8453B; --logo-b: #0D1B2E; --logo-c: #1B5FCC; --logo-d: #17897B;
+  --logo-ink: #0D1B2E; --logo-bg: #F5F7FA;
+
+  --font-head: 'Sora', system-ui, sans-serif;
+  --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --radius: 8px;
+}
+[data-theme="atlas"] .inverse {
+  --c-bg: #0D1B2E; --c-surface: #132740; --c-surface-2: #1A3150;
+  --c-ink: #F5F7FA; --c-ink-2: #B3C0D2; --c-line: #25405F;
+  --c-primary: #5B9BFF; --c-primary-ink: #0D1B2E; --c-accent: #FF7A6E; --c-accent-2: #3CC2AE;
+  --logo-a: #FF7A6E; --logo-b: #F5F7FA; --logo-c: #5B9BFF; --logo-d: #3CC2AE; --logo-ink: #F5F7FA; --logo-bg: #0D1B2E;
+}

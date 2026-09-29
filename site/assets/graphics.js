@@ -113,11 +113,10 @@
     return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296);
   }
 
-  function contours(el) {
-    const W = 160, H = 90, cols = 160, rows = 90;
-    const rand = rng(parseInt(el.dataset.seed || '7', 10));
-    const levels = parseInt(el.dataset.levels || '14', 10);
-    const bumps = Array.from({ length: 7 }, () => ({
+  // A smooth deterministic "terrain" field over a W x H domain.
+  function terrain(seed, W, H, n = 7) {
+    const rand = rng(seed);
+    const bumps = Array.from({ length: n }, () => ({
       x: rand() * W, y: rand() * H, s: 12 + rand() * 26, a: (rand() * 1.4 + 0.4) * (rand() > 0.25 ? 1 : -0.6),
     }));
     const f = (x, y) => {
@@ -125,6 +124,9 @@
       for (const b of bumps) v += b.a * Math.exp(-((x - b.x) ** 2 + (y - b.y) ** 2) / (2 * b.s * b.s));
       return v;
     };
+    return { f, bumps };
+  }
+  function sample(f, W, H, cols, rows) {
     const grid = [];
     let min = Infinity, max = -Infinity;
     for (let j = 0; j <= rows; j++) {
@@ -134,6 +136,10 @@
         grid[j][i] = v; min = Math.min(min, v); max = Math.max(max, v);
       }
     }
+    return { grid, min, max, cols, rows, W, H };
+  }
+  // Marching squares: one path string per level.
+  function trace({ grid, min, max, cols, rows, W, H }, levels) {
     const paths = [];
     for (let l = 1; l <= levels; l++) {
       const t = min + ((max - min) * l) / (levels + 1);
@@ -160,17 +166,151 @@
           }
         }
       }
-      paths.push(`<path class="${l % 5 === 0 ? 'contour-index' : ''}" d="${d}"/>`);
+      paths.push({ l, d });
     }
+    return paths;
+  }
+
+  function contours(el) {
+    const W = 160, H = 90;
+    const levels = parseInt(el.dataset.levels || '14', 10);
+    const { f } = terrain(parseInt(el.dataset.seed || '7', 10), W, H);
+    const paths = trace(sample(f, W, H, 160, 90), levels)
+      .map(({ l, d }) => `<path class="${l % 5 === 0 ? 'contour-index' : ''}" d="${d}"/>`);
     el.innerHTML = `<svg class="contours" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <g fill="none" stroke-linecap="round">${paths.join('')}</g></svg>`;
+  }
+
+  // --- Relief: hypsometric tints + hillshade on canvas, contours on top -----
+  //   <div data-graphic="relief" data-seed="4" data-levels="12"></div>
+  // Colours: --relief-0 … --relief-5 (low to high), --contour-line.
+  function relief(el) {
+    const draw = () => {
+      const w = el.clientWidth, h = el.clientHeight;
+      if (!w || !h) return;
+      el._w = w;
+      const W = 160, H = (160 * h) / w;
+      const levels = parseInt(el.dataset.levels || '12', 10);
+      const { f } = terrain(parseInt(el.dataset.seed || '4', 10), W, H, parseInt(el.dataset.bumps || '8', 10));
+      const cs = getComputedStyle(el);
+      const ramp = [0, 1, 2, 3, 4, 5].map((k) => {
+        const c = cs.getPropertyValue(`--relief-${k}`).trim() || '#cccccc';
+        const m = c.match(/^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i);
+        return m ? [parseInt(m[1], 16), parseInt(m[2], 16), parseInt(m[3], 16)] : [200, 200, 200];
+      });
+      const scale = Math.min(1, 900 / w);
+      const cw = Math.round(w * scale), ch = Math.round(h * scale);
+      const s = sample(f, W, H, cw, ch);
+      const canvas = document.createElement('canvas');
+      canvas.width = cw; canvas.height = ch;
+      const ctx = canvas.getContext('2d');
+      const img = ctx.createImageData(cw, ch);
+      const span = s.max - s.min, lx = -0.62, ly = -0.62, lz = 0.42, zk = 58 / span;
+      for (let j = 0; j < ch; j++) {
+        for (let i = 0; i < cw; i++) {
+          const v = s.grid[j][i];
+          const dx = (s.grid[j][Math.min(i + 1, cw)] - s.grid[j][Math.max(i - 1, 0)]) * zk;
+          const dy = (s.grid[Math.min(j + 1, ch)][i] - s.grid[Math.max(j - 1, 0)][i]) * zk;
+          const len = Math.hypot(dx, dy, 1);
+          const shade = Math.max(0, (-dx * lx - dy * ly + lz) / len);
+          // Step the tint at each contour interval, interpolating along the ramp.
+          const q = Math.min(1, Math.floor(((v - s.min) / span) * (levels + 1)) / levels) * 5;
+          const r0 = ramp[Math.floor(q)], r1 = ramp[Math.min(5, Math.floor(q) + 1)], fr = q - Math.floor(q);
+          const c = [0, 1, 2].map((n) => r0[n] + (r1[n] - r0[n]) * fr);
+          const k = 0.74 + 0.4 * shade, o = (j * cw + i) * 4;
+          img.data[o] = Math.min(255, c[0] * k); img.data[o + 1] = Math.min(255, c[1] * k); img.data[o + 2] = Math.min(255, c[2] * k); img.data[o + 3] = 255;
+        }
+      }
+      ctx.putImageData(img, 0, 0);
+      const paths = trace(sample(f, W, H, 200, Math.round(200 * H / W)), levels)
+        .map(({ l, d }) => `<path class="${l % 4 === 0 ? 'contour-index' : ''}" d="${d}"/>`);
+      el.innerHTML = '';
+      canvas.className = 'relief-canvas';
+      el.appendChild(canvas);
+      el.insertAdjacentHTML('beforeend', `<svg class="contours" viewBox="0 0 ${W} ${H.toFixed(2)}" preserveAspectRatio="none" aria-hidden="true"><g fill="none" stroke-linecap="round">${paths.join('')}</g></svg>`);
+    };
+    draw();
+    let t;
+    window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(() => { if (el.clientWidth !== el._w) draw(); }, 200); });
+  }
+
+  // --- Stack: four GIS layers in isometric view -----------------------------
+  //   <div data-graphic="stack" data-labels="Base map|Open mapping|Field data|Analysis"></div>
+  // Toggle a layer with any element carrying data-stack-toggle="0..3".
+  function stack(el) {
+    const S = 100, GAP = parseFloat(el.dataset.gap || '30');
+    const uid = (el._uid = el._uid || Math.random().toString(36).slice(2, 7));
+    const bare = el.dataset.labels === 'none';
+    const labels = bare ? [] : (el.dataset.labels || 'Terrain|Open map data|Field data|Analysis').split('|');
+    const rand = rng(parseInt(el.dataset.seed || '11', 10));
+    const iso = (y) => `matrix(0.866 0.5 -0.866 0.5 ${0} ${y})`;
+    const { f } = terrain(5, S, S, 6);
+    const base = trace(sample(f, S, S, 70, 70), 9).map(({ l, d }) => `<path class="${l % 3 === 0 ? 'contour-index' : ''}" d="${d}"/>`).join('');
+    let roads = '';
+    [[0, 30, 100, 44], [0, 72, 100, 62], [36, 0, 30, 100], [74, 0, 80, 100], [0, 8, 44, 0]].forEach(([a, b, c, d]) => (roads += `<path d="M${a} ${b} L${c} ${d}"/>`));
+    let bldg = '';
+    for (let k = 0; k < 46; k++) {
+      const x = rand() * 92 + 2, y = rand() * 92 + 2, w = 2.4 + rand() * 3.5, h = 2.4 + rand() * 3.5;
+      bldg += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}"/>`;
+    }
+    let pts = '';
+    for (let k = 0; k < 26; k++) {
+      const x = 8 + rand() * 84, y = 8 + rand() * 84;
+      pts += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(1.6 + rand() * 1.4).toFixed(1)}"/>`;
+    }
+    let cells = '';
+    for (let i = 0; i < 10; i++) for (let j = 0; j < 10; j++) {
+      const v = f(i * 10 + 5, j * 10 + 5);
+      const o = Math.max(0, Math.min(1, (v + 0.2) / 1.6));
+      if (o > 0.12) cells += `<rect x="${i * 10 + 0.6}" y="${j * 10 + 0.6}" width="8.8" height="8.8" rx="1.2" fill-opacity="${o.toFixed(2)}"/>`;
+    }
+    const content = [
+      `<g class="st-contours" fill="none">${base}</g>`,
+      `<g class="st-roads" fill="none">${roads}</g><g class="st-bldg">${bldg}</g>`,
+      `<g class="st-points">${pts}</g>`,
+      `<g class="st-cells">${cells}</g>`,
+    ];
+    const H = 3 * GAP + 100 + 20;
+    const planes = content.map((c, k) => {
+      const y = 10 + (3 - k) * GAP;
+      return `<g class="st-layer st-layer--${k}" style="--k:${k}" data-layer="${k}">
+        <g transform="translate(95 0) ${iso(y)}">
+          <rect class="st-plane" width="${S}" height="${S}" rx="3"/>
+          <g clip-path="url(#st-clip-${uid})">${c}</g>
+          <rect class="st-edge" width="${S}" height="${S}" rx="3" fill="none"/>
+        </g>
+        ${bare ? '' : `<g class="st-label" transform="translate(${95 + 86.6 + 14} ${y + 50})"><line x1="-12" y1="0" x2="0" y2="0"/><text x="5" y="3.5">${String(k + 1).padStart(2, '0')}  ${labels[k] || ''}</text></g>`}
+      </g>`;
+    }).join('');
+    el.innerHTML = `<svg class="stack" viewBox="${bare ? '4 -4 182' : '0 -4 300'} ${H}" role="img" aria-label="Four map layers stacked into one picture${bare ? '' : ': ' + labels.join(', ')}">
+      <defs><clipPath id="st-clip-${uid}"><rect width="${S}" height="${S}" rx="3"/></clipPath></defs>${planes}</svg>`;
+    document.querySelectorAll('[data-stack-toggle]').forEach((t) => {
+      t.addEventListener('change', () => {
+        const g = el.querySelector(`[data-layer="${t.dataset.stackToggle}"]`);
+        if (g) g.classList.toggle('is-off', !t.checked);
+      });
+    });
+  }
+
+  // --- Mini stack: n isometric layers, the top one highlighted -------------
+  function ministack(el) {
+    const n = parseInt(el.dataset.n || '1', 10);
+    let g = '';
+    for (let k = 0; k < 4; k++) {
+      const dy = (3 - k) * 7;
+      g += `<path class="${k < n ? (k === n - 1 ? 'on top' : 'on') : 'off'}" d="M32 ${8 + dy} L57 ${20.5 + dy} L32 ${33 + dy} L7 ${20.5 + dy} Z"/>`;
+    }
+    el.innerHTML = `<svg class="ministack" viewBox="0 0 64 58" aria-hidden="true">${g}</svg>`;
   }
 
   function hydrate(root = document) {
     root.querySelectorAll('[data-graphic="worldmap"]').forEach(worldmap);
     root.querySelectorAll('[data-graphic="contours"]').forEach(contours);
+    root.querySelectorAll('[data-graphic="relief"]').forEach(relief);
+    root.querySelectorAll('[data-graphic="stack"]').forEach(stack);
+    root.querySelectorAll('[data-graphic="ministack"]').forEach(ministack);
   }
 
-  window.HDAGraphics = { hydrate, worldmap, contours };
+  window.HDAGraphics = { hydrate, worldmap, contours, relief, stack };
   document.addEventListener('DOMContentLoaded', () => hydrate());
 })();

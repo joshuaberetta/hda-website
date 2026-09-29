@@ -6,7 +6,7 @@
   <title>Humanitarian Data Alliance · Design options for review</title>
   <meta name="robots" content="noindex">
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Barlow+Semi+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Barlow+Semi+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Sora:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="assets/base.css">
   <link rel="stylesheet" href="assets/hub.css">
   <link rel="icon" href="assets/favicon.svg">
@@ -21,8 +21,8 @@
 <main id="main">
   <section class="hub-hero"><div class="container">
     <p class="hub-kicker">Humanitarian Data Alliance · Design options · Draft for review</p>
-    <h1>Four website themes and five logo concepts.</h1>
-    <p class="lede">A shared home page for iMMAP, CartONG, HOT and Kobo, designed four ways, with five logo concepts that work in any of them. Each theme blends colours and type the four member brands already share, so the alliance feels familiar rather than like a fifth brand.</p>
+    <h1>Six website themes and seven logo concepts.</h1>
+    <p class="lede">A shared home page for iMMAP, CartONG, HOT and Kobo, designed six ways, with seven logo concepts that work in any of them. The Contour logo can also be reshaped in the <a href="logos/contour-studio.html">Contour studio</a>. Each theme blends colours and type the four member brands already share, so the alliance feels familiar rather than like a fifth brand.</p>
   </div></section>
 
   <section class="hub-section"><div class="container">
@@ -37,7 +37,7 @@
 
   <section class="hub-section hub-rule" id="themes"><div class="container">
     <h2>Website themes</h2>
-    <p class="sub">All four use the same content, drawn from the MoU values and recent meeting notes. Figures and dates marked “TBC” are placeholders to confirm.</p>
+    <p class="sub">All six use the same content, drawn from the MoU values and recent meeting notes. Figures and dates marked “TBC” are placeholders to confirm.</p>
     <div class="theme-cards" id="theme-cards"></div>
   </div></section>
 
@@ -54,7 +54,7 @@
       <div><h3>People before data</h3><p>The MoU’s first value. Copy leads with outcomes for affected communities. Warm neutrals and plain language keep it human.</p></div>
       <div><h3>Alongside, not above</h3><p>A light identity that sits next to the member brands. No member colour is “owned” by one organisation, and all four are always named.</p></div>
       <div><h3>Built from what we share</h3><p>Navy (iMMAP, Kobo, CartONG), red (iMMAP, HOT) and teal (CartONG, Kobo) recur across our sites, so the palettes start there.</p></div>
-      <div><h3>Data and maps, visibly</h3><p>Dot maps, contours, layers and tiles say “GIS and data” without stock photos.</p></div>
+      <div><h3>Data and maps, visibly</h3><p>Dot maps, contours, relief, layers and tiles say “GIS and data” without stock photos.</p></div>
       <div><h3>Low bandwidth, high access</h3><p>Static HTML, inline SVG graphics, WCAG AA contrast checks and no heavy imagery, so it works well on field connections.</p></div>
       <div><h3>Open and interoperable</h3><p>Open-source fonts and a simple token system make it easy for any member’s team to reuse in slides, reports and social posts.</p></div>
     </div>
@@ -85,6 +85,7 @@
         <div class="actions">
           <a class="hbtn hbtn--dark" href="themes/${t.id}/index.html?logo=default">Home page</a>
           <a class="hbtn" href="themes/${t.id}/style-guide.html?logo=default">Style guide</a>
+          <a class="hbtn" href="themes/${t.id}/collateral.html?logo=default">Collateral</a>
         </div>
       </div></article>`;
   }).join('');
@@ -95,6 +96,8 @@
     fieldwork: ['#1F5A5C', '#B4472E', '#6F7F22', '#D39C35', '#2F72A3', '#FBF8F1'],
     signal: ['#0A1522', '#1C6FD1', '#E5484D', '#12A087', '#E0A21B', '#F2F5F8'],
     commons: ['#121417', '#D63E3A', '#1E6BD6', '#2B8A78', '#FFFFFF', '#F3F2EE'],
+    relief: ['#16292B', '#BD4430', '#2C6E9E', '#5E7F4B', '#C98F2E', '#F6F4EE'],
+    atlas: ['#0D1B2E', '#1B5FCC', '#D8453B', '#17897B', '#E3A72F', '#F5F7FA'],
   };
   document.querySelectorAll('[data-theme-preview]').forEach((card) => {
     card.querySelectorAll('.strip i').forEach((i, n) => (i.style.background = PALETTE[card.dataset.themePreview][n]));
@@ -103,7 +106,9 @@
   // Logo cards
   document.getElementById('logo-cards').innerHTML = HDALogos.list.map((l) =>
     `<a class="logo-card" href="logos/index.html#${l.id}"><div class="stage"><span data-hda-logo="mark" data-logo-fixed="${l.id}"></span></div>
-      <div><b>${l.num} · ${l.name}</b><small>${l.summary}</small></div></a>`).join('');
+      <div><b>${l.num} · ${l.name}</b><small>${l.summary}</small></div></a>`).join('')
+    + `<a class="logo-card logo-card--studio" href="logos/contour-studio.html"><div class="stage"><span data-hda-logo="mark" data-logo-fixed="contour"></span></div>
+      <div><b>Contour studio</b><small>Reshape logo 3: rings, terrain, summit, line and colour.</small></div></a>`;
   HDALogos.hydrate(document);
 </script>
 </body>

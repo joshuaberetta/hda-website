@@ -1,0 +1,33 @@
+[data-theme="relief"] {
+  --c-bg: #F6F4EE;
+  --c-surface: #ECE7DA;
+  --c-surface-2: #E1E9DF;
+  --c-ink: #16292B;
+  --c-ink-2: #4A5957;
+  --c-line: #DCD5C4;
+  --c-primary: #1D4B47;
+  --c-primary-ink: #FFFFFF;
+  --c-accent: #BD4430;
+  --c-accent-ink: #FFFFFF;
+  --c-accent-2: #2C6E9E;
+  --c-accent-3: #5E7F4B;
+  --c-accent-4: #C98F2E;
+  --c-night: #16292B;
+
+  /* Hypsometric tints, low to high */
+  --relief-0: #DCE6D6; --relief-1: #C9D9BA; --relief-2: #E4DDB5; --relief-3: #E4C18D; --relief-4: #D6976A; --relief-5: #C4674C;
+
+  --logo-a: #BD4430; --logo-b: #16292B; --logo-c: #2C6E9E; --logo-d: #3F7F63;
+  --logo-ink: #16292B; --logo-bg: #F6F4EE;
+
+  --font-head: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --radius: 10px;
+}
+[data-theme="relief"] .inverse {
+  --c-bg: #16292B; --c-surface: #1D3437; --c-surface-2: #243E41;
+  --c-ink: #F6F4EE; --c-ink-2: #BFCBC6; --c-line: #33504F;
+  --c-primary: #F6F4EE; --c-primary-ink: #16292B; --c-accent: #E27A5F; --c-accent-2: #8DBEE3;
+  --logo-a: #E27A5F; --logo-b: #F6F4EE; --logo-c: #8DBEE3; --logo-d: #8CC0A3; --logo-ink: #F6F4EE; --logo-bg: #16292B;
+}

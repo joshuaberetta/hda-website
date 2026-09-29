@@ -24,7 +24,7 @@
 
   function toolbar() {
     if (!theme || params.has('shot')) return;
-    const pageFile = view === 'guide' ? 'style-guide.html' : 'index.html';
+    const pageFile = { guide: 'style-guide.html', collateral: 'collateral.html' }[view] || 'index.html';
     const themeLinks = window.HDAThemes.map((t) =>
       `<a href="${root}themes/${t.id}/${pageFile}" class="${t.id === themeId ? 'is-active' : ''}" title="${t.name}">${t.letter}<span> ${t.name}</span></a>`
     ).join('');
@@ -39,7 +39,8 @@
       <div class="rb-group" role="group" aria-label="Theme"><span class="rb-label">Theme</span><nav class="rb-seg">${themeLinks}</nav></div>
       <div class="rb-group" role="group" aria-label="Page"><span class="rb-label">Page</span><nav class="rb-seg">
         <a href="index.html" class="${view === 'home' ? 'is-active' : ''}">Home</a>
-        <a href="style-guide.html" class="${view === 'guide' ? 'is-active' : ''}">Style guide</a></nav></div>
+        <a href="style-guide.html" class="${view === 'guide' ? 'is-active' : ''}">Style guide</a>
+        <a href="collateral.html" class="${view === 'collateral' ? 'is-active' : ''}">Collateral</a></nav></div>
       <label class="rb-group"><span class="rb-label">Logo</span><select class="rb-select">${logoOptions}</select></label>
       <button class="rb-copy" type="button" title="Copy a link to this exact combination">Copy link</button>
       <button class="rb-toggle" type="button" aria-expanded="true" title="Hide toolbar">×</button>`;

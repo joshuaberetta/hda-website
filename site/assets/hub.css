@@ -56,9 +56,10 @@ body.hub { background: var(--h-bg); color: var(--h-ink-2); font: 400 16px/1.6 In
 .hub .hbtn--dark { background: var(--h-ink); color: #fff; border-color: var(--h-ink); }
 .hub .hbtn--dark:hover { background: #33363d; }
 
-.logo-cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
+.logo-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
 .logo-card { background: var(--h-surface); border: 1px solid var(--h-line); border-radius: 12px; padding: 1.2rem; text-decoration: none; display: flex; flex-direction: column; gap: .8rem; }
 .logo-card:hover { border-color: var(--h-ink); }
+.logo-card--studio { border-style: dashed; }
 .logo-card .stage { height: 96px; display: grid; place-items: center; }
 .logo-card .stage > span { width: 100%; height: 64px; }
 .logo-card b { color: var(--h-ink); font-size: 15px; }

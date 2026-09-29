@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Humanitarian Data Alliance · Contour studio</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Barlow+Semi+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Sora:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="../assets/base.css">
+  <link rel="stylesheet" href="../themes/confluence/tokens.css">
+  <link rel="stylesheet" href="../themes/fieldwork/tokens.css">
+  <link rel="stylesheet" href="../themes/signal/tokens.css">
+  <link rel="stylesheet" href="../themes/commons/tokens.css">
+  <link rel="stylesheet" href="../themes/relief/tokens.css">
+  <link rel="stylesheet" href="../themes/atlas/tokens.css">
+  <link rel="stylesheet" href="../assets/hub.css">
+  <link rel="icon" href="../assets/favicon.svg">
+  <style>
+    .cs { display: grid; grid-template-columns: 360px 1fr; gap: 2rem; align-items: start; padding-bottom: 4rem; }
+    .cs-panel { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow: auto; background: var(--h-surface); border: 1px solid var(--h-line); border-radius: 14px; padding: 1.1rem 1.2rem 1.4rem; }
+    .cs-panel h2 { font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--h-ink-2); margin: 1.3rem 0 .6rem; }
+    .cs-panel > h2:first-child { margin-top: .4rem; }
+    .cs-presets { display: flex; flex-wrap: wrap; gap: .35rem; }
+    .cs-presets button, .cs-seg button { font-size: 12.5px; padding: .35rem .65rem; border-radius: 7px; border: 1px solid var(--h-line); background: #fff; cursor: pointer; color: var(--h-ink); }
+    .cs-presets button:hover, .cs-seg button:hover { border-color: var(--h-ink-2); }
+    .cs-row { display: grid; grid-template-columns: 7.2rem 1fr 3rem; gap: .6rem; align-items: center; font-size: 13.5px; color: var(--h-ink); margin-bottom: .35rem; }
+    .cs-row output { font: 12px 'IBM Plex Mono', monospace; color: var(--h-ink-2); text-align: right; }
+    .cs-row input[type=range] { width: 100%; accent-color: var(--h-ink); }
+    .cs-row select { font-size: 13px; padding: .25rem .4rem; border: 1px solid var(--h-line); border-radius: 6px; background: #fff; grid-column: 2 / 4; }
+    .cs-seg { display: flex; gap: .3rem; grid-column: 2 / 4; flex-wrap: wrap; }
+    .cs-seg button.is-on { background: var(--h-ink); color: #fff; border-color: var(--h-ink); }
+    .cs-chips { display: flex; gap: .3rem; grid-column: 2 / 4; flex-wrap: wrap; }
+    .cs-chips button { width: 30px; height: 30px; border-radius: 7px; border: 2px solid #fff; box-shadow: 0 0 0 1px var(--h-line); cursor: pointer; font: 600 11px Inter, sans-serif; color: #fff; }
+    .cs-hint { font-size: 12px; color: var(--h-ink-2); margin-top: .2rem; }
+    .cs-actions { display: grid; gap: .45rem; margin-top: 1.2rem; }
+    .cs-status { font-size: 13px; padding: .6rem .8rem; border-radius: 8px; background: #F0F0EC; color: var(--h-ink); }
+    .cs-status.is-on { background: #E4F1EC; }
+    .cs-main { display: grid; gap: 1rem; min-width: 0; }
+    .cs-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 1rem; }
+    .cs-stage { display: flex; align-items: center; justify-content: center; gap: 1.6rem; min-height: 180px; padding: 1.8rem; border-radius: 12px; background: var(--c-bg, #fff); border: 1px solid var(--h-line); flex-wrap: wrap; }
+    .cs-stage.inverse { background: var(--c-bg); border-color: transparent; }
+    .cs-big { position: relative; width: min(100%, 360px); aspect-ratio: 1; }
+    .cs-big .frame { position: absolute; inset: 0; border: 1px dashed rgb(0 0 0 / .14); border-radius: 4px; pointer-events: none; }
+    .cs-big .frame::before, .cs-big .frame::after { content: ''; position: absolute; background: rgb(0 0 0 / .07); }
+    .cs-big .frame::before { left: 50%; top: 0; bottom: 0; width: 1px; }
+    .cs-big .frame::after { top: 50%; left: 0; right: 0; height: 1px; }
+    .cs-big #big, .cs-big .hda-lockup { position: absolute; inset: 0; }
+    .cs-big .hda-mark { overflow: visible; }
+    figure { margin: 0; }
+    figcaption { font-size: 13px; margin-top: .45rem; }
+    .cs-sizes { align-items: flex-end; }
+    .cs-sizes span { display: inline-block; }
+    .cs-mono { --logo-a: #16181D; --logo-b: #16181D; --logo-c: #16181D; --logo-d: #16181D; --logo-ink: #16181D; }
+    .cs-themes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .cs-themes .cs-stage { min-height: 120px; }
+    .cs-code { font: 12px/1.5 'IBM Plex Mono', monospace; background: #16181D; color: #E8EAED; border-radius: 10px; padding: 1rem 1.1rem; overflow: auto; white-space: pre-wrap; word-break: break-all; margin: 0; }
+    .cs-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .cs-top .cs-seg { grid-column: auto; }
+    @media (max-width: 980px) { .cs { grid-template-columns: 1fr; } .cs-panel { position: static; max-height: none; } .cs-grid, .cs-themes { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body class="hub">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="hub-top"><div class="container">
+  <a class="hub-brand" href="../index.html">HDA <span>Design review</span></a>
+  <nav aria-label="Review pages"><a href="../index.html">Overview</a><a href="index.html" aria-current="page">Logos</a><a href="../palettes/index.html">Colour</a></nav>
+</div></header>
+
+<main id="main">
+  <section class="hub-hero" style="padding-bottom:2rem"><div class="container">
+    <p class="hub-kicker">Logo 3 · Contour studio</p>
+    <h1>Shape your own contour.</h1>
+    <p class="lede">Adjust the terrain, rings, summit and line weight, and see the mark in every size and theme as you go. Choose “Use across the site” to put your version on every theme page, then share it as a link.</p>
+  </div></section>
+
+  <div class="container cs">
+    <form class="cs-panel" id="panel" onsubmit="event.preventDefault()" aria-label="Contour controls">
+      <h2>Start from</h2>
+      <div class="cs-presets" id="presets"></div>
+      <div id="controls"></div>
+      <div class="cs-actions">
+        <p class="cs-status" id="status"></p>
+        <button class="hbtn hbtn--dark" type="button" id="apply">Use across the site</button>
+        <button class="hbtn" type="button" id="share">Copy share link</button>
+        <button class="hbtn" type="button" id="download">Download SVG mark</button>
+        <button class="hbtn" type="button" id="reset">Reset to original</button>
+      </div>
+    </form>
+
+    <div class="cs-main">
+      <div class="cs-top">
+        <div class="cs-seg" id="palette" role="group" aria-label="Preview palette"></div>
+        <a class="hbtn" id="try" href="#">Open in theme →</a>
+      </div>
+      <div class="cs-grid" id="pv">
+        <figure><div class="cs-stage" style="min-height:400px"><div class="cs-big"><span class="frame" aria-hidden="true"></span><span id="big"></span></div></div><figcaption>Mark on the 64 × 64 grid</figcaption></figure>
+        <div style="display:grid;gap:1rem">
+          <figure><div class="cs-stage"><span id="lockup" style="font-size:26px"></span></div><figcaption>Primary lockup</figcaption></figure>
+          <figure><div class="cs-stage inverse"><span id="reversed" style="font-size:20px"></span></div><figcaption>Reversed</figcaption></figure>
+          <figure><div class="cs-stage cs-sizes"><span id="s64" style="width:64px;height:64px"></span><span id="s32" style="width:32px;height:32px"></span><span id="s16" style="width:16px;height:16px"></span><span class="cs-mono" id="mono" style="width:48px;height:48px"></span></div><figcaption>64 / 32 / 16 px and one colour</figcaption></figure>
+        </div>
+      </div>
+      <figure><div class="cs-stage"><span id="stacked" style="font-size:18px"></span></div><figcaption>Stacked</figcaption></figure>
+      <div class="cs-themes" id="themes"></div>
+      <figure><pre class="cs-code" id="code"></pre><figcaption>Settings (only values that differ from the original are saved)</figcaption></figure>
+    </div>
+  </div>
+</main>
+
+<footer class="hub-foot"><div class="container">Your settings are stored in this browser only. Share them with the link, or paste the settings into feedback.</div></footer>
+
+<script src="../assets/themes.js"></script>
+<script src="../assets/logos.js"></script>
+<script>
+  const C = HDALogos.contour;
+  const D = C.defaults;
+  let p = C.get();
+  let paletteId = 'fieldwork';
+
+  // [key, label, min, max, step] for sliders; other control types handled below.
+  const GROUPS = [
+    ['Rings', [['rings', 'Rings', 1, 6, 1], ['outer', 'Outer size', 12, 31, 0.5], ['step', 'Spacing', 1.5, 10, 0.1], ['ease', 'Spacing curve', 0.4, 2.2, 0.05], ['squash', 'Height', 0.55, 1.15, 0.01], ['rotate', 'Rotate', 0, 360, 1]]],
+    ['Terrain', [['wobble', 'Wobble', 0, 2.6, 0.05], ['detail', 'Detail', 0, 3, 0.05], ['twist', 'Twist', -3, 3, 0.05], ['seed', 'Terrain seed', 0, 99, 1]]],
+    ['Summit', [['dx', 'Offset x', -14, 14, 0.2], ['dy', 'Offset y', -14, 14, 0.2], ['mark', 'Marker', ['dot', 'triangle', 'ring', 'none']], ['dot', 'Marker size', 0, 8, 0.1], ['summit', 'Marker colour', 'chip']]],
+    ['Line', [['style', 'Style', ['lines', 'tint', 'filled']], ['stroke', 'Weight', 0.8, 6, 0.1], ['taper', 'Taper', -1, 0.9, 0.05], ['gap', 'Label gap', 0, 30, 1], ['gapAt', 'Gap position', 0, 360, 1]]],
+    ['Colour & type', [['colours', 'Ring colours', 'chips'], ['font', 'Wordmark', 'select'], ['fit', 'Fit to frame', ['off', 'on']]]],
+  ];
+  const LETTERS = ['A', 'B', 'C', 'D', 'I'];
+  const FONT_NAMES = { lora: 'Lora', fraunces: 'Fraunces', jakarta: 'Plus Jakarta Sans', barlow: 'Barlow', archivo: 'Archivo', sora: 'Sora' };
+
+  const PRESETS = {
+    Original: {},
+    Minimal: { rings: 2, outer: 25, step: 8, stroke: 3.6, wobble: 0.7, dot: 5 },
+    Rugged: { rings: 4, outer: 28, step: 5.6, wobble: 1.6, detail: 2.4, twist: 1.6, seed: 12, stroke: 2.4, colours: 'BDCB' },
+    Relief: { rings: 4, outer: 28, step: 5.8, style: 'tint', stroke: 2.2, taper: 0.4, colours: 'BDCA', summit: 'A', seed: 3 },
+    Survey: { rings: 4, outer: 27.5, step: 5.8, gap: 12, gapAt: 200, mark: 'triangle', dot: 4.6, stroke: 2.4, colours: 'BBBB', summit: 'A' },
+    Plateau: { rings: 4, outer: 28, step: 4.8, ease: 1.8, style: 'filled', colours: 'DCBA', dot: 3, summit: 'I', wobble: 1.1 },
+    Ridge: { rings: 5, outer: 29, step: 5, squash: 0.62, rotate: 20, dx: 9, dy: -2, wobble: 1.3, twist: 2.2, stroke: 2, colours: 'BDCBD', font: 'fraunces' },
+  };
+
+  const esc = (s) => String(s).replace(/"/g, '&quot;');
+  const colourVar = (l) => (l === 'I' ? 'var(--logo-ink)' : `var(--logo-${l.toLowerCase()})`);
+
+  function controlsHtml() {
+    return GROUPS.map(([title, rows]) => `<h2>${title}</h2>` + rows.map(([k, label, a, b, step]) => {
+      if (Array.isArray(a)) return `<div class="cs-row"><span>${label}</span><div class="cs-seg" data-seg="${k}">${a.map((v) => `<button type="button" data-v="${v}">${v}</button>`).join('')}</div></div>`;
+      if (a === 'chip') return `<div class="cs-row"><span>${label}</span><div class="cs-chips" data-chip="${k}"></div></div>`;
+      if (a === 'chips') return `<div class="cs-row"><span>${label}</span><div class="cs-chips" data-chips="${k}"></div></div><p class="cs-hint">Click a ring to cycle its colour. Ring 1 is the outermost.</p>`;
+      if (a === 'select') return `<div class="cs-row"><label for="f-${k}">${label}</label><select id="f-${k}" data-sel="${k}">${Object.entries(FONT_NAMES).map(([v, n]) => `<option value="${v}">${n}</option>`).join('')}</select></div>`;
+      return `<div class="cs-row"><label for="f-${k}">${label}</label><input type="range" id="f-${k}" data-range="${k}" min="${a}" max="${b}" step="${step}"><output data-out="${k}"></output></div>`;
+    }).join('')).join('');
+  }
+  document.getElementById('controls').innerHTML = controlsHtml();
+  document.getElementById('presets').innerHTML = Object.keys(PRESETS).map((n) => `<button type="button" data-preset="${n}">${n}</button>`).join('')
+    + '<button type="button" data-preset="__random">Surprise me</button>';
+  document.getElementById('palette').innerHTML = HDAThemes.map((t) => `<button type="button" data-pal="${t.id}">${t.letter} · ${t.name}</button>`).join('');
+
+  function syncControls() {
+    document.querySelectorAll('[data-range]').forEach((el) => { el.value = p[el.dataset.range]; });
+    document.querySelectorAll('[data-out]').forEach((el) => { const v = p[el.dataset.out]; el.textContent = Number.isInteger(v) ? v : (+v).toFixed(2).replace(/0$/, ''); });
+    document.querySelectorAll('[data-seg]').forEach((el) => {
+      const k = el.dataset.seg, cur = k === 'fit' ? (p.fit ? 'on' : 'off') : p[k];
+      el.querySelectorAll('button').forEach((b) => b.classList.toggle('is-on', b.dataset.v === cur));
+    });
+    document.querySelectorAll('[data-sel]').forEach((el) => { el.value = p[el.dataset.sel]; });
+    const colours = p.colours.padEnd(p.rings, p.colours).slice(0, p.rings);
+    const chips = document.querySelector('[data-chips="colours"]');
+    chips.innerHTML = [...colours].map((l, i) => `<button type="button" data-ring="${i}" title="Ring ${i + 1}: ${l === 'I' ? 'ink' : 'colour ' + l}" style="background:${colourVar(l)}">${i + 1}</button>`).join('');
+    const sc = document.querySelector('[data-chip="summit"]');
+    sc.innerHTML = LETTERS.map((l) => `<button type="button" data-summit="${l}" title="${l === 'I' ? 'Ink' : 'Colour ' + l}" style="background:${colourVar(l)};${p.summit === l ? 'box-shadow:0 0 0 2px var(--h-ink)' : ''}">${l === 'I' ? 'Ink' : l}</button>`).join('');
+    document.querySelectorAll('[data-pal]').forEach((b) => b.classList.toggle('is-on', b.dataset.pal === paletteId));
+  }
+
+  function renderAll() {
+    const R = (layout) => HDALogos.render('contour', layout, p);
+    document.getElementById('pv').closest('.cs-main').setAttribute('data-theme', paletteId);
+    document.getElementById('panel').setAttribute('data-theme', paletteId);
+    document.getElementById('big').outerHTML = `<span id="big">${R('mark')}</span>`;
+    ['lockup', 'reversed'].forEach((id) => (document.getElementById(id).innerHTML = R('horizontal')));
+    document.getElementById('stacked').innerHTML = R('stacked');
+    ['s64', 's32', 's16', 'mono'].forEach((id) => (document.getElementById(id).innerHTML = R('mark')));
+    document.getElementById('themes').innerHTML = HDAThemes.map((t) => `
+      <figure data-theme="${t.id}"><div class="cs-stage" style="border-color:transparent">${HDALogos.render('contour', 'horizontal', p).replace('class="hda-lockup', 'style="font-size:16px" class="hda-lockup')}</div><figcaption>${t.letter} · ${t.name}</figcaption></figure>`).join('');
+    const d = C.diff(p);
+    document.getElementById('code').textContent = Object.keys(d).length ? JSON.stringify(d, null, 1).replace(/\n\s*/g, ' ') : '{} (original)';
+    const active = C.isCustom();
+    const same = JSON.stringify(C.diff(C.get())) === JSON.stringify(d);
+    const st = document.getElementById('status');
+    st.className = 'cs-status' + (active ? ' is-on' : '');
+    st.textContent = active ? (same ? 'This custom contour is live on every theme page.' : 'A custom contour is live on the site. Apply to replace it with this one.') : (Object.keys(d).length ? 'Preview only. The site still shows the original.' : 'The site shows the original contour.');
+    document.getElementById('try').href = `../themes/${paletteId}/index.html?logo=contour&contour=${Object.keys(d).length ? C.encode(d) : 'reset'}`;
+  }
+  const update = () => { syncControls(); renderAll(); };
+
+  const panel = document.getElementById('panel');
+  panel.addEventListener('input', (e) => {
+    const k = e.target.dataset.range || e.target.dataset.sel;
+    if (!k) return;
+    p[k] = e.target.dataset.range ? +e.target.value : e.target.value;
+    if (k === 'rings') p.colours = p.colours.padEnd(p.rings, p.colours);
+    update();
+  });
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest('button');
+    if (!b) return;
+    if (b.dataset.v !== undefined && b.parentElement.dataset.seg) {
+      const k = b.parentElement.dataset.seg;
+      p[k] = k === 'fit' ? b.dataset.v === 'on' : b.dataset.v;
+    } else if (b.dataset.ring !== undefined) {
+      const i = +b.dataset.ring, cols = [...p.colours.padEnd(p.rings, p.colours)];
+      cols[i] = LETTERS[(LETTERS.indexOf(cols[i]) + 1) % LETTERS.length];
+      p.colours = cols.join('');
+    } else if (b.dataset.summit) {
+      p.summit = b.dataset.summit;
+    } else if (b.dataset.pal) {
+      paletteId = b.dataset.pal;
+    } else if (b.dataset.preset) {
+      if (b.dataset.preset === '__random') {
+        const r = (a, z, s = 0.05) => Math.round((a + Math.random() * (z - a)) / s) * s;
+        const rings = 2 + Math.floor(Math.random() * 4);
+        p = Object.assign({}, D, { rings, outer: r(24, 29, 0.5), step: r(4.6, 8, 0.1), wobble: r(0.5, 1.8), detail: r(0.4, 2.4), twist: r(-2, 2.5), seed: Math.floor(Math.random() * 99) + 1, dx: r(-8, 8, 0.2), dy: r(-8, 4, 0.2), squash: r(0.78, 1)
+          , colours: Array.from({ length: rings }, () => 'BDC'[Math.floor(Math.random() * 3)]).join('') });
+      } else {
+        p = Object.assign({}, D, PRESETS[b.dataset.preset]);
+      }
+    } else return;
+    update();
+  });
+
+  document.getElementById('apply').addEventListener('click', () => { C.save(p); update(); });
+  document.getElementById('reset').addEventListener('click', () => { C.reset(); p = C.get(); update(); });
+  document.getElementById('share').addEventListener('click', async (e) => {
+    const d = C.diff(p);
+    const url = new URL(`../themes/${paletteId}/index.html`, location.href);
+    url.searchParams.set('logo', 'contour');
+    url.searchParams.set('contour', Object.keys(d).length ? C.encode(d) : 'reset');
+    try { await navigator.clipboard.writeText(url.toString()); e.target.textContent = 'Link copied'; }
+    catch { prompt('Copy this link', url.toString()); }
+    setTimeout(() => (e.target.textContent = 'Copy share link'), 1600);
+  });
+  document.getElementById('download').addEventListener('click', () => {
+    const host = document.getElementById('lockup');
+    const svg = host.querySelector('svg.hda-mark').cloneNode(true);
+    const cs = getComputedStyle(host);
+    svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    svg.removeAttribute('class'); svg.removeAttribute('aria-hidden');
+    const out = svg.outerHTML.replace(/var\(--logo-([a-z]+),\s*([^)]+)\)/g, (_, k, fb) => cs.getPropertyValue('--logo-' + k).trim() || fb);
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([out], { type: 'image/svg+xml' }));
+    a.download = `hda-logo-contour-${paletteId}.svg`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  });
+
+  update();
+</script>
+</body>
+</html>

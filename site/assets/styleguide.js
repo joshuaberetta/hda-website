@@ -42,7 +42,7 @@
         <div class="sg-intro-grid">
           <div><h2>How it merges our brands</h2><p>${theme.blend}</p></div>
           <div><h2>Best for</h2><p>${theme.bestFor}</p>
-            <p style="margin-top:1.2rem"><a class="link-arrow" href="index.html">View the ${theme.name} home page ${icon('i-arrow')}</a></p></div>
+            <p style="margin-top:1.2rem"><a class="link-arrow" href="index.html">View the ${theme.name} home page ${icon('i-arrow')}</a></p><p style="margin-top:.6rem"><a class="link-arrow" href="collateral.html">Brochure, slides and booth ${icon('i-arrow')}</a></p></div>
         </div>
       </div>
     </header>`;
