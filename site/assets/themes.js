@@ -106,4 +106,21 @@ window.HDAThemes = [
       ['--c-surface', 'Frost', 'Section backgrounds'],
     ],
   },
+  {
+    id: 'unified', letter: 'G', name: 'Unified', defaultLogo: 'convergence-2', round: 2,
+    tagline: 'Round two. Confluence’s clarity, Fieldwork’s warmth and Atlas’s layers, merged from the team’s votes.',
+    blend: 'Confluence was on five of six ballots, so it sets the structure, navy, red and type. Fieldwork adds warm paper, soft contour textures and clear pastel member colours, which reviewers found easier to read. Atlas (and a little of Signal) adds the interactive layer stack and monospace data labels for GIS audiences. Ochre joins as a fourth data colour.',
+    fonts: { head: 'Plus Jakarta Sans', body: 'Inter', mono: 'IBM Plex Mono' },
+    bestFor: 'A single direction for everyone: donors and coordination first, with enough warmth for field audiences and enough precision for GIS partners.',
+    swatches: [
+      ['--c-primary', 'Alliance Navy', 'Headings, navigation, dark sections'],
+      ['--c-accent', 'Response Red', 'Primary actions, highlights (used sparingly)'],
+      ['--c-accent-2', 'Data Blue', 'Links, data points, charts'],
+      ['--c-accent-3', 'Field Teal', 'Secondary data colour, success states'],
+      ['--c-accent-4', 'Ochre', 'Fourth data colour, small highlights'],
+      ['--c-bg', 'Paper', 'Page background'],
+      ['--c-surface', 'Stone', 'Section backgrounds'],
+      ['--c-surface-2', 'Mist', 'Cards, info panels'],
+    ],
+  },
 ];

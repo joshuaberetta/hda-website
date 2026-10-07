@@ -21,11 +21,54 @@
 <main id="main">
   <section class="hub-hero"><div class="container">
     <p class="hub-kicker">Humanitarian Data Alliance · Design options · Draft for review</p>
-    <h1>Six website themes and seven logo concepts.</h1>
-    <p class="lede">A shared home page for iMMAP, CartONG, HOT and Kobo, designed six ways, with seven logo concepts that work in any of them. The Contour logo can also be reshaped in the <a href="logos/contour-studio.html">Contour studio</a>. Each theme blends colours and type the four member brands already share, so the alliance feels familiar rather than like a fifth brand.</p>
+    <h1>Seven website themes and eight logo concepts.</h1>
+    <p class="lede">A shared home page for iMMAP, CartONG, HOT and Kobo, designed six ways in round one plus a merged seventh, with eight logo concepts that work in any of them. The Contour logo can also be reshaped in the <a href="logos/contour-studio.html">Contour studio</a>. Each theme blends colours and type the four member brands already share, so the alliance feels familiar rather than like a fifth brand.</p>
   </div></section>
 
-  <section class="hub-section"><div class="container">
+  <section class="hub-section hub-round2" id="round-2"><div class="container">
+    <p class="hub-kicker">Round 2 · October 2026</p>
+    <h2>One merged direction: Theme G, Unified, with Convergence II</h2>
+    <p class="sub">Round one was spread out, but two choices were on almost every ballot. Theme G keeps those as the base and folds in what people asked for in their comments. Ranks score 3/2/1, and each logo counts once per person.</p>
+    <div class="r2-grid">
+      <div class="r2-card">
+        <h3>Themes</h3>
+        <ol class="r2-bars" role="list">
+          <li style="--v:12"><span>A · Confluence</span><b>12</b><small>5 of 6 reviewers</small></li>
+          <li style="--v:6"><span>B · Fieldwork</span><b>6</b><small>2</small></li>
+          <li style="--v:5"><span>F · Atlas</span><b>5</b><small>2</small></li>
+          <li style="--v:3"><span>C · Signal</span><b>3</b><small>2</small></li>
+          <li style="--v:2"><span>E · Relief</span><b>2</b><small>1</small></li>
+        </ol>
+      </div>
+      <div class="r2-card">
+        <h3>Logos</h3>
+        <ol class="r2-bars" role="list">
+          <li style="--v:11"><span>1 · Convergence</span><b>11</b><small>5 of 6 reviewers</small></li>
+          <li style="--v:7.5"><span>3 · Contour</span><b>7.5</b><small>3</small></li>
+          <li style="--v:4"><span>2 · Layers</span><b>4</b><small>2</small></li>
+          <li style="--v:3"><span>7 · Strata</span><b>3</b><small>2</small></li>
+          <li style="--v:3"><span>5 · Monogram</span><b>3</b><small>1</small></li>
+        </ol>
+      </div>
+      <div class="r2-card r2-card--merge">
+        <h3>What went into G</h3>
+        <ul role="list">
+          <li><b>Confluence</b> sets the structure, navy, red and type. It was the clear first choice.</li>
+          <li><b>Fieldwork</b> adds warm paper, contour textures and clear pastel colours, which reviewers said were easier to read.</li>
+          <li><b>Atlas</b> adds the interactive layer stack (one layer per service) and building lifecycle. <b>Signal</b> adds monospace data labels.</li>
+          <li><b>Convergence II</b> keeps the most-picked mark but makes it less “standard”: the pins swirl inward to a contour summit, borrowed from Contour.</li>
+        </ul>
+        <div class="actions">
+          <a class="hbtn hbtn--dark" href="themes/unified/index.html?logo=default">Open Theme G</a>
+          <a class="hbtn" href="themes/unified/style-guide.html?logo=default">Style guide</a>
+          <a class="hbtn" href="themes/unified/collateral.html?logo=default">Collateral</a>
+          <a class="hbtn" href="logos/index.html#convergence-2">Convergence II</a>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="hub-section hub-rule"><div class="container">
     <h2>How to review</h2>
     <p class="sub">Every page has a small review bar at the bottom. Use it to switch theme, page and logo without losing your place.</p>
     <ol class="hub-steps" role="list">
@@ -37,7 +80,7 @@
 
   <section class="hub-section hub-rule" id="themes"><div class="container">
     <h2>Website themes</h2>
-    <p class="sub">All six use the same content, drawn from the MoU values and recent meeting notes. Figures and dates marked “TBC” are placeholders to confirm.</p>
+    <p class="sub">All seven use the same content, drawn from the MoU values and recent meeting notes. Figures and dates marked “TBC” are placeholders to confirm.</p>
     <div class="theme-cards" id="theme-cards"></div>
   </div></section>
 
@@ -98,6 +141,7 @@
     commons: ['#121417', '#D63E3A', '#1E6BD6', '#2B8A78', '#FFFFFF', '#F3F2EE'],
     relief: ['#16292B', '#BD4430', '#2C6E9E', '#5E7F4B', '#C98F2E', '#F6F4EE'],
     atlas: ['#0D1B2E', '#1B5FCC', '#D8453B', '#17897B', '#E3A72F', '#F5F7FA'],
+    unified: ['#0E2A47', '#C8363B', '#1A72BF', '#22857A', '#B97D16', '#F4F0E7'],
   };
   document.querySelectorAll('[data-theme-preview]').forEach((card) => {
     card.querySelectorAll('.strip i').forEach((i, n) => (i.style.background = PALETTE[card.dataset.themePreview][n]));

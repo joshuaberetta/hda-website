@@ -238,6 +238,26 @@
     </g></svg>`;
   }
 
+  // --- 8. Convergence II: four pins swirl in to a contour summit ----------
+  // Reworked from concept 1 after round-one feedback ("too standard"). The
+  // pins turn off the compass axes and spiral inward, and the point where
+  // they meet becomes a contour ring with a summit, borrowed from concept 3.
+  function convergence2() {
+    const h = 15, r = 8.4, gap = 7, swirl = 14, hole = 3.6;
+    const tx = (r * Math.sqrt(1 - (r / h) ** 2)).toFixed(3), ty = (-h + (r * r) / h).toFixed(3);
+    const pins = [A, B, C, D].map((c, i) =>
+      `<path transform="rotate(${45 + i * 90} 32 32) translate(32 ${32 - gap}) rotate(${swirl})" fill="${c}" fill-rule="evenodd"
+        d="M0 0 L${tx} ${ty} A${r} ${r} 0 1 0 -${tx} ${ty} Z M0 ${-h - hole} a${hole} ${hole} 0 1 0 0.001 0 Z"/>`).join('');
+    const ring = [];
+    for (let k = 0; k < 48; k++) {
+      const a = (k / 48) * Math.PI * 2, w = 1 + 0.12 * Math.sin(2 * a + 0.9) + 0.07 * Math.sin(3 * a + 1.8);
+      ring.push([32 + Math.cos(a) * 5.4 * w, 32 + Math.sin(a) * 5.4 * w]);
+    }
+    return `<svg class="hda-mark" viewBox="0 0 64 64" aria-hidden="true">${pins}
+      <path d="${smoothClosed(ring)}" fill="none" stroke="${INK}" stroke-width="1.8"/>
+      <circle cx="32" cy="32" r="2" fill="${INK}"/></svg>`;
+  }
+
   const LOGOS = [
     {
       id: 'convergence', num: 1, name: 'Convergence', draw: convergence,
@@ -280,6 +300,12 @@
       wordmark: 'Humanitarian<br>Data Alliance', wm: 'wm-strata',
       summary: 'Contour plates stacked into terrain.',
       rationale: 'A hybrid of Layers and Contour. Four contour plates stack in isometric view, like a terraced relief model, so it reads as both a GIS layer stack and a landscape. Each layer is needed to build the summit. It has the most depth of any concept and still holds up as a favicon.',
+    },
+    {
+      id: 'convergence-2', num: 8, name: 'Convergence II', draw: convergence2,
+      wordmark: 'Humanitarian<br>Data Alliance', wm: 'wm-convergence',
+      summary: 'Convergence reworked: pins swirl in to a contour summit.',
+      rationale: 'Round two. Convergence was on five of six ballots, but felt too “standard”. Here the four pins turn off the compass axes and spiral inward, so the mark has movement rather than sitting like a map key. Where they meet, a contour ring and summit (from Contour, the second-most-picked logo) stand for the community at the centre: people before data.',
     },
   ];
 

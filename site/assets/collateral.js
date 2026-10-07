@@ -19,6 +19,7 @@
     commons: { hl: 'Stronger <em>together</em> for humanitarian data.', art: 'bars', tex: 'none', cover: 'type', divider: 'accent' },
     relief: { hl: 'Every decision rests on the <em>ground truth.</em>', art: 'relief', tex: 'contours', cover: 'full', divider: 'inverse', frame: true },
     atlas: { hl: 'Four layers of expertise. <em>One clear picture.</em>', art: 'stack', tex: 'grid', cover: 'split', divider: 'inverse' },
+    unified: { hl: 'Connecting data, maps and expertise for <em>humanitarian action.</em>', art: 'map', tex: 'contours', cover: 'split', divider: 'inverse' },
   };
   const F = FLAVOUR[theme.id];
 

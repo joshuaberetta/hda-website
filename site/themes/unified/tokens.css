@@ -1,0 +1,33 @@
+[data-theme="unified"] {
+  --c-bg: #FDFBF7;
+  --c-surface: #F4F0E7;
+  --c-surface-2: #EAF2FA;
+  --c-ink: #0E2A47;
+  --c-ink-2: #3F5064;
+  --c-line: #E0DCD2;
+  --c-primary: #0E2A47;
+  --c-primary-ink: #FFFFFF;
+  --c-accent: #C8363B;
+  --c-accent-ink: #FFFFFF;
+  --c-accent-2: #1A72BF;
+  --c-accent-3: #22857A;
+  --c-accent-4: #B97D16;
+  --c-night: #0E2A47;
+  /* Clear pastel tints (from Fieldwork) for member and service panels */
+  --c-tint-a: #F8E4E1; --c-tint-b: #E3ECF5; --c-tint-c: #E0EFEC; --c-tint-d: #F6EBD6;
+
+  --logo-a: #C8363B; --logo-b: #0E2A47; --logo-c: #2B8FE0; --logo-d: #2A9D8F;
+  --logo-ink: #0E2A47; --logo-bg: #FDFBF7;
+
+  --font-head: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --radius: 12px;
+  --shadow: 0 1px 2px rgb(14 42 71 / .05), 0 8px 24px rgb(14 42 71 / .05);
+}
+[data-theme="unified"] .inverse {
+  --c-bg: #0E2A47; --c-surface: #12345A; --c-surface-2: #173E69;
+  --c-ink: #FFFFFF; --c-ink-2: #C3D0DF; --c-line: #2A4B70;
+  --c-primary: #FFFFFF; --c-primary-ink: #0E2A47; --c-accent-2: #6CB6F5; --c-accent-4: #E8B44E;
+  --logo-b: #FFFFFF; --logo-ink: #FFFFFF; --logo-bg: #0E2A47;
+}

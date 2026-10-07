@@ -1,6 +1,6 @@
 # Humanitarian Data Alliance: design options
 
-A static review site for the HDA website and brand exploration: six website themes, seven logo concepts, and a style guide and colour palette for each theme. It is live at **https://hda.kobolabs.dev**.
+A static review site for the HDA website and brand exploration: seven website themes (six from round one plus a merged Theme G), eight logo concepts, and a style guide and colour palette for each theme. It is live at **https://hda.kobolabs.dev**.
 
 No build step and no dependencies. Plain HTML, CSS and JS in `site/`.
 
@@ -19,17 +19,17 @@ Any static server works. Pages use relative paths, so the site can also be hoste
 | Path | What |
 |---|---|
 | `site/index.html` | Review hub: brief, how to review, theme cards, logo overview, design principles |
-| `site/themes/<id>/index.html` | Home page in each theme: `confluence` (A), `fieldwork` (B), `signal` (C), `commons` (D), `relief` (E), `atlas` (F) |
+| `site/themes/<id>/index.html` | Home page in each theme: `confluence` (A), `fieldwork` (B), `signal` (C), `commons` (D), `relief` (E), `atlas` (F), and the round-two merge `unified` (G) |
 | `site/themes/<id>/style-guide.html` | Style guide for that theme: logo usage, colour and contrast, type, components, graphics, voice |
 | `site/themes/<id>/collateral.html` | Collateral in that theme: DL tri-fold brochure (outside and inside) and A5 flyer, a 12-layout slide template in a carousel, three roll-up banners, a backdrop wall, a table front and a to-scale booth view, plus a name badge, social posts and an email signature |
-| `site/logos/index.html` | All seven logo concepts with rationale, variants, theme colourways, co-branding and SVG download |
+| `site/logos/index.html` | All eight logo concepts with rationale, variants, theme colourways, co-branding and SVG download |
 | `site/logos/contour-studio.html` | Contour studio: reshape logo 3 (rings, terrain, summit, line, colour, wordmark), preview it everywhere, apply it site-wide, share or download it |
 | `site/palettes/index.html` | Member colours as observed, where they overlap, and every theme palette with WCAG contrast |
 | `site/results/index.html` | Organisers only (not linked from the hub): paste the review doc to tally everyone's top three picks |
 
 ### Review bar
 
-Every theme page has a small toolbar that switches **theme (A–F)**, **page (Home / Style guide / Collateral)** and **logo (1–7)**.
+Every theme page has a small toolbar that switches **theme (A–F)**, **page (Home / Style guide / Collateral)** and **logo (1–8)**.
 
 - The logo choice is remembered across pages.
 - Share a combination with `?logo=<id>`, e.g. `themes/fieldwork/index.html?logo=tiles`. **Copy link** always writes the explicit logo id, and adds `&contour=<code>` (or `reset`) when the logo is Contour, so the link fully describes what the reviewer saw.
@@ -74,7 +74,7 @@ Parsing rules: a line with no link starts a new reviewer (a second line straight
 With the local server running (needs Google Chrome):
 
 ```sh
-for id in confluence fieldwork signal commons relief atlas; do
+for id in confluence fieldwork signal commons relief atlas unified; do
   scripts/shot.sh "themes/$id/index.html?shot&logo=default" /tmp/$id.png 1440 900
   sips -Z 960 -s format jpeg -s formatOptions 78 /tmp/$id.png --out site/assets/thumbs/$id.jpg
 done
