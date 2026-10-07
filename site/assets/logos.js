@@ -258,6 +258,48 @@
       <circle cx="32" cy="32" r="2" fill="${INK}"/></svg>`;
   }
 
+  // --- 9. Contour II: concept 3 redrawn ------------------------------------
+  // Round-two feedback liked the idea but not the drawing. Four rings, one per
+  // member colour, at one weight. They crowd on the steep side and get rounder
+  // as they rise, so it reads as a hillside rather than a target.
+  function softRing(cx, cy, R, amp, sq, rot) {
+    const pts = [];
+    for (let k = 0; k < 64; k++) {
+      const a = (k / 64) * Math.PI * 2, q = a - rot;
+      const w = 1 + amp * (0.10 * Math.sin(2 * q + 0.9) + 0.06 * Math.sin(3 * q + 2.4) + 0.025 * Math.sin(5 * q + 0.4));
+      pts.push([cx + Math.cos(a) * R * w, cy + Math.sin(a) * R * w * sq]);
+    }
+    return pts;
+  }
+  function contour2() {
+    const sx = 40, sy = 24;
+    const rings = [B, D, C, A].map((c, i) => {
+      const t = (i / 3.4) ** 1.3;
+      return `<path d="${smoothClosed(softRing(30 + (sx - 30) * t, 36 + (sy - 36) * t, 27.5 - 6.6 * i, 1 - 0.6 * i / 3.4, 0.9, 0.3))}" fill="none" stroke="${c}" stroke-width="3"/>`;
+    }).join('');
+    return `<svg class="hda-mark" viewBox="0 0 64 64" aria-hidden="true">${rings}
+      <circle cx="${sx + 0.6}" cy="${sy - 0.6}" r="2.9" fill="${A}"/></svg>`;
+  }
+
+  // --- 10. Strata II: concept 7 redrawn -------------------------------------
+  // The Layers stack (concept 2) with contour lines etched into the top plate,
+  // so the four layers build a landscape. Crisper than the original plates.
+  function strata2() {
+    const rh = (dy) => `M32 ${8 + dy}L57 ${20.5 + dy}L32 ${33 + dy}L7 ${20.5 + dy}Z`;
+    const plates = [[22, D], [14.5, C], [7, B], [-0.5, A]].map(([dy, c]) =>
+      `<path d="${rh(dy)}" fill="${c}" stroke="${BG}" stroke-width="2.6" stroke-linejoin="round"/>`).join('');
+    const lines = [0, 1, 2].map((i) => {
+      const t = i / 3;
+      return `<path d="${smoothClosed(softRing(32 + 3 * t, 20.2 - 1.6 * t, 15.5 - 4.6 * i, 0.9 - 0.4 * t, 0.5, 0.2))}"/>`;
+    }).join('');
+    const id = `hda-s2-${++strata2.n}`;
+    return `<svg class="hda-mark" viewBox="0 0 64 64" aria-hidden="true">${plates}
+      <clipPath id="${id}"><path d="${rh(-0.5)}"/></clipPath>
+      <g clip-path="url(#${id})" fill="none" stroke="#fff" stroke-width="1.5" stroke-opacity=".9">${lines}</g>
+      <circle cx="35.6" cy="17.9" r="1.7" fill="#fff"/></svg>`;
+  }
+  strata2.n = 0;
+
   const LOGOS = [
     {
       id: 'convergence', num: 1, name: 'Convergence', draw: convergence,
@@ -306,6 +348,18 @@
       wordmark: 'Humanitarian<br>Data Alliance', wm: 'wm-convergence',
       summary: 'Convergence reworked: pins swirl in to a contour summit.',
       rationale: 'Round two. Convergence was on five of six ballots, but felt too “standard”. Here the four pins turn off the compass axes and spiral inward, so the mark has movement rather than sitting like a map key. Where they meet, a contour ring and summit (from Contour, the second-most-picked logo) stand for the community at the centre: people before data.',
+    },
+    {
+      id: 'contour-2', num: 9, name: 'Contour II', draw: contour2,
+      wordmark: 'Humanitarian<br>Data Alliance', wm: 'wm-contour',
+      summary: 'Contour redrawn: four member rings climbing one hillside.',
+      rationale: 'Round two. Reviewers liked the Contour idea but not the drawing. The rings are now one weight, one per member colour, and they crowd together on the steep side of the hill and get rounder towards the top, the way real contours do. It reads as terrain rather than a target, and still rises to a single summit: people before data.',
+    },
+    {
+      id: 'strata-2', num: 10, name: 'Strata II', draw: strata2,
+      wordmark: 'Humanitarian<br>Data Alliance', wm: 'wm-strata',
+      summary: 'Strata redrawn: the layer stack, with terrain etched on top.',
+      rationale: 'Round two. Strata’s idea (layers that build a landscape) is kept, but drawn with the crisp geometry of Layers, the logo with the most first-choice votes among GIS reviewers. Four member layers stack up, and the top one carries contour lines and a summit: the picture you get when the layers combine. Cleaner than the original plates and legible at favicon size.',
     },
   ];
 

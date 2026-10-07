@@ -1,6 +1,6 @@
 # Humanitarian Data Alliance: design options
 
-A static review site for the HDA website and brand exploration: seven website themes (six from round one plus a merged Theme G), eight logo concepts, and a style guide and colour palette for each theme. It is live at **https://hda.kobolabs.dev**.
+A static review site for the HDA website and brand exploration: seven website themes (six from round one plus a merged Theme G), ten logo concepts, and a style guide and colour palette for each theme. It is live at **https://hda.kobolabs.dev**.
 
 No build step and no dependencies. Plain HTML, CSS and JS in `site/`.
 
@@ -22,14 +22,14 @@ Any static server works. Pages use relative paths, so the site can also be hoste
 | `site/themes/<id>/index.html` | Home page in each theme: `confluence` (A), `fieldwork` (B), `signal` (C), `commons` (D), `relief` (E), `atlas` (F), and the round-two merge `unified` (G) |
 | `site/themes/<id>/style-guide.html` | Style guide for that theme: logo usage, colour and contrast, type, components, graphics, voice |
 | `site/themes/<id>/collateral.html` | Collateral in that theme: DL tri-fold brochure (outside and inside) and A5 flyer, a 12-layout slide template in a carousel, three roll-up banners, a backdrop wall, a table front and a to-scale booth view, plus a name badge, social posts and an email signature |
-| `site/logos/index.html` | All eight logo concepts with rationale, variants, theme colourways, co-branding and SVG download |
+| `site/logos/index.html` | All ten logo concepts with rationale, variants, theme colourways, co-branding and SVG download |
 | `site/logos/contour-studio.html` | Contour studio: reshape logo 3 (rings, terrain, summit, line, colour, wordmark), preview it everywhere, apply it site-wide, share or download it |
 | `site/palettes/index.html` | Member colours as observed, where they overlap, and every theme palette with WCAG contrast |
 | `site/results/index.html` | Organisers only (not linked from the hub): paste the review doc to tally everyone's top three picks |
 
 ### Review bar
 
-Every theme page has a small toolbar that switches **theme (A–F)**, **page (Home / Style guide / Collateral)** and **logo (1–8)**.
+Every theme page has a small toolbar that switches **theme (A–G)**, **page (Home / Style guide / Collateral)** and **logo (1–10)**.
 
 - The logo choice is remembered across pages.
 - Share a combination with `?logo=<id>`, e.g. `themes/fieldwork/index.html?logo=tiles`. **Copy link** always writes the explicit logo id, and adds `&contour=<code>` (or `reset`) when the logo is Contour, so the link fully describes what the reviewer saw.
