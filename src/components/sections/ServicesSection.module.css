@@ -1,0 +1,109 @@
+.groups {
+  display: grid;
+  gap: 24px;
+}
+
+.group {
+  --slot: var(--mantine-color-blue-7);
+  --slot-tint: var(--mantine-color-blue-1);
+
+  padding: 40px;
+  border-radius: var(--mantine-radius-xl);
+  background: var(--slot-tint);
+
+  &[data-slot='1'] {
+    --slot: var(--mantine-color-teal-8);
+    --slot-tint: var(--mantine-color-teal-1);
+  }
+
+  &[data-slot='2'] {
+    --slot: var(--mantine-color-red-8);
+    --slot-tint: var(--mantine-color-red-1);
+  }
+
+  &[data-slot='3'] {
+    --slot: var(--mantine-color-ochre-8);
+    --slot-tint: var(--mantine-color-ochre-1);
+  }
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    padding: 28px 18px;
+  }
+}
+
+.head {
+  display: flex;
+  gap: 18px;
+  max-width: 720px;
+  margin-bottom: 24px;
+}
+
+.icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--slot);
+}
+
+.services {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.service {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: start;
+  padding: 18px 22px;
+  border-radius: var(--mantine-radius-lg);
+  background: #fff;
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+/* Which members provide the service: mono names with member dots. */
+.providers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  & li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--member-tint);
+    font-family: var(--hda-font-mono);
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--member-strong);
+  }
+
+  & li::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--member-dot);
+  }
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    justify-content: flex-start;
+  }
+}

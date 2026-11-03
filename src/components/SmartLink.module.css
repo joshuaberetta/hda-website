@@ -1,0 +1,42 @@
+/* Unified's arrow link: semibold, red, the arrow slides 6px on hover. */
+.arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 600;
+  line-height: 1.5;
+  --arrow-color: var(--mantine-color-red-6);
+
+  &:hover {
+    text-decoration: none;
+    --arrow-color: var(--mantine-color-red-7);
+  }
+
+  &[data-light] {
+    --arrow-color: var(--mantine-color-white);
+  }
+}
+
+.chevron {
+  flex: none;
+  transition: transform 200ms ease;
+
+  .arrow:hover & {
+    transform: translateX(6px);
+  }
+
+  .arrow:hover &[data-offsite] {
+    transform: translate(3px, -3px);
+  }
+}
+
+/* The outline button fills navy on hover, as in Unified. */
+.outline {
+  border-width: 1.5px;
+
+  &:hover {
+    background: var(--mantine-color-navy-8);
+    color: var(--mantine-color-white);
+  }
+}

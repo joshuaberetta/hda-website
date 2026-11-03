@@ -1,0 +1,36 @@
+/* Convergence lockup, as drawn by the review site's assets/logos.js. */
+.lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.62em;
+  line-height: 1;
+  color: var(--logo-ink);
+  vertical-align: middle;
+
+  &[data-layout='stacked'] {
+    flex-direction: column;
+    gap: 0.55em;
+    text-align: center;
+
+    & .mark {
+      height: 4.2em;
+    }
+  }
+}
+
+.mark {
+  display: block;
+  flex: none;
+  width: auto;
+  height: 2.7em;
+}
+
+.wordmark {
+  display: block;
+  font-family: var(--mantine-font-family-headings);
+  font-size: 1.02em;
+  font-weight: 750;
+  line-height: 1.02;
+  letter-spacing: -0.018em;
+  white-space: nowrap;
+}

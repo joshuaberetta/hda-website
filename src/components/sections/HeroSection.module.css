@@ -1,0 +1,134 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--hda-stone);
+}
+
+.contours {
+  position: absolute;
+  inset: 0;
+  --contour-line: #e3dccb;
+  mask-image: linear-gradient(90deg, #000 30%, transparent 75%);
+}
+
+.inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: 32px;
+  align-items: center;
+  min-height: 580px;
+  padding-block: 64px;
+
+  @media (max-width: $mantine-breakpoint-md) {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    padding-block: 56px 40px;
+  }
+}
+
+/* The members strip: mono names, each with its member colour dot. */
+.members {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--hda-font-mono);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--hda-ink);
+
+  & li {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  & li::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--member-dot);
+  }
+}
+
+.title {
+  margin: 18px 0 22px;
+
+  & em {
+    font-style: normal;
+    color: var(--mantine-color-red-6);
+  }
+}
+
+.lead {
+  max-width: 34rem;
+  font-size: var(--mantine-font-size-lg);
+  color: var(--hda-ink-2);
+}
+
+.visual {
+  position: relative;
+}
+
+.map {
+  margin-inline-end: -16%;
+  transform: scale(1.08);
+  transform-origin: left center;
+
+  @media (max-width: $mantine-breakpoint-md) {
+    margin: 0;
+    transform: none;
+  }
+}
+
+/* Floating map labels: white chips with a mono coordinate line. */
+.pin {
+  position: absolute;
+  max-width: 240px;
+  padding: 10px 13px;
+  border: 1px solid var(--hda-line);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 12px 28px -14px rgb(14 42 71 / 35%);
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--hda-ink-2);
+
+  & b {
+    display: block;
+    font-family: var(--mantine-font-family-headings);
+    font-size: 14px;
+    font-weight: 650;
+    color: var(--hda-ink);
+  }
+
+  & small {
+    display: block;
+    margin-top: 3px;
+    font-family: var(--hda-font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    color: var(--mantine-color-blue-7);
+  }
+
+  &[data-pin='0'] {
+    inset-inline-end: 2%;
+    top: -18%;
+  }
+
+  &[data-pin='1'] {
+    inset-inline-start: 4%;
+    bottom: -16%;
+  }
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    display: none;
+  }
+}

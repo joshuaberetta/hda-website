@@ -1,0 +1,96 @@
+:root {
+  /* Sticky header: 76px, 60px below the desktop nav. */
+  --hda-header-height: 76px;
+}
+
+@media (max-width: $mantine-breakpoint-md) {
+  :root {
+    --hda-header-height: 60px;
+  }
+}
+
+html {
+  scroll-padding-top: calc(var(--hda-header-height) + 18px);
+}
+
+body {
+  background: var(--hda-paper);
+  color: var(--hda-ink-2);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Headings are navy with Unified's tight tracking. Dark bands set `color` on the band. */
+:where(h1, h2, h3, h4) {
+  color: var(--hda-heading, var(--hda-ink));
+  letter-spacing: -0.02em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--mantine-color-blue-7);
+  outline-offset: 2px;
+}
+
+/*
+ * Dark bands (navy): text, headings, links and the logo all flip. Used by
+ * SectionShell's `dark` background, the CTA band and the footer.
+ */
+.hda-dark {
+  --hda-heading: var(--mantine-color-white);
+  --hda-line: #2a4b70;
+  --logo-b: var(--mantine-color-white);
+  --logo-ink: var(--mantine-color-white);
+  --logo-bg: var(--mantine-color-navy-8);
+
+  color: #c3d0df;
+}
+
+.skip-link {
+  position: absolute;
+  inset-inline-start: -9999px;
+  z-index: 1000;
+  padding: 8px 16px;
+  background: var(--mantine-color-white);
+  color: var(--hda-ink);
+
+  &:focus {
+    inset-inline-start: 16px;
+    top: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/*
+ * Member colours. Anything carrying data-colour gets a pastel tint (panels),
+ * a dot colour (decoration) and a strong shade (AA text on the tint).
+ */
+[data-colour='red'] {
+  --member-tint: var(--mantine-color-red-1);
+  --member-dot: var(--mantine-color-red-6);
+  --member-strong: var(--mantine-color-red-8);
+}
+
+[data-colour='teal'] {
+  --member-tint: var(--mantine-color-teal-1);
+  --member-dot: var(--mantine-color-teal-5);
+  --member-strong: var(--mantine-color-teal-8);
+}
+
+[data-colour='ochre'] {
+  --member-tint: var(--mantine-color-ochre-1);
+  --member-dot: var(--mantine-color-ochre-7);
+  --member-strong: var(--mantine-color-ochre-8);
+}
+
+[data-colour='blue'] {
+  --member-tint: var(--mantine-color-blue-1);
+  --member-dot: var(--mantine-color-blue-5);
+  --member-strong: var(--mantine-color-blue-8);
+}

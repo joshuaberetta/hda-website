@@ -1,0 +1,46 @@
+.layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 48px;
+  align-items: center;
+
+  @media (max-width: $mantine-breakpoint-md) {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.intro {
+  margin-top: 16px;
+
+  & :global(.mantine-Typography-root) {
+    font-size: var(--mantine-font-size-lg);
+  }
+}
+
+.form {
+  display: grid;
+  gap: 12px;
+}
+
+.label {
+  margin-bottom: 4px;
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 500;
+  color: var(--mantine-color-white);
+}
+
+/* Inputs on navy: a faint fill and a light rule, white text. */
+.input {
+  border: 1.5px solid #2a4b70;
+  background: rgb(255 255 255 / 6%);
+  color: var(--mantine-color-white);
+
+  &::placeholder {
+    color: #93a7bf;
+  }
+
+  &:focus {
+    border-color: var(--mantine-color-blue-3);
+  }
+}

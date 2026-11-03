@@ -1,0 +1,23 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--hda-stone);
+}
+
+.contours {
+  position: absolute;
+  inset: 0;
+  --contour-line: #e3dccb;
+  mask-image: linear-gradient(90deg, transparent 20%, #000 70%);
+}
+
+.inner {
+  position: relative;
+  padding-block: clamp(56px, 7vw, 96px);
+}
+
+.subtitle {
+  max-width: 40rem;
+  margin-top: 20px;
+  font-size: var(--mantine-font-size-lg);
+}

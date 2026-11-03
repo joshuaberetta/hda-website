@@ -1,0 +1,51 @@
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  margin: 0;
+  font-family: var(--hda-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mantine-color-blue-7);
+
+  &::before {
+    content: '';
+    flex: none;
+    width: 0.55em;
+    height: 0.55em;
+    border-radius: 50%;
+    background: var(--mantine-color-red-6);
+  }
+
+  &[data-on-dark] {
+    color: var(--mantine-color-blue-3);
+  }
+}
+
+.kicker {
+  font-family: var(--hda-font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--hda-ink-2);
+}
+
+.tbc {
+  display: inline-block;
+  padding: 0.15em 0.55em;
+  border: 1px dashed currentColor;
+  border-radius: 999px;
+  font-family: var(--hda-font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  vertical-align: middle;
+  color: var(--mantine-color-ochre-8);
+}

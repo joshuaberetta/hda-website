@@ -1,0 +1,164 @@
+/* Colours for the procedural graphics. Bands and sections set the variables. */
+
+.worldmap {
+  display: block;
+  width: 100%;
+  height: auto;
+
+  & [data-dots] {
+    fill: var(--map-dot, #c9c8bf);
+  }
+
+  & [data-arcs] path {
+    stroke: var(--map-arc, var(--mantine-color-red-6));
+    stroke-width: 0.32;
+    stroke-dasharray: 3 2.2;
+    animation: dash 14s linear infinite;
+  }
+
+  & [data-halo] {
+    fill: var(--map-halo, rgb(43 143 224 / 16%));
+  }
+
+  & [data-core] {
+    fill: var(--hda-ink);
+  }
+
+  & [data-hub='b'] [data-core] {
+    fill: var(--mantine-color-blue-5);
+  }
+
+  & [data-hub='d'] [data-core] {
+    fill: var(--mantine-color-teal-5);
+  }
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -52;
+  }
+}
+
+.contours {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  & path {
+    stroke: var(--contour-line, #e3dccb);
+    stroke-width: 1px;
+    vector-effect: non-scaling-stroke;
+  }
+
+  & path[data-index] {
+    stroke-width: var(--contour-index-width, 1.3px);
+  }
+}
+
+/* --- Services stack ------------------------------------------------------ */
+
+.stack {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+
+  & [data-contours] path {
+    stroke: #c9bfa6;
+    stroke-width: 0.8px;
+    vector-effect: non-scaling-stroke;
+  }
+
+  & [data-contours] path[data-index] {
+    stroke: #a8996f;
+    stroke-width: 1.3px;
+  }
+
+  & [data-roads] path {
+    stroke: #ebcb8c;
+    stroke-width: 3.2px;
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+  }
+
+  & [data-buildings] rect {
+    fill: var(--mantine-color-red-6);
+    opacity: 0.72;
+  }
+
+  & [data-points] circle {
+    fill: var(--mantine-color-teal-7);
+    stroke: #fff;
+    stroke-width: 1.2px;
+    vector-effect: non-scaling-stroke;
+  }
+
+  & [data-cells] rect {
+    fill: var(--mantine-color-blue-7);
+  }
+}
+
+.layer {
+  transform: translateY(calc(var(--k) * 4px));
+  transition:
+    transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+    opacity 0.3s;
+
+  .stack:hover & {
+    transform: translateY(calc(var(--k) * -6px));
+  }
+
+  &[data-off] {
+    opacity: 0;
+    transform: translateY(-24px);
+    pointer-events: none;
+  }
+
+  &[data-layer='0'] .plane {
+    fill: #f6f1e4;
+  }
+
+  &[data-layer='3'] .plane {
+    fill: #f3f8fd;
+  }
+}
+
+.plane {
+  fill: #fff;
+  filter: drop-shadow(0 6px 10px rgb(14 42 71 / 10%));
+}
+
+.edge {
+  stroke: #d3d7dc;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+/* --- Lifecycle mini stacks (on the dark band) ---------------------------- */
+
+.ministack {
+  display: block;
+  width: 70px;
+  height: auto;
+
+  & path {
+    stroke: var(--mantine-color-navy-8);
+    stroke-width: 2.2;
+    stroke-linejoin: round;
+  }
+
+  & [data-state='off'] {
+    fill: none;
+    stroke: #3a5c82;
+    stroke-dasharray: 2 2.5;
+    stroke-width: 1.2;
+  }
+
+  & [data-state='on'] {
+    fill: #4f7faf;
+  }
+
+  & [data-state='top'] {
+    fill: var(--ministack-top, var(--mantine-color-blue-3));
+  }
+}

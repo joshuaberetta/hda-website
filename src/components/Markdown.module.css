@@ -1,0 +1,62 @@
+/* Long text: Inter 16.5px / 1.65 in ink-2, Plus Jakarta headings in navy. */
+.root {
+  font-size: var(--mantine-font-size-md);
+  line-height: 1.65;
+  color: inherit;
+
+  & > :first-child {
+    margin-top: 0;
+  }
+
+  & > :last-child {
+    margin-bottom: 0;
+  }
+
+  & :where(h2, h3, h4) {
+    font-family: var(--mantine-font-family-headings);
+    color: var(--hda-heading, var(--hda-ink));
+  }
+
+  & strong {
+    color: var(--hda-heading, var(--hda-ink));
+  }
+
+  --md-link: var(--mantine-color-blue-7);
+
+  & a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  & a:hover {
+    --md-link: var(--mantine-color-blue-8);
+  }
+
+  & img {
+    max-width: 100%;
+    border-radius: var(--mantine-radius-md);
+  }
+
+  & blockquote {
+    margin-inline: 0;
+    padding: 0 0 0 24px;
+    border: 0;
+    border-inline-start: 4px solid var(--mantine-color-red-6);
+    border-radius: 0;
+    background: none;
+    font-family: var(--mantine-font-family-headings);
+    color: var(--hda-ink);
+  }
+
+  &[data-on-dark] {
+    --md-link: var(--mantine-color-blue-3);
+
+    & a:hover {
+      --md-link: var(--mantine-color-white);
+    }
+
+    & blockquote {
+      color: inherit;
+    }
+  }
+}

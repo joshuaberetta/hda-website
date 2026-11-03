@@ -1,0 +1,20 @@
+/* CTA cards alternate mist and stone; the links sit at the bottom so cards line up. */
+.cta {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  border-radius: var(--mantine-radius-lg);
+  background: var(--hda-mist);
+
+  &:nth-child(2) {
+    background: var(--hda-stone);
+  }
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    padding: 28px 22px;
+  }
+}
+
+.links {
+  margin-top: auto;
+}

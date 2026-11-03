@@ -1,0 +1,55 @@
+/*
+ * Full-width bands. Cards are white on every band except dark ones, where
+ * they take the lighter navy (`--tile-bg`).
+ */
+.section {
+  --tile-bg: var(--mantine-color-white);
+
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(64px, 8vw, 104px);
+
+  &[data-bg='paper'] {
+    background-color: var(--hda-paper);
+  }
+
+  &[data-bg='stone'] {
+    background-color: var(--hda-stone);
+    --contour-line: #e3dccb;
+  }
+
+  &[data-bg='mist'] {
+    background-color: var(--hda-mist);
+    --contour-line: #d4e2f0;
+  }
+
+  &[data-bg='dark'] {
+    --tile-bg: #12345a;
+    --contour-line: #16395f;
+
+    background-color: var(--mantine-color-navy-8);
+  }
+}
+
+.contours {
+  position: absolute;
+  inset: 0;
+  --contour-index-width: 1.3px;
+}
+
+.inner {
+  position: relative;
+}
+
+.intro {
+  & :global(.mantine-Typography-root) {
+    font-size: var(--mantine-font-size-lg);
+  }
+}
+
+/* Two bands of the same colour in a row read as one: drop the gap between them. */
+.section[data-bg='paper'] + .section[data-bg='paper'],
+.section[data-bg='stone'] + .section[data-bg='stone'],
+.section[data-bg='mist'] + .section[data-bg='mist'] {
+  padding-top: 0;
+}

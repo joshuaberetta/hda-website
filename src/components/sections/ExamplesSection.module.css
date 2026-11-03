@@ -1,0 +1,59 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--hda-line);
+  border-radius: var(--mantine-radius-lg);
+  background: var(--tile-bg);
+  box-shadow: var(--hda-shadow);
+}
+
+/* Photo, or a contour texture in the member's tint until a photo arrives. */
+.media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--member-tint);
+  --contour-line: color-mix(in srgb, var(--member-dot) 45%, transparent);
+
+  & img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.texture {
+  position: absolute;
+  inset: 0;
+}
+
+.badge {
+  position: absolute;
+  inset-inline-start: 12px;
+  top: 12px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #fff;
+  font-family: var(--hda-font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--member-strong);
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 20px 22px 24px;
+}
+
+.link {
+  margin-top: auto;
+  padding-top: 6px;
+}

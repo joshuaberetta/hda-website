@@ -1,0 +1,105 @@
+.wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+
+  @media (max-width: $mantine-breakpoint-md) {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.visual {
+  width: 100%;
+  max-width: 420px;
+  margin-inline: auto;
+}
+
+.list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* Each service is a card you can switch off, like a layer in a GIS. */
+.item {
+  --slot: var(--mantine-color-blue-7);
+  --slot-tint: var(--mantine-color-blue-1);
+
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 18px;
+  align-items: start;
+  padding: 19px 21px;
+  border: 1px solid var(--hda-line);
+  border-radius: var(--mantine-radius-lg);
+  background: #fff;
+  box-shadow: var(--hda-shadow);
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    opacity 0.2s;
+
+  &:hover {
+    border-color: var(--hda-ink-2);
+  }
+
+  &[data-off] {
+    opacity: 0.55;
+    box-shadow: none;
+  }
+
+  &[data-slot='1'] {
+    --slot: var(--mantine-color-teal-7);
+    --slot-tint: var(--mantine-color-teal-1);
+  }
+
+  &[data-slot='2'] {
+    --slot: var(--mantine-color-red-6);
+    --slot-tint: var(--mantine-color-red-1);
+  }
+
+  &[data-slot='3'] {
+    --slot: var(--mantine-color-ochre-8);
+    --slot-tint: var(--mantine-color-ochre-1);
+  }
+
+  & input {
+    width: 17px;
+    height: 17px;
+    margin: 3px 0 0;
+    accent-color: var(--hda-ink);
+  }
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--slot-tint);
+  color: var(--slot);
+}
+
+.title {
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--mantine-font-family-headings);
+  font-size: 17.5px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--hda-ink);
+}
+
+.hint {
+  margin: 6px 0 0;
+  font-family: var(--hda-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--hda-ink-2);
+}

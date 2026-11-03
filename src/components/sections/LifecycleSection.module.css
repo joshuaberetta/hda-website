@@ -1,0 +1,48 @@
+.steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  /* A line in the member colours runs through the stacks. */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 33px;
+    inset-inline: 38px 12%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--mantine-color-blue-5), var(--mantine-color-teal-5), var(--mantine-color-red-6));
+    opacity: 0.7;
+  }
+
+  @media (max-width: $mantine-breakpoint-md) {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 40px;
+
+    &::before {
+      display: none;
+    }
+  }
+
+  @media (max-width: $mantine-breakpoint-xs) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.step {
+  position: relative;
+
+  &[data-last] {
+    --ministack-top: var(--mantine-color-red-3);
+  }
+}
+
+/* Masks the line behind each stack. */
+.stack {
+  display: inline-block;
+  padding-inline-end: 6px;
+  background: var(--mantine-color-navy-8);
+}

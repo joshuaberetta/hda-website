@@ -1,0 +1,48 @@
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+
+  &[data-image-position='left'] .media {
+    order: -1;
+  }
+
+  @media (max-width: $mantine-breakpoint-md) {
+    grid-template-columns: 1fr;
+    gap: 32px;
+
+    &[data-image-position='left'] .media {
+      order: 0;
+    }
+  }
+}
+
+.media {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--mantine-radius-lg);
+
+  & img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  &[data-graphic='contours'] {
+    aspect-ratio: 4 / 3;
+    background: var(--hda-stone);
+  }
+
+  &[data-graphic='worldmap'] {
+    padding: 24px;
+    background: var(--mantine-color-navy-8);
+    --map-dot: #34587f;
+  }
+}
+
+.texture {
+  position: absolute;
+  inset: 0;
+}

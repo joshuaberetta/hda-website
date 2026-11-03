@@ -1,0 +1,49 @@
+/* A ruled grid, three across: the lines are drawn by each cell's borders. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--hda-line);
+  border-inline-start: 1px solid var(--hda-line);
+
+  &[data-detail] {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $mantine-breakpoint-md) {
+    &,
+    &[data-detail] {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.item {
+  display: flex;
+  gap: 18px;
+  padding: 32px;
+  border-inline-end: 1px solid var(--hda-line);
+  border-bottom: 1px solid var(--hda-line);
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    padding: 24px 20px;
+  }
+}
+
+.icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--hda-mist);
+  color: var(--mantine-color-blue-7);
+}
+
+.detail {
+  margin-top: 12px;
+
+  & :global(.mantine-Typography-root) {
+    font-size: var(--mantine-font-size-sm);
+  }
+}

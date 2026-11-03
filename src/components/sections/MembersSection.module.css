@@ -1,0 +1,83 @@
+/* Home tiles: clear pastel panels with a mono index (Unified). */
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 24px 24px 22px;
+  border-radius: var(--mantine-radius-lg);
+  background: var(--member-tint);
+}
+
+.summary {
+  color: #33465b;
+}
+
+.site {
+  margin-top: auto;
+  padding-top: 8px;
+  font-family: var(--hda-font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--hda-ink);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* Members page: one tinted panel per member (kobo.ngo's showcase panel). */
+.panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 40px;
+  padding: 48px;
+  border-radius: var(--mantine-radius-xl);
+  background: var(--member-tint);
+  scroll-margin-top: calc(var(--hda-header-height) + 24px);
+
+  @media (max-width: $mantine-breakpoint-md) {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 32px 20px;
+  }
+}
+
+.panelSide {
+  display: grid;
+  gap: 16px;
+  align-content: start;
+}
+
+.card {
+  --check-color: var(--member-strong);
+
+  padding: 24px;
+  border-radius: var(--mantine-radius-lg);
+  background: #fff;
+}
+
+.person {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.photo {
+  flex: none;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+
+  &[data-empty] {
+    display: grid;
+    place-items: center;
+    border: 1.5px dashed var(--member-strong);
+    background: var(--member-tint);
+    font-family: var(--mantine-font-family-headings);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--member-strong);
+  }
+}

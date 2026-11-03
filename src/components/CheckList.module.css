@@ -1,0 +1,20 @@
+.list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--mantine-font-size-sm);
+
+  & li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+}
+
+.tick {
+  flex: none;
+  margin-top: 0.2em;
+  color: var(--check-color, var(--mantine-color-blue-7));
+}

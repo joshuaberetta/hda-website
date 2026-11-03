@@ -1,0 +1,57 @@
+.footer {
+  padding-top: 64px;
+  background: var(--mantine-color-navy-9);
+  font-size: var(--mantine-font-size-sm);
+  --logo-bg: var(--mantine-color-navy-9);
+}
+
+.grid {
+  padding-bottom: 56px;
+}
+
+.brand {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Column labels: mono uppercase, as in Unified. */
+.label {
+  margin: 0 0 16px;
+  font-family: var(--hda-font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mantine-color-white);
+}
+
+.list {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  --footer-link: #c3d0df;
+  font-size: var(--mantine-font-size-sm);
+
+  &:hover {
+    --footer-link: var(--mantine-color-white);
+    text-decoration: underline 2px var(--mantine-color-red-3);
+    text-underline-offset: 4px;
+  }
+}
+
+.base {
+  padding-block: 20px 28px;
+  border-top: 1px solid #1f3a5b;
+  font-family: var(--hda-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+}

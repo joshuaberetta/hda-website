@@ -1,0 +1,31 @@
+# Site-wide settings: menus, footer and contact address.
+name: Humanitarian Data Alliance
+description: "iMMAP, CartONG, the Humanitarian OpenStreetMap Team and Kobo: connecting data, maps and expertise for humanitarian action."
+# Where "Work with us" messages go. Shared address still to be agreed.
+email: contact@example.org
+emailConfirmed: false
+nav:
+  - { label: About, href: "/#about" }
+  - { label: Members, href: /members }
+  - { label: What we do, href: /what-we-do }
+  - { label: Commitments, href: /commitments }
+  - { label: News & events, href: "/#news" }
+cta: { label: Work with us, href: "/#contact" }
+footer:
+  blurb: An alliance of iMMAP, CartONG, the Humanitarian OpenStreetMap Team and Kobo, working toward a more connected, resilient and sustainable humanitarian data ecosystem.
+  columns:
+    - title: Alliance
+      links:
+        - { label: About, href: "/#about" }
+        - { label: Members, href: /members }
+        - { label: What we do, href: /what-we-do }
+        - { label: Commitments, href: /commitments }
+        - { label: News & events, href: "/#news" }
+        - { label: Work with us, href: "/#contact" }
+    - title: Members
+      links:
+        - { label: iMMAP, href: "https://immap.org" }
+        - { label: CartONG, href: "https://www.cartong.org" }
+        - { label: HOT, href: "https://www.hotosm.org" }
+        - { label: Kobo, href: "https://kobo.ngo" }
+  base: Draft site · not yet launched
