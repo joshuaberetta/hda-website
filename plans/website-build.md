@@ -189,7 +189,7 @@ static_sites:
 ## Phase 2 (not in this build)
 
 - ~~**Translations**~~: done, brought forward on 3 Nov 2026 (see `LOCALISATION.md`). Machine drafts for FR/ES/AR are awaiting review: CartONG for French and Spanish, iMMAP for Arabic.
-- **Sveltia CMS** for editors.
+- ~~**Sveltia CMS** for editors~~: done on 3 Nov 2026, at `/admin/` (see `EDITING.md`). GitHub sign-in reuses kobo.ngo's DigitalOcean Function, once `hda.kobolabs.dev` is in its allowed domains.
 - **"Latest from our members"**: pull each member's RSS/JSON feed at build time if all four have one. To check per site.
 - **"They trust us"** partner logos page, a projects map (data formats differ between members), and job openings.
 - **Form routing** via a form service once the address and the CC rules are agreed.
@@ -211,7 +211,6 @@ static_sites:
 2. `doctl apps update 5796283e-d7c4-4797-8a11-2ab53ba2a9ae --spec .do/app.yaml`. The live spec still points at `source_dir: site`, which no longer exists after the merge.
 
 **Known gaps:**
-- No real CMS or i18n yet (phase 2).
 - The JS bundle is ~720 kB (~220 kB gzipped). YAML parsing and react-markdown are bundled. They could be precompiled at build time later.
 - Social links for iMMAP, CartONG and HOT are their LinkedIn company pages, and still need confirming.
 - The service-to-member mapping on `/what-we-do` is illustrative until the catalogue export arrives.

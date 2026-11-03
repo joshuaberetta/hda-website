@@ -157,6 +157,39 @@ for (const file of sourceFiles()) {
       warnings.push(`${target}: layout differs from English at ${at}; English shows there until it's retranslated`);
   }
 }
+// The website editor (public/admin/config.yml) must know every field in use,
+// every section type and every icon, or editors can't reach them.
+const cmsFile = path.join(root, 'public/admin/config.yml');
+const cms = YAML.parse(fs.readFileSync(cmsFile, 'utf8'), { merge: true, maxAliasCount: -1 });
+const collection = (name) => cms.collections.find((c) => c.name === name);
+const sectionsField = collection('pages').fields.find((f) => f.name === 'sections');
+const cmsTypes = new Set(sectionsField.types.map((t) => t.name));
+for (const type of Object.keys(SECTIONS)) if (!cmsTypes.has(type)) fail(cmsFile, `section type "${type}" is missing`);
+for (const type of cmsTypes) if (!SECTIONS[type]) fail(cmsFile, `unknown section type "${type}"`);
+const iconField = (fields) => fields.flatMap((f) => (f.name === 'icon' ? [f] : iconField(f.fields ?? f.types?.flatMap((t) => t.fields) ?? [])));
+const sameSet = (a, b) => [...a].sort().join() === [...b].sort().join();
+if (!iconField(sectionsField.types.flatMap((t) => t.fields)).every((f) => sameSet(f.options, ICONS)))
+  fail(cmsFile, `icon options don't match src/lib/icons.tsx (${[...ICONS].join(', ')})`);
+
+function checkFields(file, where, value, fields) {
+  if (Array.isArray(value)) return value.forEach((v, i) => checkFields(file, `${where}[${i}]`, v, fields));
+  if (!value || typeof value !== 'object' || !fields) return;
+  const byName = Object.fromEntries(fields.map((f) => [f.name, f]));
+  for (const [key, v] of Object.entries(value)) {
+    const field = byName[key];
+    if (!field) fail(file, `"${where}${where ? '.' : ''}${key}" can't be edited in the website editor (add it to public/admin/config.yml)`);
+    else if (field.types) v?.forEach?.((s, i) => checkFields(file, `${key}[${i}]`, s, [{ name: 'type' }, ...(field.types.find((t) => t.name === s.type)?.fields ?? [])]));
+    else checkFields(file, `${where}${where ? '.' : ''}${key}`, v, field.fields);
+  }
+}
+for (const dir of ['pages', 'members', 'news']) for (const file of files(dir)) checkFields(file, '', frontMatter(file), collection(dir).fields);
+for (const { name, fields } of collection('settings').files) {
+  const file = path.join(content, `settings/${name}.yml`);
+  checkFields(file, '', YAML.parse(fs.readFileSync(file, 'utf8')), fields);
+}
+const socialField = collection('members').fields.find((f) => f.name === 'socials').fields.find((f) => f.name === 'network');
+if (!sameSet(socialField.options, SOCIALS)) fail(cmsFile, `social network options don't match src/lib/icons.tsx (${[...SOCIALS].join(', ')})`);
+
 if (warnings.length) console.warn(`Translation warnings (${warnings.length}):\n  ${warnings.join('\n  ')}`);
 
 if (errors.length) {

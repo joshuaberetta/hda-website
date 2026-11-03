@@ -1,6 +1,6 @@
 # Content model
 
-All the site's copy lives here. Edit a file, push to `main`, and the site rebuilds. `npm run lint:content` checks everything against this model. The build runs it too, so a typo fails the build rather than breaking a page.
+All the site's copy lives here. Edit a file (or use the website editor at `/admin/`, see [`../EDITING.md`](../EDITING.md)), push to `main`, and the site rebuilds. `npm run lint:content` checks everything against this model. The build runs it too, so a typo fails the build rather than breaking a page.
 
 ```
 content/settings/site.yml   name, contact email, menu, footer
@@ -115,4 +115,5 @@ If you change the shape of the content, update all of these together:
 - `src/lib/types.ts`;
 - the section component, plus `src/components/sections/SectionRenderer.tsx`;
 - `scripts/validate-content.mjs`;
+- `public/admin/config.yml`, the website editor's fields (`lint:content` checks that it covers every field in use);
 - this file.

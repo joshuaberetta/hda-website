@@ -84,7 +84,7 @@ fs.writeFileSync(
 );
 fs.writeFileSync(
   path.join(dist, 'robots.txt'),
-  noindex ? 'User-agent: *\nDisallow: /\n' : `User-agent: *\nAllow: /\nDisallow: /designs/\n\nSitemap: ${siteUrl}/sitemap.xml\n`,
+  noindex ? 'User-agent: *\nDisallow: /\n' : `User-agent: *\nAllow: /\nDisallow: /designs/\nDisallow: /admin/\n\nSitemap: ${siteUrl}/sitemap.xml\n`,
 );
 fs.rmSync(path.join(root, 'dist-ssr'), { recursive: true, force: true });
 fs.rmSync(path.join(dist, '.vite'), { recursive: true, force: true });

@@ -1,0 +1,642 @@
+# Sveltia CMS configuration (Decap/Netlify CMS compatible).
+# Editors sign in at https://hda.kobolabs.dev/admin/ and every save becomes a
+# commit on GitHub, which redeploys the site in a couple of minutes.
+# Setup notes and editing guide: EDITING.md
+#
+# The fields here mirror the content model (content/README.md). If you change
+# the shape of the content, change this file too.
+backend:
+  name: github
+  repo: joshuaberetta/hda-website
+  branch: main
+  # GitHub sign-in runs as a DigitalOcean Function, shared with kobo.ngo
+  # (../kobo.ngo/cms-auth). hda.kobolabs.dev must be in its ALLOWED_DOMAINS.
+  base_url: https://faas-nyc1-2ef2e6cc.doserverless.co/api/v1/web/fn-71a733d0-28ac-4549-8671-5325f39a0f1a/cms/auth
+  commit_messages:
+    create: "Create {{collection}} “{{slug}}” (website editor)"
+    update: "Update {{collection}} “{{slug}}” (website editor)"
+    delete: "Delete {{collection}} “{{slug}}” (website editor)"
+    uploadMedia: "Upload “{{path}}” (website editor)"
+    deleteMedia: "Delete “{{path}}” (website editor)"
+
+# Leave out optional fields that are empty, instead of writing `href: ''`.
+output:
+  omit_empty_optional_fields: true
+
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+site_url: https://hda.kobolabs.dev
+display_url: https://hda.kobolabs.dev
+logo_url: /favicon.svg
+
+# Languages. Translations sit beside the English file (home.md, home.fr.md…).
+# In the editor, switch language with the menu at the top right of an entry.
+# Text fields are translated; links, images, colours and settings come from
+# English. See LOCALISATION.md.
+i18n:
+  structure: multiple_files
+  locales: [en, fr, es, ar]
+  default_locale: en
+  omit_default_locale_from_file_path: true
+  omit_default_locale_from_preview_path: true
+
+# ---------------------------------------------------------------------------
+# Reusable fields (YAML anchors keep the section definitions short).
+# i18n: true = translated text; i18n: duplicate = layout, copied from English.
+# ---------------------------------------------------------------------------
+x-id: &id
+  { name: id, label: Anchor ID, widget: string, required: false, hint: "Lets links jump to this section, e.g. /#contact", i18n: duplicate }
+x-eyebrow: &eyebrow { name: eyebrow, label: Small label above the title, widget: string, required: false, i18n: true }
+x-title: &title { name: title, label: Title, widget: string, required: false, i18n: true }
+x-intro: &intro { name: intro, label: Intro text, widget: markdown, required: false, i18n: true }
+x-background: &background
+  { name: background, label: Band colour, widget: select, required: false, default: paper,
+    options: [paper, stone, mist, dark], hint: "Two bands of the same colour in a row merge into one", i18n: duplicate }
+x-align: &align
+  { name: align, label: Heading alignment, widget: select, required: false, default: left, options: [left, center], i18n: duplicate }
+x-links: &links
+  name: links
+  i18n: true
+  label: Links / buttons
+  widget: list
+  required: false
+  summary: "{{label}} → {{href}}"
+  fields:
+    - { name: label, label: Label, widget: string, i18n: true }
+    - { name: href, label: "Link (e.g. /members, /#contact or https://…)", widget: string, i18n: duplicate }
+    - { name: variant, label: Style, widget: select, required: false, default: filled,
+        options: [{ label: Red button, value: filled }, { label: Outline button, value: outline }, { label: Text link with arrow, value: arrow }],
+        i18n: duplicate }
+x-icon: &icon
+  { name: icon, label: Icon, widget: select, i18n: duplicate,
+    options: [alert-triangle, bulb, chart, compass, eye, form, heart-handshake, link, map, pin, people, puzzle, scale, school, shield, sprout, stack, target, tool, world] }
+x-member: &member
+  { name: member, label: Member, widget: relation, collection: members, value_field: "{{slug}}",
+    search_fields: [name], display_fields: [name], i18n: duplicate }
+x-colour: &colour
+  { name: colour, label: Colour, widget: select, options: [red, teal, ochre, blue], i18n: duplicate }
+x-variant: &variant
+  { name: variant, label: Layout, widget: select, required: false, default: grid,
+    options: [{ label: "Short tiles (home page)", value: grid }, { label: "Full detail (own page)", value: detail }], i18n: duplicate }
+x-placeholder: &placeholder
+  { name: placeholder, label: "Placeholder (still waiting on the team)", widget: boolean, required: false, i18n: duplicate }
+
+x-translation: &translation
+  name: translation
+  label: Translation
+  widget: object
+  required: false
+  collapsed: true
+  i18n: true
+  hint: >-
+    Only used on the French, Spanish and Arabic versions. "Machine" translations
+    are redone by the translation bot when the English changes; set "Reviewed"
+    once a person has checked it, so it's never overwritten; choose
+    "Retranslate" and save to ask the bot for a fresh translation.
+  fields:
+    - { name: status, label: Status, widget: select, required: false, i18n: true,
+        options: [machine, reviewed, outdated, retranslate] }
+    - { name: source, label: English version translated (set automatically), widget: string, required: false,
+        readonly: true, i18n: true }
+    - { name: model, label: Translated by, widget: string, required: false, readonly: true, i18n: true }
+    - { name: updated, label: Last translated, widget: string, required: false, readonly: true, i18n: true }
+
+x-sections: &sections
+  name: sections
+  i18n: true
+  label: Page sections
+  widget: list
+  required: false
+  typeKey: type
+  types:
+    - name: hero
+      label: Home banner (world map)
+      fields:
+        - *id
+        - { name: title, label: Title, widget: string, i18n: true }
+        - { name: highlight, label: "Highlighted end of the title (in red)", widget: string, required: false,
+            hint: "Must match the end of the title exactly", i18n: true }
+        - { name: subtitle, label: Subtitle, widget: text, i18n: true }
+        - *links
+        - name: pins
+          i18n: true
+          label: Map labels
+          widget: list
+          required: false
+          summary: "{{label}}: {{title}}"
+          fields:
+            - { name: label, label: "Small label (e.g. coordinates)", widget: string, i18n: true }
+            - { name: title, label: Title, widget: string, i18n: true }
+            - { name: body, label: Text, widget: string, i18n: true }
+    - name: examples
+      label: Examples of our work
+      fields:
+        - *id
+        - *eyebrow
+        - *title
+        - *intro
+        - *background
+        - *align
+        - name: items
+          i18n: true
+          label: Examples
+          widget: list
+          summary: "{{member}}: {{title}}"
+          hint: "One piece of work per member"
+          fields:
+            - *member
+            - { name: title, label: Title, widget: string, i18n: true }
+            - { name: place, label: Place, widget: string, i18n: true }
+            - { name: body, label: One line about it, widget: text, i18n: true }
+            - { name: image, label: Photo, widget: image, required: false,
+                hint: "Only photos with consent. Without one, a contour pattern in the member's colour shows", i18n: duplicate }
+            - { name: href, label: Link, widget: string, required: false, i18n: duplicate }
+            - *placeholder
+        - *links
+    - name: members
+      label: Members
+      fields: [*id, *eyebrow, *title, *intro, *variant, *background, *align, *links]
+    - name: layers
+      label: Services stack (interactive)
+      fields:
+        - *id
+        - *eyebrow
+        - *title
+        - *intro
+        - *background
+        - *align
+        - name: items
+          i18n: true
+          label: Layers (top first, four of them)
+          widget: list
+          summary: "{{label}}: {{title}}"
+          fields:
+            - { name: label, label: "Small label (e.g. L1)", widget: string, i18n: true }
+            - { name: title, label: Title, widget: string, i18n: true }
+            - { name: body, label: Text, widget: text, i18n: true }
+            - *icon
+        - { name: hint, label: Hint under the stack, widget: string, required: false, i18n: true }
+        - *links
+    - name: lifecycle
+      label: Crisis lifecycle
+      fields:
+        - *id
+        - *eyebrow
+        - *title
+        - *intro
+        - *align
+        - name: items
+          i18n: true
+          label: Stages
+          widget: list
+          summary: "{{phase}}: {{title}}"
+          fields:
+            - { name: phase, label: "Small label (e.g. Before)", widget: string, i18n: true }
+            - { name: title, label: Title, widget: string, i18n: true }
+            - { name: body, label: Text, widget: text, i18n: true }
+        - *links
+    - name: commitments
+      label: Commitments
+      fields:
+        - *id
+        - *eyebrow
+        - *title
+        - *intro
+        - *variant
+        - *background
+        - *align
+        - name: items
+          i18n: true
+          label: Commitments
+          widget: list
+          summary: "{{title}}"
+          fields:
+            - { name: title, label: Title, widget: string, i18n: true }
+            - { name: body, label: Short text, widget: text, i18n: true }
+            - *icon
+            - { name: detail, label: "Full text (shown on the detail layout)", widget: markdown, required: false, i18n: true }
+        - *links
+    - name: quote
+      label: Quote
+      fields:
+        - *id
+        - { name: quote, label: Quote, widget: text, i18n: true }
+        - { name: body, label: Text under the quote, widget: text, required: false, i18n: true }
+        - *background
+        - *links
+    - name: stats
+      label: Numbers
+      fields:
+        - *id
+        - *eyebrow
+        - *title
+        - *intro
+        - *background
+        - *align
+        - name: items
+          i18n: true
+          label: Numbers
+          widget: list
+          summary: "{{member}}: {{value}} {{label}}"
+          hint: "Any number of figures per member. They're shown side by side, never added up. Confirmed figures only"
+          fields:
+            - *member
+            - { name: value, label: "Number (e.g. 35,000+)", widget: string, i18n: true }
+            - { name: label, label: Description, widget: string, i18n: true }
+        - { name: note, label: Note under the numbers, widget: string, required: false, i18n: true }
+        - { name: tbc, label: "Figures still to be confirmed", widget: boolean, required: false, i18n: duplicate }
+        - *links
+    - name: split
+      label: Text + photo
+      fields:
+        - *id
+        - *eyebrow
+        - *title
+        - { name: body, label: Text, widget: markdown, i18n: true }
+        - { name: image, label: Photo, widget: image, required: false, hint: "Only photos with consent", i18n: duplicate }
+        - { name: imageAlt, label: "Photo description (for screen readers)", widget: string, required: false, i18n: true }
+        - { name: graphic, label: Graphic (when there's no photo), widget: select, required: false,
+            options: [contours, worldmap, stack], i18n: duplicate }
+        - { name: imagePosition, label: Photo side, widget: select, required: false, default: right, options: [left, right], i18n: duplicate }
+        - *background
+        - *links
+    - name: news
+      label: News & events
+      fields:
+        - *id
+        - *eyebrow
+        - *title
+        - *intro
+        - { name: limit, label: How many to show, widget: number, value_type: int, min: 1, required: false, i18n: duplicate }
+        - *background
+        - *align
+        - *links
+    - name: services
+      label: Service catalogue
+      fields:
+        - *id
+        - *eyebrow
+        - *title
+        - *intro
+        - *background
+        - *align
+        - name: groups
+          i18n: true
+          label: Service areas
+          widget: list
+          summary: "{{title}}"
+          fields:
+            - { name: title, label: Title, widget: string, i18n: true }
+            - *icon
+            - { name: body, label: Text, widget: text, i18n: true }
+            - name: services
+              i18n: true
+              label: Services
+              widget: list
+              summary: "{{name}}"
+              fields:
+                - { name: name, label: Name, widget: string, i18n: true }
+                - { name: body, label: Text, widget: text, i18n: true }
+                - { name: members, label: Provided by, widget: relation, collection: members, value_field: "{{slug}}",
+                    search_fields: [name], display_fields: [name], multiple: true, i18n: duplicate }
+                - { name: phases, label: "Crisis stages (e.g. Preparedness)", widget: list, required: false, i18n: true }
+        - { <<: *placeholder, label: "Illustrative (services and providers not yet agreed)" }
+        - *links
+    - name: text
+      label: Text
+      fields:
+        - *id
+        - *eyebrow
+        - *title
+        - { name: body, label: Text, widget: markdown, i18n: true }
+        - *background
+        - *align
+        - *links
+    - name: cta
+      label: Next steps
+      fields:
+        - *id
+        - *eyebrow
+        - *title
+        - *intro
+        - *background
+        - *align
+        - name: items
+          i18n: true
+          label: Next steps (two)
+          widget: list
+          summary: "{{title}}"
+          fields:
+            - { name: title, label: Title, widget: string, i18n: true }
+            - { name: body, label: Text, widget: text, i18n: true }
+            - *links
+    - name: contact
+      label: Contact form
+      fields:
+        - *id
+        - *eyebrow
+        - *title
+        - *intro
+        - { name: body, label: "Text beside the form", widget: markdown, required: false, i18n: true }
+        - *background
+        - *align
+        - *links
+
+# ---------------------------------------------------------------------------
+collections:
+  - name: pages
+    i18n: true
+    label: Pages
+    description: "Each page is a stack of sections. home is the home page; the file name is the URL (members is /members)."
+    folder: content/pages
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}}  ·  /{{slug}}"
+    fields:
+      - *translation
+      - { name: title, label: Page title, widget: string, i18n: true }
+      - { name: description, label: "Search-engine description", widget: text, required: false, i18n: true }
+      - name: hero
+        i18n: true
+        label: "Page banner (not used on the home page)"
+        widget: object
+        required: false
+        fields:
+          - { name: eyebrow, label: Small label above the title, widget: string, required: false, i18n: true }
+          - { name: title, label: Title, widget: string, i18n: true }
+          - { name: subtitle, label: Subtitle, widget: text, required: false, i18n: true }
+      - *sections
+
+  - name: members
+    i18n: true
+    label: Members
+    description: "One entry per member organisation. Mark anything not yet confirmed by the member as a placeholder."
+    folder: content/members
+    extension: md
+    format: frontmatter
+    create: false
+    delete: false
+    slug: "{{slug}}"
+    sortable_fields: [order, name]
+    summary: "{{name}}"
+    fields:
+      - *translation
+      - { name: name, label: Short name, widget: string, i18n: true }
+      - { name: fullName, label: Full name, widget: string, i18n: true }
+      - { name: order, label: Position in lists, widget: number, value_type: int, i18n: duplicate }
+      - *colour
+      - { name: focus, label: "Focus (short label, e.g. Mapping & data)", widget: string, i18n: true }
+      - { name: url, label: Website, widget: string, i18n: duplicate }
+      - { name: summary, label: One sentence for the home page, widget: text, i18n: true }
+      - { name: intro, label: Introduction (members page), widget: markdown, i18n: true }
+      - { name: skills, label: What they bring, widget: list, hint: "Short lines shown with a tick", i18n: true }
+      - name: focalPoint
+        i18n: true
+        label: Focal point
+        widget: object
+        required: false
+        fields:
+          - { name: name, label: Name, widget: string, i18n: true }
+          - { name: role, label: Role, widget: string, i18n: true }
+          - { name: photo, label: Photo, widget: image, required: false, hint: "Only with the person's consent", i18n: duplicate }
+          - { <<: *placeholder, label: "Placeholder (not yet confirmed)" }
+      - name: socials
+        i18n: duplicate
+        label: Social links
+        widget: list
+        required: false
+        summary: "{{network}}"
+        fields:
+          - { name: network, label: Network, widget: select, options: [linkedin, x, facebook, instagram, youtube, github], i18n: duplicate }
+          - { name: href, label: Link, widget: string, i18n: duplicate }
+      - { <<: *placeholder, label: "Introduction is a draft (not yet from the member)" }
+
+  - name: news
+    i18n: true
+    label: News & events
+    folder: content/news
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{slug}}"
+    sortable_fields: [date, title]
+    summary: "{{title}} ({{dateLabel}})"
+    fields:
+      - *translation
+      - { name: title, label: Title, widget: string, i18n: true }
+      - { name: date, label: "Date (for sorting)", widget: datetime, format: YYYY-MM-DD, time_format: false, i18n: duplicate }
+      - { name: dateLabel, label: "Date as shown (e.g. November 2026)", widget: string, i18n: true }
+      - { name: tag, label: "Tag (e.g. Event, Webinar)", widget: string, i18n: true }
+      - { name: tone, label: Colour, widget: select, required: false, options: [red, teal, ochre, blue], i18n: duplicate }
+      - { name: summary, label: Summary, widget: text, i18n: true }
+      - { name: href, label: Link, widget: string, required: false, i18n: duplicate }
+      - { name: linkLabel, label: Link label, widget: string, required: false, i18n: true }
+      - { name: tbc, label: "Date still to be confirmed", widget: boolean, required: false, i18n: duplicate }
+
+  - name: settings
+    i18n: true
+    label: Site settings
+    files:
+      - name: site
+        i18n: true
+        label: Menu, footer and contact address
+        file: content/settings/site.{{locale}}.yml
+        fields:
+          - *translation
+          - { name: name, label: Site name, widget: string, i18n: true }
+          - { name: description, label: "Search-engine description", widget: text, i18n: true }
+          - { name: email, label: "Contact address (where “Work with us” messages go)", widget: string, i18n: duplicate }
+          - { name: emailConfirmed, label: "The contact address is confirmed", widget: boolean, required: false,
+              hint: "Until it's ticked, the contact form says the address is still to be confirmed", i18n: duplicate }
+          - name: nav
+            i18n: true
+            label: Main menu
+            widget: list
+            summary: "{{label}} → {{href}}"
+            fields:
+              - { name: label, label: Label, widget: string, i18n: true }
+              - { name: href, label: Link, widget: string, i18n: duplicate }
+          - name: cta
+            i18n: true
+            label: Header button
+            widget: object
+            fields:
+              - { name: label, label: Label, widget: string, i18n: true }
+              - { name: href, label: Link, widget: string, i18n: duplicate }
+          - name: footer
+            i18n: true
+            label: Footer
+            widget: object
+            fields:
+              - { name: blurb, label: Text under the logo, widget: text, i18n: true }
+              - name: columns
+                i18n: true
+                label: Link columns
+                widget: list
+                summary: "{{title}}"
+                fields:
+                  - { name: title, label: Title, widget: string, i18n: true }
+                  - name: links
+                    i18n: true
+                    label: Links
+                    widget: list
+                    summary: "{{label}} → {{href}}"
+                    fields:
+                      - { name: label, label: Label, widget: string, i18n: true }
+                      - { name: href, label: Link, widget: string, i18n: duplicate }
+              - { name: base, label: Bottom line, widget: string, required: false, i18n: true }
+
+      - name: ui
+        i18n: true
+        label: Interface text
+        description: "Labels, buttons and messages built into the layout. Words in {braces} are filled in by the site; keep them as they are."
+        file: content/settings/ui.{{locale}}.yml
+        fields:
+          - *translation
+          - { name: skipToContent, label: Skip link (keyboard users), widget: string, i18n: true }
+          - { name: opensAnotherSite, label: Said after links to other sites (screen readers), widget: string, i18n: true }
+          - { name: readMore, label: Read more, widget: string, i18n: true }
+          - name: header
+            i18n: true
+            label: Header
+            widget: object
+            collapsed: true
+            fields:
+              - { name: home, label: Logo link, widget: string, i18n: true }
+              - { name: mainMenu, label: Main menu name, widget: string, i18n: true }
+              - { name: openMenu, label: Open menu button, widget: string, i18n: true }
+              - { name: language, label: Language menu, widget: string, i18n: true }
+          - name: footer
+            i18n: true
+            label: Footer
+            widget: object
+            collapsed: true
+            fields:
+              - { name: followMembers, label: Social links title, widget: string, i18n: true }
+              - { name: copyright, label: Copyright, widget: string, i18n: true }
+          - name: social
+            i18n: true
+            label: Social links
+            widget: object
+            collapsed: true
+            fields:
+              - { name: on, label: "Link name (e.g. CartONG on LinkedIn)", widget: string, i18n: true }
+          - name: hero
+            i18n: true
+            label: Home banner
+            widget: object
+            collapsed: true
+            fields:
+              - { name: members, label: Members strip label, widget: string, i18n: true }
+          - name: graphics
+            i18n: true
+            label: Graphic descriptions (screen readers)
+            widget: object
+            collapsed: true
+            fields:
+              - { name: worldMap, label: World map, widget: string, i18n: true }
+              - { name: stack, label: Layer stack, widget: string, i18n: true }
+              - { name: stackWith, label: Layer stack with layer names, widget: string, i18n: true }
+          - name: layers
+            i18n: true
+            label: Services stack
+            widget: object
+            collapsed: true
+            fields:
+              - { name: legend, label: Layer buttons label, widget: string, i18n: true }
+          - name: members
+            i18n: true
+            label: Members
+            widget: object
+            collapsed: true
+            fields:
+              - { name: brings, label: Skills title, widget: string, i18n: true }
+              - { name: focalPoint, label: Focal point, widget: string, i18n: true }
+              - { name: draft, label: Draft marker, widget: string, i18n: true }
+          - name: services
+            i18n: true
+            label: Service catalogue
+            widget: object
+            collapsed: true
+            fields:
+              - { name: providedBy, label: Provided by, widget: string, i18n: true }
+              - { name: illustrative, label: Illustrative marker, widget: string, i18n: true }
+              - { name: illustrativeNote, label: Illustrative note, widget: text, i18n: true }
+          - name: placeholder
+            i18n: true
+            label: Placeholder markers
+            widget: object
+            collapsed: true
+            fields:
+              - { name: tbc, label: To be confirmed, widget: string, i18n: true }
+              - { name: short, label: Short form (TBC), widget: string, i18n: true }
+              - { name: placeholder, label: Placeholder, widget: string, i18n: true }
+          - name: contact
+            i18n: true
+            label: Contact form
+            widget: object
+            collapsed: true
+            fields:
+              - { name: name, label: Name field, widget: string, i18n: true }
+              - { name: organisation, label: Organisation field, widget: string, i18n: true }
+              - { name: email, label: Email field, widget: string, i18n: true }
+              - { name: message, label: Message field, widget: string, i18n: true }
+              - { name: send, label: Send button, widget: string, i18n: true }
+              - { name: sendNote, label: Note under the button, widget: string, i18n: true }
+              - { name: orEmail, label: "“Or email” line", widget: string, i18n: true }
+              - { name: addressTbc, label: Address not confirmed, widget: string, i18n: true }
+              - { name: subject, label: Email subject, widget: string, i18n: true }
+          - name: languageSuggestion
+            i18n: true
+            label: Language suggestion bar
+            widget: object
+            collapsed: true
+            hint: "Each translation shows this in its own language, on English pages"
+            fields:
+              - { name: available, label: Message, widget: string, i18n: true }
+              - { name: switch, label: Switch button, widget: string, i18n: true }
+              - { name: dismiss, label: Dismiss button, widget: string, i18n: true }
+          - name: translationNotice
+            i18n: true
+            label: Translation notice
+            widget: object
+            collapsed: true
+            fields:
+              - { name: machine, label: Machine translation, widget: string, i18n: true }
+              - { name: readEnglish, label: Link to English, widget: string, i18n: true }
+              - { name: missing, label: Not translated yet, widget: string, i18n: true }
+          - name: notFound
+            i18n: true
+            label: Page not found
+            widget: object
+            collapsed: true
+            fields:
+              - { name: pageTitle, label: Browser tab title, widget: string, i18n: true }
+              - { name: title, label: Title, widget: string, i18n: true }
+              - { name: body, label: Text, widget: string, i18n: true }
+              - { name: home, label: Home link, widget: string, i18n: true }
+
+      - name: translation
+        i18n: false
+        label: Translation guide (for the bot)
+        description: "Sent to the translation bot with every request. Add a glossary term once reviewers agree on it."
+        file: content/settings/translation.yml
+        fields:
+          - { name: general, label: Style guide, widget: text }
+          - name: glossary
+            label: Glossary
+            widget: list
+            summary: "{{term}}"
+            fields:
+              - { name: term, label: Term, widget: string }
+              - { name: note, label: How to handle it, widget: string }
+          - name: locales
+            label: Notes per language
+            widget: object
+            fields:
+              - { name: fr, label: French, widget: text }
+              - { name: es, label: Spanish, widget: text }
+              - { name: ar, label: Arabic, widget: text }

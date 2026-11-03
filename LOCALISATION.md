@@ -48,6 +48,10 @@ When a person edits a translation on GitHub, the bot marks it `reviewed` and rec
 
 ## Reviewing a translation
 
+In the website editor (`/admin/`, see [`EDITING.md`](EDITING.md)): open the entry, switch language at the top right, fix the text, and set *Translation → Status* to **reviewed**. Only text fields can be changed there; the layout comes from English.
+
+Or on GitHub:
+
 1. Open the file, e.g. `content/pages/home.fr.md`.
 2. Fix the text. Only change text: the layout comes from `home.md`.
 3. Set `status: reviewed`, then commit. (If you forget, the bot does it for you on the next push.)

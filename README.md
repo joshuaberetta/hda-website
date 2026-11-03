@@ -5,6 +5,7 @@ The website of the Humanitarian Data Alliance (iMMAP, CartONG, HOT and Kobo), li
 - **Site:** React 19, Mantine 9, React Router 8 and Vite 8, prerendered to static HTML. It's the same stack and structure as `../kobo.ngo`.
 - **Design:** Theme G, Unified, with logo 1, Convergence. See [`DESIGN.md`](DESIGN.md).
 - **Copy:** lives in [`content/`](content/). See [`content/README.md`](content/README.md).
+- **Editing:** non-developers use the website editor at [/admin/](https://hda.kobolabs.dev/admin/) (Sveltia CMS). See [`EDITING.md`](EDITING.md).
 - **Languages:** English, French, Spanish and Arabic (right-to-left), as on kobo.ngo. See [`LOCALISATION.md`](LOCALISATION.md).
 - **The plan, and what's still to come:** [`plans/website-build.md`](plans/website-build.md).
 
@@ -28,6 +29,8 @@ npm run preview        # serve dist/ at http://localhost:4173
 | `scripts/prerender.mjs` | Writes `dist/<route>/index.html` for every page, plus `404.html` and the sitemap |
 | `scripts/validate-content.mjs` | The content checks (`npm run lint:content`) |
 | `public/designs/` | The design review site, served unchanged at `/designs/` |
+| `public/admin/` | The website editor (Sveltia CMS) and its field definitions, `config.yml` |
+| `public/images/uploads/` | Photos uploaded through the editor |
 
 Links from before the move (`/themes/…`, `/logos/…`, `/palettes/…`, `/results/…`) forward to the same page under `/designs/`, query string included. The voting doc's links keep working, and the results page tallies both old and new links.
 

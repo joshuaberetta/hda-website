@@ -13,7 +13,7 @@ export function isExternal(href: string): boolean {
   return /^(https?:)?\/\//.test(href) || href.startsWith('mailto:') || href.startsWith('tel:');
 }
 
-/** Files and the review site (/designs/) are plain <a> tags, not client-side routes. */
+/** Files, the review site (/designs/) and the editor (/admin/) are plain <a> tags, not client-side routes. */
 export function isRouterLink(href: string): boolean {
-  return href.startsWith('/') && !href.startsWith('/files/') && !href.startsWith('/designs/');
+  return href.startsWith('/') && !/^\/(files|designs|admin|images)\//.test(href);
 }
