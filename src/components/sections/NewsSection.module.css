@@ -1,23 +1,17 @@
 .card {
-  --member-tint: var(--mantine-color-blue-1);
-  --member-strong: var(--mantine-color-blue-8);
-  --member-dot: var(--mantine-color-blue-5);
-
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border: 1px solid var(--hda-line);
   border-radius: var(--mantine-radius-lg);
-  background: var(--tile-bg);
-  box-shadow: var(--hda-shadow);
+  background: var(--member-tint, var(--tile-bg));
 }
 
 .thumb {
   position: relative;
   height: 150px;
   overflow: hidden;
-  background: var(--member-tint);
-  --contour-line: color-mix(in srgb, var(--member-dot) 45%, transparent);
+  background: var(--member-tint, var(--tile-bg));
+  --contour-line: color-mix(in srgb, var(--member-dot, var(--mantine-color-blue-5)) 45%, transparent);
 
   & > svg {
     position: absolute;
@@ -60,8 +54,8 @@
   gap: 6px;
   padding: 5px 11px;
   border-radius: 999px;
-  background: var(--member-tint);
-  color: var(--member-strong);
+  background: #fff;
+  color: var(--member-strong, var(--mantine-color-blue-8));
 
   &::before {
     content: '';

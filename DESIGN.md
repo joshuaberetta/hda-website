@@ -13,7 +13,7 @@ The page structure (bands, panels, cards, headings, link behaviour) follows kobo
 1. **Unified's palette only.** Use theme colours (`red.6`, `var(--mantine-color-navy-8)`) or `var(--hda-*)`, never hex values in components. The exceptions are the graphics' own line colours in `Graphics.module.css`.
 2. **Red is for action.** Response Red is the filled button, the arrow link, the eyebrow dot and the highlighted words in the hero. Don't use it for decoration.
 3. **Plus Jakarta for voice, Inter for reading, Plex Mono for data.** Headings use Plus Jakarta Sans 750 with tight tracking. Body text uses Inter. Eyebrows, kickers, layer IDs, coordinates, tags and footer labels use IBM Plex Mono in uppercase.
-4. **Calm surfaces, real data colours.** Warm paper and stone bands, white cards with a hairline border and a very soft shadow. The four member colours appear as pastel tints, never as large blocks of strong colour.
+4. **Flat tiles, not cards.** Content sits on borderless tiles with a flat fill: a member's pastel tint where the tile belongs to a member, otherwise `--tile-bg`. That's stone on paper bands, white on stone and mist, and lighter navy on dark. No borders, no shadows, no coloured top rules. Shadows are only for floating UI: the hero's map labels, dropdowns and the header once the page scrolls.
 5. **AA everywhere.** Text meets WCAG AA (4.5:1, or 3:1 for large text). See [Contrast](#contrast-checked).
 6. **Graphics are generated.** Maps, contours and stacks are seeded SVG, the same on every load and on the server. Placeholders use them until photos arrive. Photos are welcome and wanted (round-one feedback asked for more).
 
@@ -98,7 +98,7 @@ Two bands of the same colour in a row merge: the second loses its top padding.
 
 - **Buttons** (`LinkButton`): `filled` is a red pill with →. `outline` is a 1.5px navy outline that fills navy on hover (white on dark bands). Off-site links show ↗.
 - **Arrow link** (`ArrowLink`): 14px / 600, red. The arrow slides 6px on hover.
-- **Cards:** white, 1px line border, `--hda-shadow`, 12px radius. On dark bands they use `--tile-bg` (#12345A).
+- **Tiles:** borderless, no shadow, 12px radius, 24px padding, filled with `--member-tint` or `--tile-bg` (set by `SectionShell`). Photo and texture areas sit flush at the top. Interactive tiles (the services layers) underline their title on hover.
 - **Tags:** mono pills in the item's tint with a dot (`NewsSection`).
 - **Checklists** (`CheckList`): a plain tick per line in `--check-color`.
 - **TBC marker** (`Tbc`): a dashed ochre pill. Use it for anything waiting on the team.
@@ -115,7 +115,8 @@ Two bands of the same colour in a row merge: the second loses its top padding.
 | Unified (review site) | Here | Why |
 |---|---|---|
 | Data Blue #1A72BF | #186CB6 | 12px eyebrows were 4.4:1 on stone and mist; now 4.8:1 |
-| Stat cards with bars of arbitrary length | A member-colour rule on top instead | The bars implied a comparison between figures that measure different things |
+| White cards with a hairline border and soft shadow | Flat tiles (kobo.ngo's pattern) | Calmer, and less templated |
+| Stat cards with bars of arbitrary length | Plain member-tint tiles | The bars implied a comparison between figures that measure different things |
 | Logo 8, Convergence II, paired with Unified | Logo 1, Convergence | The team's choice for the build |
 | Members-strip dot for HOT in navy | Ochre, HOT's member colour | One colour per member everywhere |
 

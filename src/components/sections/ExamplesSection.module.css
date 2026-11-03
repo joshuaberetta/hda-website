@@ -2,10 +2,8 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border: 1px solid var(--hda-line);
   border-radius: var(--mantine-radius-lg);
-  background: var(--tile-bg);
-  box-shadow: var(--hda-shadow);
+  background: var(--member-tint, var(--tile-bg));
 }
 
 /* Photo, or a contour texture in the member's tint until a photo arrives. */

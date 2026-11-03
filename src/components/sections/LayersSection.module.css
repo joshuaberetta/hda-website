@@ -34,22 +34,18 @@
   gap: 18px;
   align-items: start;
   padding: 19px 21px;
-  border: 1px solid var(--hda-line);
   border-radius: var(--mantine-radius-lg);
-  background: #fff;
-  box-shadow: var(--hda-shadow);
+  background: var(--tile-bg);
   cursor: pointer;
-  transition:
-    border-color 0.15s,
-    opacity 0.2s;
+  transition: opacity 0.2s;
 
-  &:hover {
-    border-color: var(--hda-ink-2);
+  &:hover .title {
+    text-decoration: underline 3px var(--slot);
+    text-underline-offset: 4px;
   }
 
   &[data-off] {
     opacity: 0.55;
-    box-shadow: none;
   }
 
   &[data-slot='1'] {

@@ -1,9 +1,10 @@
 /*
- * Full-width bands. Cards are white on every band except dark ones, where
- * they take the lighter navy (`--tile-bg`).
+ * Full-width bands. Tiles are flat (no border, no shadow) and take their fill
+ * from `--tile-bg`: stone on paper bands, white on stone and mist, lighter
+ * navy on dark (kobo.ngo's tile pattern).
  */
 .section {
-  --tile-bg: var(--mantine-color-white);
+  --tile-bg: var(--hda-stone);
 
   position: relative;
   overflow: hidden;
@@ -14,13 +15,17 @@
   }
 
   &[data-bg='stone'] {
-    background-color: var(--hda-stone);
+    --tile-bg: var(--mantine-color-white);
     --contour-line: #e3dccb;
+
+    background-color: var(--hda-stone);
   }
 
   &[data-bg='mist'] {
-    background-color: var(--hda-mist);
+    --tile-bg: var(--mantine-color-white);
     --contour-line: #d4e2f0;
+
+    background-color: var(--hda-mist);
   }
 
   &[data-bg='dark'] {

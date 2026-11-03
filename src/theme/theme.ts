@@ -113,7 +113,6 @@ export const cssVariablesResolver: CSSVariablesResolver = () => ({
     '--hda-ink': navy[8],
     '--hda-ink-2': gray[7],
     '--hda-font-mono': "'IBM Plex Mono', ui-monospace, monospace",
-    '--hda-shadow': '0 1px 2px rgb(14 42 71 / 5%), 0 8px 24px rgb(14 42 71 / 5%)',
     // Logo colours: one per member pin. Dark bands override b, ink and bg.
     '--logo-a': red[6],
     '--logo-b': navy[8],
