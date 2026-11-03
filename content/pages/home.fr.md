@@ -1,7 +1,7 @@
 ---
 translation:
   status: machine
-  source: 023809726bff
+  source: ba8aaadf87e4
   model: claude-opus-5-5
   updated: 2026-11-03
 title: Accueil
@@ -155,15 +155,23 @@ sections:
     tbc: true
   - type: split
     id: hila
-    eyebrow: HILA
-    title: Aux côtés de HILA
+    eyebrow: Une collaboration de l’Alliance
+    title: "HILA : mesurer les écosystèmes d’information humanitaires"
     background: mist
     graphic: worldmap
     imagePosition: left
     body: |
-      L’Alliance a été présentée en même temps que HILA, et travaille avec elle pour apporter aux acteurs humanitaires un appui coordonné en données, en cartographie et en gestion de l’information.
+      La **Humanitarian Information Landscape Assessment (HILA)** est la première mesure mondiale, standardisée et mise à jour en continu des écosystèmes d’information humanitaires. Elle a été développée par iMMAP, CartONG, HOT et Kobo, avec le soutien et l’approbation d’ICVA, d’InterAction, du H2H Network et de Sphere.
 
-      *Une courte description de HILA et un lien vers celle-ci seront ajoutés prochainement.*
+      Une courte enquête en ligne (moins de 20 minutes) interroge les personnes qui travaillent dans une réponse humanitaire, ou qui la soutiennent, sur cinq dimensions de l’information qui les entoure : **disponibilité, accessibilité, qualité, utilisation et connaissance**. Elle est répétée tous les six mois : elle suit donc l’évolution plutôt que de prendre un simple instantané, et fournit aux responsables, aux bailleurs et aux partenaires des données comparables pour orienter les investissements, la coordination et la réponse.
+
+      Elle s’adresse aux gestionnaires de l’information des clusters, aux analystes, aux coordinateurs, aux responsables de programmes et aux décideurs, au sein des agences des Nations Unies, des ONG internationales et locales et du Mouvement de la Croix-Rouge et du Croissant-Rouge. Les premiers résultats seront en ligne le 15 novembre 2026.
+    links:
+      - label: Répondre à l’enquête
+        href: https://ee-eu.kobotoolbox.org/x/OUSUPDMY
+      - label: Visiter hila-survey.org
+        href: https://hila-survey.org
+        variant: arrow
   - type: news
     id: news
     eyebrow: Actualités et événements

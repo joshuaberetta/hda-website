@@ -1,7 +1,7 @@
 ---
 translation:
   status: machine
-  source: 023809726bff
+  source: ba8aaadf87e4
   model: claude-opus-5-5
   updated: 2026-11-03
 title: Inicio
@@ -155,15 +155,23 @@ sections:
     tbc: true
   - type: split
     id: hila
-    eyebrow: HILA
-    title: Trabajando junto a HILA
+    eyebrow: Una colaboración de la Alianza
+    title: "HILA: medir los ecosistemas de información humanitaria"
     background: mist
     graphic: worldmap
     imagePosition: left
     body: |
-      La Alianza se presentó junto con HILA y trabaja con ella para brindar a los actores humanitarios un apoyo coordinado en datos, cartografía y gestión de la información.
+      La **Humanitarian Information Landscape Assessment (HILA)** es la primera medición global, estandarizada y actualizada de forma continua de los ecosistemas de información humanitaria. La desarrollaron iMMAP, CartONG, HOT y Kobo, con el apoyo y el respaldo de ICVA, InterAction, la H2H Network y Sphere.
 
-      *Próximamente se agregarán una breve descripción de HILA y un enlace.*
+      Una breve encuesta en línea (menos de 20 minutos) pregunta a las personas que trabajan en una respuesta humanitaria, o que la apoyan, sobre cinco dimensiones de la información que las rodea: **disponibilidad, accesibilidad, calidad, uso y conocimiento**. Se repite cada seis meses, de modo que sigue los cambios en lugar de tomar una instantánea puntual, y ofrece a líderes, donantes y socios evidencia comparable para orientar la inversión, la coordinación y la respuesta.
+
+      Está dirigida a responsables de gestión de la información de los clústeres, analistas, coordinadores, gerentes de programas y personas que toman decisiones, en agencias de las Naciones Unidas, ONG internacionales y locales y el Movimiento de la Cruz Roja y la Media Luna Roja. Los primeros resultados se publican el 15 de noviembre de 2026.
+    links:
+      - label: Responder la encuesta
+        href: https://ee-eu.kobotoolbox.org/x/OUSUPDMY
+      - label: Visitar hila-survey.org
+        href: https://hila-survey.org
+        variant: arrow
   - type: news
     id: news
     eyebrow: Noticias y eventos

@@ -86,8 +86,9 @@ export function LinkButton({ link, onDark, ...rest }: { link: LinkItem; onDark?:
       </Button>
     );
   }
+  const icon = isOffsite(link.href) ? <OffsiteIcon size={17} /> : <IconArrowRight size={17} stroke={2.2} className="rtl-flip" aria-hidden />;
   return (
-    <Button size="md" rightSection={<IconArrowRight size={17} stroke={2.2} className="rtl-flip" aria-hidden />} {...rest} {...linkProps(link.href)}>
+    <Button size="md" rightSection={icon} {...rest} {...linkProps(link.href)}>
       {link.label}
     </Button>
   );

@@ -121,15 +121,20 @@ sections:
 
   - type: split
     id: hila
-    eyebrow: HILA
-    title: Working alongside HILA
+    eyebrow: An Alliance collaboration
+    title: "HILA: measuring humanitarian information ecosystems"
     background: mist
     graphic: worldmap
     imagePosition: left
     body: |
-      The Alliance was introduced alongside HILA, and works with it to bring coordinated data, mapping and information management support to humanitarian actors.
+      The **Humanitarian Information Landscape Assessment (HILA)** is the first global, standardised and continuously updated measure of humanitarian information ecosystems. It was developed by iMMAP, CartONG, HOT and Kobo, with the support and endorsement of ICVA, InterAction, the H2H Network and Sphere.
 
-      *A short description of HILA and a link to it are still to come.*
+      A short online survey (under 20 minutes) asks people working in or supporting a humanitarian response about five dimensions of the information around them: **availability, accessibility, quality, use and awareness**. It runs every six months, so it tracks change instead of taking a one-off snapshot, and gives leaders, donors and partners comparable evidence to guide investment, coordination and response.
+
+      Open to cluster information managers, analysts, coordinators, programme managers and decision-makers, at UN agencies, international and local NGOs and the Red Cross and Red Crescent. The first results go live on 15 November 2026.
+    links:
+      - { label: Take the survey, href: "https://ee-eu.kobotoolbox.org/x/OUSUPDMY" }
+      - { label: Visit hila-survey.org, href: "https://hila-survey.org", variant: arrow }
 
   - type: news
     id: news
