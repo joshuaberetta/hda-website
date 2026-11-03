@@ -1,0 +1,61 @@
+translation:
+  status: machine
+  source: 2c47eca3b4ad
+  model: claude-opus-5-5
+  updated: 2026-11-03
+skipToContent: Aller au contenu
+opensAnotherSite: (ouvre un autre site)
+readMore: Lire la suite
+header:
+  home: "{name}, accueil"
+  mainMenu: Principal
+  openMenu: Ouvrir le menu
+  language: Langue
+footer:
+  followMembers: Suivre les membres
+  copyright: © {year} {name}
+social:
+  on: "{name} sur {network}"
+hero:
+  members: Membres
+graphics:
+  worldMap: Carte du monde en pointillés, avec des lignes reliant des pôles humanitaires
+  stack: Quatre couches cartographiques superposées en une seule image
+  stackWith: "Quatre couches cartographiques superposées en une seule image : {layers}"
+layers:
+  legend: Les services comme couches cartographiques
+members:
+  brings: Ce qu’apporte {name}
+  focalPoint: Point focal
+  draft: Brouillon
+services:
+  providedBy: Fourni par
+  illustrative: À titre indicatif
+  illustrativeNote: Ces services et prestataires sont provisoires et seront remplacés par le catalogue de services convenu.
+placeholder:
+  tbc: À confirmer
+  short: À CONF.
+  placeholder: Provisoire
+contact:
+  name: Nom
+  organisation: Organisation
+  email: E-mail
+  message: Comment pouvons-nous vous aider ?
+  send: Envoyer le message
+  sendNote: Votre application de messagerie s’ouvrira avec votre message prêt à être envoyé.
+  orEmail: Ou écrivez à
+  addressTbc: Adresse à confirmer
+  subject: "Travailler avec nous : {from}"
+languageSuggestion:
+  available: Cette page est aussi disponible en français.
+  switch: Lire en français
+  dismiss: Non merci
+translationNotice:
+  machine: Cette page a été traduite automatiquement et peut contenir des erreurs.
+  readEnglish: Lire la version anglaise
+  missing: Cette page n’a pas encore été traduite ; elle est donc affichée en anglais.
+notFound:
+  pageTitle: Page introuvable
+  title: Nous n’avons pas trouvé cette page.
+  body: Elle a peut-être été déplacée. La revue de conception se trouve désormais à l’adresse
+  home: Aller à la page d’accueil

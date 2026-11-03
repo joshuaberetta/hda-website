@@ -76,3 +76,21 @@
     color: var(--mantine-color-red-6);
   }
 }
+
+/* Language menu: globe, code and chevron, like kobo.ngo's. */
+.language {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 36px;
+  padding-inline: 8px;
+  border-radius: var(--mantine-radius-md);
+  font-family: var(--hda-font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--hda-ink);
+
+  &:hover {
+    background: var(--hda-stone);
+  }
+}

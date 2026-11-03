@@ -1,0 +1,44 @@
+# Guidance for the translation bot (scripts/translate.mjs). It is sent with
+# every request, so changes here apply to the next translation it makes.
+general: |
+  The Humanitarian Data Alliance is a partnership of four non-profits (iMMAP, CartONG, the
+  Humanitarian OpenStreetMap Team and Kobo) that provide data collection, mapping, geospatial
+  analysis and information management support to humanitarian actors. The audience is NGO
+  staff, UN agencies, coordination bodies, governments and donors. Write clear, warm,
+  professional prose, the way a native-speaking communications officer at an international
+  NGO would, not a word-for-word rendering. Keep sentences short. Keep Markdown formatting,
+  links, line breaks and list structure exactly as they are; translate link text but never
+  URLs. Keep numbers and figures as written unless a locale convention below says otherwise.
+  Keep names of people, organisations' acronyms and product names unchanged, in Latin script.
+  Text quoted from the members' memorandum of understanding (the `detail` fields on the
+  commitments page) is a formal agreement: translate it faithfully and completely, in a
+  formal register, without summarising.
+glossary:
+  - { term: Humanitarian Data Alliance, note: "The alliance's name, as in its logo. Never translate. In running text 'the Alliance' may be translated (fr: l'Alliance, es: la Alianza, ar: التحالف)." }
+  - { term: HDA, note: "Acronym. Never translate." }
+  - { term: iMMAP, note: "Organisation name. Never translate." }
+  - { term: CartONG, note: "Organisation name. Never translate." }
+  - { term: HOT, note: "Acronym of the Humanitarian OpenStreetMap Team. Never translate." }
+  - { term: Humanitarian OpenStreetMap Team, note: "Organisation name. Never translate." }
+  - { term: Kobo, note: "Organisation name. Never translate." }
+  - { term: KoboToolbox, note: "Product name. Never translate." }
+  - { term: OpenStreetMap, note: "Product name. Never translate." }
+  - { term: HILA, note: "Acronym. Never translate." }
+  - { term: HNPW, note: "Humanitarian Networks and Partnerships Weeks. Keep the acronym; translate the full name if it appears." }
+  - { term: memorandum of understanding, note: "fr: protocole d'accord, es: memorando de entendimiento, ar: مذكرة التفاهم." }
+  - { term: information management, note: "fr: gestion de l'information, es: gestión de la información, ar: إدارة المعلومات." }
+  - { term: focal point, note: "fr: point focal, es: punto focal, ar: جهة الاتصال." }
+  - { term: open mapping, note: "fr: cartographie ouverte, es: cartografía abierta, ar: الخرائط المفتوحة." }
+  - { term: To be confirmed / TBC / Placeholder / Draft, note: "Markers on unconfirmed content. Keep them short. fr: À confirmer / À CONF. / Provisoire / Brouillon; es: Por confirmar / POR CONF. / Provisional / Borrador; ar: قيد التأكيد / للتأكيد / مؤقت / مسودة." }
+locales:
+  fr: |
+    International French suitable for West and Central Africa, Haiti and Europe. Use "vous".
+    Use French typography: a non-breaking space before : ; ? ! and « guillemets » for quotes.
+    Numbers use a space as thousands separator (35 000+).
+  es: |
+    Neutral Latin American Spanish. Use "usted"/"ustedes", never "vosotros". Use inclusive
+    phrasing where natural, without slashes or "@".
+  ar: |
+    Modern Standard Arabic suitable for the whole Arab region. Formal but readable. Keep
+    Western (Latin) digits as in the source. Keep product and organisation names in Latin
+    script (iMMAP, KoboToolbox). Use Arabic punctuation (، ؛ ؟).

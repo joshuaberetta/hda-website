@@ -1,6 +1,6 @@
 import { IconUser } from '@tabler/icons-react';
 import { ActionIcon, Group, SimpleGrid, Stack, Text, Title } from '@mantine/core';
-import { members } from '../../lib/content';
+import { useContent, useT } from '../../lib/i18n';
 import { SocialIcon } from '../../lib/icons';
 import type { Member, MembersData } from '../../lib/types';
 import { asset } from '../../lib/url';
@@ -15,6 +15,7 @@ const host = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\
 
 /** Four pastel tiles (home) or one panel per member (members page). */
 export function MembersSection({ section }: { section: MembersData }) {
+  const { members } = useContent();
   const detail = section.variant === 'detail';
   return (
     <SectionShell id={section.id} background={section.background} labelledBy={section.title ? `${section.id ?? 'members'}-h` : undefined}>
@@ -49,6 +50,7 @@ export function MembersSection({ section }: { section: MembersData }) {
 }
 
 function MemberPanel({ member: m, index }: { member: Member; index: number }) {
+  const t = useT();
   const fp = m.focalPoint;
   return (
     <article id={m.slug} className={classes.panel} data-colour={m.colour} aria-labelledby={`${m.slug}-h`}>
@@ -64,7 +66,7 @@ function MemberPanel({ member: m, index }: { member: Member; index: number }) {
           {m.placeholder && (
             <>
               {' '}
-              <Tbc>Draft</Tbc>
+              <Tbc>{t('members.draft')}</Tbc>
             </>
           )}
         </Text>
@@ -81,7 +83,7 @@ function MemberPanel({ member: m, index }: { member: Member; index: number }) {
                 rel="noopener noreferrer"
                 variant="subtle"
                 color="navy.8"
-                aria-label={`${m.name} on ${s.network}`}
+                aria-label={t('social.on', { name: m.name, network: s.network })}
               >
                 <SocialIcon network={s.network} />
               </ActionIcon>
@@ -91,7 +93,7 @@ function MemberPanel({ member: m, index }: { member: Member; index: number }) {
       </div>
       <div className={classes.panelSide}>
         <div className={classes.card}>
-          <Kicker mb="sm">What {m.name} brings</Kicker>
+          <Kicker mb="sm">{t('members.brings', { name: m.name })}</Kicker>
           <CheckList items={m.skills} />
         </div>
         {fp && (
@@ -104,7 +106,7 @@ function MemberPanel({ member: m, index }: { member: Member; index: number }) {
               </span>
             )}
             <div>
-              <Kicker>Focal point</Kicker>
+              <Kicker>{t('members.focalPoint')}</Kicker>
               <Text fw={650} c="var(--hda-ink)" mt={2}>
                 {fp.name}
               </Text>

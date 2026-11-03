@@ -77,15 +77,30 @@ sections:
     id: commitments
     eyebrow: Our commitments
     title: Collaboration creates more value than any of us can alone.
+    intro: The values the four members signed up to in their memorandum of understanding.
     items:
-      - { title: Coordination, icon: link, body: Strengthen coordination and reduce fragmentation across the humanitarian data ecosystem. }
-      - { title: Access to expertise, icon: pin, body: Make specialised technical expertise more accessible where it is needed most. }
-      - { title: Interoperability, icon: puzzle, body: "Develop interoperable, demand-driven and fit-for-purpose services." }
-      - { title: Responsible data, icon: shield, body: Promote responsible data stewardship and open knowledge. }
-      - { title: Local leadership, icon: sprout, body: "Reinforce local expertise, leadership and long-term capacity." }
-      - { title: Practical innovation, icon: bulb, body: Pursue innovation that responds to real humanitarian challenges. }
+    - title: Independence and neutrality
+      icon: compass
+      body: Services that are impartial and guided only by humanitarian needs, free from political, commercial or institutional influence.
+    - title: Collaboration over competition
+      icon: link
+      body: Cooperation, knowledge sharing and joint problem-solving come before competing for visibility or resources.
+    - title: Equity
+      icon: scale
+      body: Data and services that serve the people most often left out, with local actors able to take part, lead and benefit.
+    - title: Open and responsible data
+      icon: shield
+      body: Data as open as possible and as protected as necessary.
+    - title: Trust and transparency
+      icon: eye
+      body: Open decision-making, resource allocation and reporting, so partners and stakeholders can rely on us.
+    - title: Common cause
+      icon: heart-handshake
+      body: Outcomes, lessons and challenges belong to the Alliance as a whole, not to any one member.
     links:
-      - { label: Read our commitments in full, href: /commitments, variant: arrow }
+    - label: Our values and operating principles
+      href: /commitments
+      variant: arrow
 
   - type: quote
     quote: People will always come before data.

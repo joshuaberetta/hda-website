@@ -1,0 +1,49 @@
+translation:
+  status: machine
+  source: 97ecde44cc75
+  model: claude-opus-5-5
+  updated: 2026-11-03
+name: Humanitarian Data Alliance
+description: "iMMAP, CartONG, le Humanitarian OpenStreetMap Team et Kobo : relier données, cartes et expertise au service de l’action humanitaire."
+nav:
+  - label: À propos
+    href: /#about
+  - label: Membres
+    href: /members
+  - label: Ce que nous faisons
+    href: /what-we-do
+  - label: Engagements
+    href: /commitments
+  - label: Actualités et événements
+    href: /#news
+cta:
+  label: Travailler avec nous
+  href: /#contact
+footer:
+  blurb: Une alliance entre iMMAP, CartONG, le Humanitarian OpenStreetMap Team et Kobo, qui œuvre pour un écosystème de données humanitaires plus connecté, plus résilient et plus durable.
+  columns:
+    - title: Alliance
+      links:
+        - label: À propos
+          href: /#about
+        - label: Membres
+          href: /members
+        - label: Ce que nous faisons
+          href: /what-we-do
+        - label: Engagements
+          href: /commitments
+        - label: Actualités et événements
+          href: /#news
+        - label: Travailler avec nous
+          href: /#contact
+    - title: Membres
+      links:
+        - label: iMMAP
+          href: https://immap.org
+        - label: CartONG
+          href: https://www.cartong.org
+        - label: HOT
+          href: https://www.hotosm.org
+        - label: Kobo
+          href: https://kobo.ngo
+  base: Site provisoire · pas encore lancé

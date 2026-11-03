@@ -11,6 +11,11 @@ The Humanitarian Data Alliance website (hda.kobolabs.dev). It uses React 19, Man
   - Use theme colours (`navy`, `red`, `blue`, `teal`, `ochre`, `gray`), `var(--hda-*)` or the member-colour variables (`data-colour` → `--member-tint/-dot/-strong`), not hex values.
   - Use `Eyebrow`, `Kicker`, `CardTitle` and `Tbc` from `src/components/Typography.tsx`, and `SectionShell`/`SectionHeading` for bands.
   - Keep text at WCAG AA contrast, and add new pairs to the table in `DESIGN.md`.
+- **Localisation** (`LOCALISATION.md`): the site is in en/fr/es/ar, with Arabic right-to-left. It works like kobo.ngo's.
+  - Interface text goes in `content/settings/ui.yml` and is read with `useT()`. Add each new key to `ui.fr/es/ar.yml` too (or run `npm run translate`).
+  - Read content with `useContent()` from `src/lib/i18n.tsx`, not module-level imports, so it's in the visitor's language.
+  - A new text field must be added to `translatableKeys` in `src/lib/i18n.json`.
+  - Use logical CSS properties (`inset-inline-start`, `padding-inline-end`), not `left`/`right`.
 - **Placeholders:** mark anything waiting on the team (`placeholder: true`, `tbc: true`, `<Tbc>`). Never present invented facts (names, figures, service providers, URLs) as real.
 - **Component styles** go in CSS modules next to the component. Mantine breakpoints are available as `$mantine-breakpoint-*`. To colour a Mantine `Anchor` from a module, pass `c="var(--x)"` and set `--x` in CSS.
 - **Code must be SSR-safe**, because `scripts/prerender.mjs` renders every route with `renderToString`. Don't touch `window`/`document` outside effects. Graphics in `src/lib/graphics.ts` must stay deterministic (seeded).

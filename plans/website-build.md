@@ -188,7 +188,7 @@ static_sites:
 
 ## Phase 2 (not in this build)
 
-- **Translations** (FR/ES from CartONG, AR from iMMAP): kobo.ngo's i18n layer, with RTL for Arabic.
+- ~~**Translations**~~: done, brought forward on 3 Nov 2026 (see `LOCALISATION.md`). Machine drafts for FR/ES/AR are awaiting review: CartONG for French and Spanish, iMMAP for Arabic.
 - **Sveltia CMS** for editors.
 - **"Latest from our members"**: pull each member's RSS/JSON feed at build time if all four have one. To check per site.
 - **"They trust us"** partner logos page, a projects map (data formats differ between members), and job openings.

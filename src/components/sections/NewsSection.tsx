@@ -1,5 +1,5 @@
 import { SimpleGrid, Text } from '@mantine/core';
-import { news } from '../../lib/content';
+import { useContent, useT } from '../../lib/i18n';
 import type { NewsData } from '../../lib/types';
 import { Contours, WorldMap } from '../brand/Graphics';
 import { ArrowLink, LinkGroup } from '../SmartLink';
@@ -9,6 +9,8 @@ import classes from './NewsSection.module.css';
 
 /** Latest alliance news and events, newest first. */
 export function NewsSection({ section }: { section: NewsData }) {
+  const { news } = useContent();
+  const t = useT();
   const items = news.slice(0, section.limit ?? 3);
   return (
     <SectionShell id={section.id} background={section.background}>
@@ -23,14 +25,14 @@ export function NewsSection({ section }: { section: NewsData }) {
               <div className={classes.meta}>
                 <span className={classes.tag}>{item.tag}</span>
                 <span>
-                  {item.dateLabel} {item.tbc && <Tbc>TBC</Tbc>}
+                  {item.dateLabel} {item.tbc && <Tbc>{t('placeholder.short')}</Tbc>}
                 </span>
               </div>
               <CardTitle fz={18}>{item.title}</CardTitle>
               <Text fz="sm">{item.summary}</Text>
               {item.href && (
                 <div className={classes.link}>
-                  <ArrowLink href={item.href}>{item.linkLabel ?? 'Read more'}</ArrowLink>
+                  <ArrowLink href={item.href}>{item.linkLabel ?? t('readMore')}</ArrowLink>
                 </div>
               )}
             </div>

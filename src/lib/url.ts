@@ -6,6 +6,9 @@ export function asset(path?: string): string | undefined {
   return path.startsWith('/') ? `${BASE}${path}` : path;
 }
 
+/** `/members/` -> `/members`, so links match whether or not the host adds a trailing slash. */
+export const trimSlash = (path: string) => (path.length > 1 ? path.replace(/\/+$/, '') : path);
+
 export function isExternal(href: string): boolean {
   return /^(https?:)?\/\//.test(href) || href.startsWith('mailto:') || href.startsWith('tel:');
 }

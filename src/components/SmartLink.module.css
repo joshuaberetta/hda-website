@@ -29,6 +29,15 @@
   .arrow:hover &[data-offsite] {
     transform: translate(3px, -3px);
   }
+
+  /* Right-to-left (Arabic): the arrow points and slides the other way. */
+  [dir='rtl'] &:not([data-offsite]) {
+    transform: scaleX(-1);
+  }
+
+  [dir='rtl'] .arrow:hover &:not([data-offsite]) {
+    transform: scaleX(-1) translateX(6px);
+  }
 }
 
 /* The outline button fills navy on hover, as in Unified. */

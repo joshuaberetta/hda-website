@@ -1,5 +1,5 @@
 import { SimpleGrid, Text } from '@mantine/core';
-import { getMember } from '../../lib/content';
+import { useContent } from '../../lib/i18n';
 import type { StatsData } from '../../lib/types';
 import { LinkGroup } from '../SmartLink';
 import { Kicker, Tbc } from '../Typography';
@@ -11,6 +11,7 @@ import classes from './StatsSection.module.css';
  * different things, so the figures are shown side by side, never added up.
  */
 export function StatsSection({ section }: { section: StatsData }) {
+  const { getMember } = useContent();
   return (
     <SectionShell id={section.id} background={section.background}>
       <SectionHeading eyebrow={section.eyebrow} title={section.title} intro={section.intro} align={section.align} />

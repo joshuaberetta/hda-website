@@ -1,0 +1,16 @@
+.bar {
+  padding-block: 10px;
+  border-bottom: 1px solid var(--hda-line);
+  background: var(--hda-paper);
+}
+
+.icon {
+  flex: none;
+  margin-top: 2px;
+  color: var(--mantine-color-blue-7);
+}
+
+.link {
+  font-weight: 500;
+  color: var(--mantine-color-blue-7);
+}

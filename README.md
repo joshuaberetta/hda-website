@@ -5,6 +5,7 @@ The website of the Humanitarian Data Alliance (iMMAP, CartONG, HOT and Kobo), li
 - **Site:** React 19, Mantine 9, React Router 8 and Vite 8, prerendered to static HTML. It's the same stack and structure as `../kobo.ngo`.
 - **Design:** Theme G, Unified, with logo 1, Convergence. See [`DESIGN.md`](DESIGN.md).
 - **Copy:** lives in [`content/`](content/). See [`content/README.md`](content/README.md).
+- **Languages:** English, French, Spanish and Arabic (right-to-left), as on kobo.ngo. See [`LOCALISATION.md`](LOCALISATION.md).
 - **The plan, and what's still to come:** [`plans/website-build.md`](plans/website-build.md).
 
 ## Develop
@@ -12,7 +13,8 @@ The website of the Humanitarian Data Alliance (iMMAP, CartONG, HOT and Kobo), li
 ```sh
 npm install
 npm run dev            # http://localhost:5173
-npm run lint:content   # check content/ against the content model
+npm run lint:content   # check content/ (and its translations) against the content model
+npm run translate -- status   # where each translation stands
 npm run build          # typecheck, build, prerender every page to dist/
 npm run preview        # serve dist/ at http://localhost:4173
 ```

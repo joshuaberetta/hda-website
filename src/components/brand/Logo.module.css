@@ -1,5 +1,7 @@
 /* Convergence lockup, as drawn by the review site's assets/logos.js. */
 .lockup {
+  /* A logo doesn't mirror in right-to-left languages: mark first, then the wordmark. */
+  direction: ltr;
   display: inline-flex;
   align-items: center;
   gap: 0.62em;

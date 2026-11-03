@@ -1,0 +1,61 @@
+translation:
+  status: machine
+  source: 2c47eca3b4ad
+  model: claude-opus-5-5
+  updated: 2026-11-03
+skipToContent: Ir al contenido
+opensAnotherSite: (abre otro sitio)
+readMore: Leer más
+header:
+  home: "{name}, inicio"
+  mainMenu: Principal
+  openMenu: Abrir menú
+  language: Idioma
+footer:
+  followMembers: Siga a los miembros
+  copyright: © {year} {name}
+social:
+  on: "{name} en {network}"
+hero:
+  members: Miembros
+graphics:
+  worldMap: Mapa mundial punteado con líneas que conectan centros humanitarios
+  stack: Cuatro capas de mapa superpuestas en una sola imagen
+  stackWith: "Cuatro capas de mapa superpuestas en una sola imagen: {layers}"
+layers:
+  legend: Servicios como capas de mapa
+members:
+  brings: Lo que aporta {name}
+  focalPoint: Punto focal
+  draft: Borrador
+services:
+  providedBy: Prestado por
+  illustrative: Ilustrativo
+  illustrativeNote: Estos servicios y proveedores son provisionales y se reemplazarán por el catálogo de servicios acordado.
+placeholder:
+  tbc: Por confirmar
+  short: POR CONF.
+  placeholder: Provisional
+contact:
+  name: Nombre
+  organisation: Organización
+  email: Correo electrónico
+  message: ¿Cómo podemos ayudarle?
+  send: Enviar mensaje
+  sendNote: Esto abre su aplicación de correo con su mensaje listo para enviar.
+  orEmail: O escriba a
+  addressTbc: Dirección por confirmar
+  subject: "Trabajar con ustedes: {from}"
+languageSuggestion:
+  available: Esta página también está disponible en español.
+  switch: Leer en español
+  dismiss: No, gracias
+translationNotice:
+  machine: Esta página se tradujo automáticamente y puede contener errores.
+  readEnglish: Leer la versión en inglés
+  missing: Esta página aún no se ha traducido, por lo que se muestra en inglés.
+notFound:
+  pageTitle: Página no encontrada
+  title: No pudimos encontrar esa página.
+  body: Es posible que se haya movido. La revisión de diseño ahora está en
+  home: Ir a la página de inicio

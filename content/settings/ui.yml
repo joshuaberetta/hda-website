@@ -1,0 +1,61 @@
+# Interface text: labels, buttons and messages built into the site's layout.
+# Words in {braces} are filled in by the site; keep them as they are.
+# Translations live beside this file (ui.fr.yml, ui.es.yml, ui.ar.yml).
+skipToContent: Skip to content
+opensAnotherSite: (opens another site)
+readMore: Read more
+header:
+  home: "{name}, home"
+  mainMenu: Main
+  openMenu: Open menu
+  language: Language
+footer:
+  followMembers: Follow the members
+  copyright: "© {year} {name}"
+social:
+  on: "{name} on {network}"
+hero:
+  members: Members
+graphics:
+  worldMap: Dotted world map with lines connecting humanitarian hubs
+  stack: Four map layers stacked into one picture
+  stackWith: "Four map layers stacked into one picture: {layers}"
+layers:
+  legend: Services as map layers
+members:
+  brings: "What {name} brings"
+  focalPoint: Focal point
+  draft: Draft
+services:
+  providedBy: Provided by
+  illustrative: Illustrative
+  illustrativeNote: These services and providers are placeholders, to be replaced with the agreed service catalogue.
+placeholder:
+  tbc: To be confirmed
+  short: TBC
+  placeholder: Placeholder
+contact:
+  name: Name
+  organisation: Organisation
+  email: Email
+  message: How can we help?
+  send: Send message
+  sendNote: This opens your email app with your message ready to send.
+  orEmail: Or email
+  addressTbc: Address TBC
+  subject: "Work with us: {from}"
+# Offered on English pages to visitors whose browser prefers another language.
+# Each translation shows this in its own language.
+languageSuggestion:
+  available: This page is also available in English.
+  switch: Read in English
+  dismiss: No thanks
+translationNotice:
+  machine: This page was translated automatically and may contain mistakes.
+  readEnglish: Read the English version
+  missing: This page hasn't been translated yet, so it is shown in English.
+notFound:
+  pageTitle: Page not found
+  title: We couldn’t find that page.
+  body: It may have moved. The design review is now at
+  home: Go to the home page

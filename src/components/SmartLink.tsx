@@ -2,6 +2,7 @@ import { Anchor, Button, Group, type AnchorProps, type ButtonProps } from '@mant
 import { IconArrowRight, IconArrowUpRight } from '@tabler/icons-react';
 import type { ReactNode } from 'react';
 import { Link } from 'react-router';
+import { useT } from '../lib/i18n';
 import type { LinkItem } from '../lib/types';
 import { asset, isExternal, isRouterLink } from '../lib/url';
 import classes from './SmartLink.module.css';
@@ -37,7 +38,8 @@ export function linkProps(href: string): LinkLikeProps {
 
 /** The ↗ marker for off-site links in lists. */
 export function OffsiteIcon({ size = 14 }: { size?: number }) {
-  return <IconArrowUpRight size={size} stroke={2} aria-label="(opens another site)" />;
+  const t = useT();
+  return <IconArrowUpRight size={size} stroke={2} aria-label={t('opensAnotherSite')} />;
 }
 
 export function SmartLink({ href, children, ...rest }: { href: string; children: ReactNode } & AnchorProps) {
@@ -50,6 +52,7 @@ export function SmartLink({ href, children, ...rest }: { href: string; children:
 
 /** Text link with an arrow that slides on hover (↗ for off-site links). */
 export function ArrowLink({ href, children, light }: { href: string; children: ReactNode; light?: boolean }) {
+  const t = useT();
   const offsite = isOffsite(href);
   const Arrow = offsite ? IconArrowUpRight : IconArrowRight;
   return (
@@ -60,7 +63,7 @@ export function ArrowLink({ href, children, light }: { href: string; children: R
         stroke={2.2}
         className={classes.chevron}
         data-offsite={offsite || undefined}
-        aria-label={offsite ? '(opens another site)' : undefined}
+        aria-label={offsite ? t('opensAnotherSite') : undefined}
         aria-hidden={offsite ? undefined : true}
       />
     </Anchor>
@@ -84,7 +87,7 @@ export function LinkButton({ link, onDark, ...rest }: { link: LinkItem; onDark?:
     );
   }
   return (
-    <Button size="md" rightSection={<IconArrowRight size={17} stroke={2.2} aria-hidden />} {...rest} {...linkProps(link.href)}>
+    <Button size="md" rightSection={<IconArrowRight size={17} stroke={2.2} className="rtl-flip" aria-hidden />} {...rest} {...linkProps(link.href)}>
       {link.label}
     </Button>
   );

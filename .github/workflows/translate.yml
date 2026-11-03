@@ -1,0 +1,86 @@
+name: Translate
+
+# Keeps the French, Spanish and Arabic versions in step with the English
+# (LOCALISATION.md). After every push that changes content/, it:
+#   - redoes "machine" translations whose English has changed,
+#   - translates anything new, or marked "Retranslate" in the CMS,
+#   - marks "reviewed" translations "outdated" instead of overwriting them,
+#   - treats a person's edit to a translation as reviewed.
+# It then commits the result, which redeploys the site.
+#
+# Needs the ANTHROPIC_API_KEY repository secret; without it, it does nothing.
+# Run it by hand from the Actions tab to translate everything that's missing
+# or out of date, or to force a fresh translation (e.g. after changing the
+# translation guide).
+on:
+  push:
+    branches: [main]
+    paths: ['content/**']
+  workflow_dispatch:
+    inputs:
+      locale:
+        description: Language
+        type: choice
+        options: [all, fr, es, ar]
+        default: all
+      only:
+        description: "Only this English file (e.g. pages/about.md); blank for all"
+        required: false
+      force:
+        description: Retranslate machine translations even if they're current
+        type: boolean
+        default: false
+
+# One run at a time, so two bot commits never race.
+concurrency:
+  group: translate
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Translate
+        env:
+          BEFORE: ${{ github.event.before }}
+          LOCALE: ${{ inputs.locale }}
+          ONLY: ${{ inputs.only }}
+          FORCE: ${{ inputs.force }}
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "::notice::ANTHROPIC_API_KEY isn't set, so nothing was translated."
+            exit 0
+          fi
+          args=()
+          if [ -n "$LOCALE" ] && [ "$LOCALE" != all ]; then args+=(--locale "$LOCALE"); fi
+          if [ -n "$ONLY" ]; then args+=(--only "$ONLY"); fi
+          if [ "$FORCE" = true ]; then args+=(--force); fi
+          if [ "${{ github.event_name }}" = push ] && git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
+            mapfile -t changed < <(git diff --name-only "$BEFORE" "$GITHUB_SHA" -- content)
+            npm run translate -- ci "${changed[@]}" "${args[@]}"
+          else
+            npm run translate -- "${args[@]}"
+          fi
+      - run: npm run lint:content
+      - name: Commit
+        run: |
+          git add content
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name "hda-translation-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update translations"
+          git pull --rebase
+          git push

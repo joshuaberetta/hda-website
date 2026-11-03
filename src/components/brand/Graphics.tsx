@@ -5,15 +5,17 @@ import classes from './Graphics.module.css';
 // The markup comes from src/lib/graphics.ts: generated, deterministic SVG
 // (never user content), so it's safe to inject and identical on server and client.
 
-export function WorldMap({ step, arcs, className }: { step?: number; arcs?: boolean; className?: string }) {
+/** With a `label` the map is an image for screen readers; without one it's decoration. */
+export function WorldMap({ step, arcs, className, label }: { step?: number; arcs?: boolean; className?: string; label?: string }) {
   const { viewBox, markup } = worldMap({ step, arcs });
   return (
     <svg
       className={`${classes.worldmap} ${className ?? ''}`}
       viewBox={viewBox}
       preserveAspectRatio="xMidYMid meet"
-      role="img"
-      aria-label="Dotted world map with lines connecting humanitarian hubs"
+      role={label ? 'img' : undefined}
+      aria-label={label}
+      aria-hidden={label ? undefined : true}
       dangerouslySetInnerHTML={{ __html: markup }}
     />
   );

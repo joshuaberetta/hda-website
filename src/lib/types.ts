@@ -1,3 +1,6 @@
+/** Where a page stands in a language: English source, machine draft, checked by a person… See LOCALISATION.md. */
+export type TranslationStatus = 'source' | 'machine' | 'reviewed' | 'outdated' | 'retranslate' | 'missing';
+
 // The shape of everything in content/. Documented in content/README.md and
 // checked by scripts/validate-content.mjs: change all three together.
 
@@ -156,6 +159,7 @@ export interface Page {
   /** Detail pages open with a page hero. The home page uses a `hero` section instead. */
   hero?: { eyebrow?: string; title: string; subtitle?: string };
   sections: Section[];
+  translation?: TranslationStatus;
 }
 
 export interface Member {
@@ -175,6 +179,7 @@ export interface Member {
   focalPoint?: { name: string; role: string; photo?: string; placeholder?: boolean };
   socials?: { network: string; href: string }[];
   placeholder?: boolean;
+  translation?: TranslationStatus;
 }
 
 export interface NewsItem {
@@ -190,6 +195,7 @@ export interface NewsItem {
   href?: string;
   linkLabel?: string;
   tbc?: boolean;
+  translation?: TranslationStatus;
 }
 
 export interface SiteSettings {

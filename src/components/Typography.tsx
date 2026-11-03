@@ -1,5 +1,6 @@
 import { Text, Title, type TextProps, type TitleProps } from '@mantine/core';
 import type { ReactNode } from 'react';
+import { useT } from '../lib/i18n';
 import classes from './Typography.module.css';
 
 /** Mono uppercase line with a red dot, above a section or hero title. */
@@ -38,6 +39,7 @@ export function CardTitle({
 }
 
 /** Marks copy that's waiting on the team: visible to reviewers, easy to find later. */
-export function Tbc({ children = 'To be confirmed' }: { children?: ReactNode }) {
-  return <span className={classes.tbc}>{children}</span>;
+export function Tbc({ children }: { children?: ReactNode }) {
+  const t = useT();
+  return <span className={classes.tbc}>{children ?? t('placeholder.tbc')}</span>;
 }

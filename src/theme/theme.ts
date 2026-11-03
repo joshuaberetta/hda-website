@@ -112,7 +112,7 @@ export const cssVariablesResolver: CSSVariablesResolver = () => ({
     '--hda-line': gray[2],
     '--hda-ink': navy[8],
     '--hda-ink-2': gray[7],
-    '--hda-font-mono': "'IBM Plex Mono', ui-monospace, monospace",
+    '--hda-font-mono': "'IBM Plex Mono', 'Noto Sans Arabic Variable', ui-monospace, monospace",
     // Logo colours: one per member pin. Dark bands override b, ink and bg.
     '--logo-a': red[6],
     '--logo-b': navy[8],
@@ -131,10 +131,12 @@ export const theme = createTheme({
   primaryShade: 7,
   black: navy[8],
   white: '#ffffff',
-  fontFamily: "'Inter Variable', Inter, system-ui, sans-serif",
+  // The Noto Arabic faces supply Arabic glyphs: Noto Kufi for headings (its
+  // geometry suits Plus Jakarta), Noto Sans for text.
+  fontFamily: "'Inter Variable', Inter, 'Noto Sans Arabic Variable', system-ui, sans-serif",
   fontFamilyMonospace: "'IBM Plex Mono', ui-monospace, monospace",
   headings: {
-    fontFamily: "'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', system-ui, sans-serif",
+    fontFamily: "'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', 'Noto Kufi Arabic Variable', system-ui, sans-serif",
     fontWeight: '750',
     sizes: {
       h1: { fontSize: 'clamp(2.3rem, 1.6rem + 2.6vw, 3.3rem)', lineHeight: '1.12' },

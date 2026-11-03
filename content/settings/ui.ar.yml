@@ -1,0 +1,61 @@
+translation:
+  status: machine
+  source: 2c47eca3b4ad
+  model: claude-opus-5-5
+  updated: 2026-11-03
+skipToContent: انتقل إلى المحتوى
+opensAnotherSite: (يفتح موقعًا آخر)
+readMore: اقرأ المزيد
+header:
+  home: "{name}، الصفحة الرئيسية"
+  mainMenu: القائمة الرئيسية
+  openMenu: فتح القائمة
+  language: اللغة
+footer:
+  followMembers: تابع الأعضاء
+  copyright: © {year} {name}
+social:
+  on: "{name} على {network}"
+hero:
+  members: الأعضاء
+graphics:
+  worldMap: خريطة عالم منقّطة تربط خطوطها بين المراكز الإنسانية
+  stack: أربع طبقات خرائط مكدّسة في صورة واحدة
+  stackWith: "أربع طبقات خرائط مكدّسة في صورة واحدة: {layers}"
+layers:
+  legend: الخدمات كطبقات خرائط
+members:
+  brings: ما يقدمه {name}
+  focalPoint: جهة الاتصال
+  draft: مسودة
+services:
+  providedBy: يقدمها
+  illustrative: توضيحي
+  illustrativeNote: هذه الخدمات والجهات المقدمة لها مؤقتة، وستُستبدل بدليل الخدمات المتفق عليه.
+placeholder:
+  tbc: قيد التأكيد
+  short: للتأكيد
+  placeholder: مؤقت
+contact:
+  name: الاسم
+  organisation: المنظمة
+  email: البريد الإلكتروني
+  message: كيف يمكننا مساعدتك؟
+  send: إرسال الرسالة
+  sendNote: سيفتح هذا تطبيق البريد الإلكتروني لديك ورسالتك جاهزة للإرسال.
+  orEmail: أو راسلنا على
+  addressTbc: العنوان قيد التأكيد
+  subject: "العمل معنا: {from}"
+languageSuggestion:
+  available: هذه الصفحة متاحة أيضًا باللغة العربية.
+  switch: اقرأ بالعربية
+  dismiss: لا، شكرًا
+translationNotice:
+  machine: تُرجمت هذه الصفحة آليًا وقد تحتوي على أخطاء.
+  readEnglish: اقرأ النسخة الإنجليزية
+  missing: لم تُترجم هذه الصفحة بعد، لذا تُعرض باللغة الإنجليزية.
+notFound:
+  pageTitle: الصفحة غير موجودة
+  title: لم نتمكن من العثور على هذه الصفحة.
+  body: ربما نُقلت. مراجعة التصميم متاحة الآن على
+  home: الانتقال إلى الصفحة الرئيسية

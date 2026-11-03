@@ -1,5 +1,5 @@
 import { Text, Title } from '@mantine/core';
-import { getMember } from '../../lib/content';
+import { useContent, useT } from '../../lib/i18n';
 import { ContentIcon } from '../../lib/icons';
 import type { ServicesData } from '../../lib/types';
 import { LinkGroup } from '../SmartLink';
@@ -9,12 +9,14 @@ import classes from './ServicesSection.module.css';
 
 /** The service catalogue: one panel per service area, listing who provides each service. */
 export function ServicesSection({ section }: { section: ServicesData }) {
+  const { getMember } = useContent();
+  const t = useT();
   return (
     <SectionShell id={section.id} background={section.background}>
       <SectionHeading eyebrow={section.eyebrow} title={section.title} intro={section.intro} align={section.align} />
       {section.placeholder && (
         <Text fz="sm" mb="lg">
-          <Tbc>Illustrative</Tbc> These services and providers are placeholders, to be replaced with the agreed service catalogue.
+          <Tbc>{t('services.illustrative')}</Tbc> {t('services.illustrativeNote')}
         </Text>
       )}
       <div className={classes.groups}>
@@ -45,7 +47,7 @@ export function ServicesSection({ section }: { section: ServicesData }) {
                     </Text>
                     {service.phases?.length ? <Kicker mt={8}>{service.phases.join(' · ')}</Kicker> : null}
                   </div>
-                  <ul className={classes.providers} aria-label="Provided by">
+                  <ul className={classes.providers} aria-label={t('services.providedBy')}>
                     {service.members.map((slug) => {
                       const member = getMember(slug);
                       return (

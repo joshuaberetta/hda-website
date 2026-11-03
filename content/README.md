@@ -11,6 +11,8 @@ content/news/<slug>.md      news and events, shown newest first
 
 Every `.md` file is YAML front matter between `---` lines. The body under the second `---` isn't used.
 
+Files named `*.fr.md`, `*.es.md` and `*.ar.md` (and `ui.fr.yml`…) are translations. They hold only text, and the layout always comes from the English file. See [`../LOCALISATION.md`](../LOCALISATION.md).
+
 ## Placeholders
 
 Copy that's still waiting on the team is marked, so reviewers can see it and it's easy to find later:
@@ -71,7 +73,7 @@ Every section can have these fields:
 | `cta` | `items` [`title`, `body`, `links`] | Two next steps side by side, to close a page |
 | `contact` | `title`, `body` | The "Work with us" form. Sending opens the visitor's email app, addressed to `email` in `site.yml` |
 
-Icons are referred to by name: `alert-triangle`, `bulb`, `chart`, `form`, `link`, `map`, `pin`, `people`, `puzzle`, `school`, `shield`, `sprout`, `world`. To add one, register it in `src/lib/icons.tsx`.
+Icons are referred to by name: `alert-triangle`, `bulb`, `chart`, `compass`, `eye`, `form`, `heart-handshake`, `link`, `map`, `pin`, `people`, `puzzle`, `scale`, `school`, `shield`, `sprout`, `stack`, `target`, `tool`, `world`. To add one, register it in `src/lib/icons.tsx`.
 
 ## Members
 

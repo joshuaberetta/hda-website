@@ -1,5 +1,6 @@
 import { Text, VisuallyHidden } from '@mantine/core';
 import { useState } from 'react';
+import { useT } from '../../lib/i18n';
 import { ContentIcon } from '../../lib/icons';
 import type { LayersData } from '../../lib/types';
 import { LayerStack } from '../brand/Graphics';
@@ -13,6 +14,7 @@ import classes from './LayersSection.module.css';
  * and switching it off lifts that layer away. Items are listed top layer first.
  */
 export function LayersSection({ section }: { section: LayersData }) {
+  const t = useT();
   const [off, setOff] = useState<number[]>([]);
   const top = section.items.length - 1;
   const toggle = (layer: number, on: boolean) =>
@@ -23,10 +25,10 @@ export function LayersSection({ section }: { section: LayersData }) {
       <SectionHeading eyebrow={section.eyebrow} title={section.title} intro={section.intro} align={section.align} />
       <div className={classes.wrap}>
         <div className={classes.visual}>
-          <LayerStack off={off} label={`Four map layers stacked into one picture: ${section.items.map((i) => i.title).join(', ')}`} />
+          <LayerStack off={off} label={t('graphics.stackWith', { layers: section.items.map((i) => i.title).join(', ') })} />
         </div>
         <fieldset className={classes.list}>
-          <VisuallyHidden component="legend">Services as map layers</VisuallyHidden>
+          <VisuallyHidden component="legend">{t('layers.legend')}</VisuallyHidden>
           {section.items.map((item, i) => {
             const layer = top - i;
             return (

@@ -71,6 +71,7 @@ Two bands of the same colour in a row merge: the second loses its top padding.
 | Kicker (`Kicker`) | IBM Plex Mono | 11px / 500 / uppercase / 0.07em, Ink 2 |
 | Stat figure | Plus Jakarta Sans | 38px / 800 |
 | Nav item | Inter | 15px / 500, navy |
+| Arabic | Noto Kufi Arabic (headings), Noto Sans Arabic (text, mono labels) | Same sizes; no letter-spacing; line height 1.8 |
 
 ## Layout
 

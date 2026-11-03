@@ -9,6 +9,10 @@
   inset: 0;
   --contour-line: #e3dccb;
   mask-image: linear-gradient(90deg, #000 30%, transparent 75%);
+
+  [dir='rtl'] & {
+    mask-image: linear-gradient(270deg, #000 30%, transparent 75%);
+  }
 }
 
 .inner {
@@ -80,6 +84,10 @@
   margin-inline-end: -16%;
   transform: scale(1.08);
   transform-origin: left center;
+
+  [dir='rtl'] & {
+    transform-origin: right center;
+  }
 
   @media (max-width: $mantine-breakpoint-md) {
     margin: 0;

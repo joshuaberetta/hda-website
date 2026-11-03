@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import YAML from 'yaml';
+import { TRANSLATIONS, localeOf, mismatches, readEntry, sourceFiles, translatableShape, translationOf } from './i18n.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const content = path.join(root, 'content');
@@ -21,7 +22,10 @@ function frontMatter(file) {
 }
 const files = (dir) =>
   fs.existsSync(path.join(content, dir))
-    ? fs.readdirSync(path.join(content, dir)).filter((f) => f.endsWith('.md')).map((f) => path.join(content, dir, f))
+    ? fs
+        .readdirSync(path.join(content, dir))
+        .filter((f) => f.endsWith('.md') && !localeOf(f))
+        .map((f) => path.join(content, dir, f))
     : [];
 
 // Keep in step with src/lib/icons.tsx and src/lib/types.ts.
@@ -127,8 +131,38 @@ for (const col of site.footer?.columns ?? []) checkLinks(siteFile, `footer "${co
 
 if (!pageSlugs.has('home')) fail(path.join(content, 'pages'), 'there must be a home.md');
 
+// Translations (LOCALISATION.md): each must parse, carry a known status, and
+// keep the English layout. Where the layout differs, the site shows English
+// at that spot, so this is a warning to fix, not a broken page.
+const STATUSES = new Set(['machine', 'reviewed', 'outdated', 'retranslate']);
+let translationCount = 0;
+const warnings = [];
+for (const file of sourceFiles()) {
+  const en = readEntry(file);
+  for (const locale of TRANSLATIONS) {
+    const target = translationOf(file, locale);
+    const abs = path.join(content, target);
+    if (!fs.existsSync(abs)) continue;
+    translationCount++;
+    let loc;
+    try {
+      loc = readEntry(target);
+    } catch (e) {
+      fail(abs, `invalid YAML: ${e.message.split('\n')[0]}`);
+      continue;
+    }
+    const status = loc.data.translation?.status;
+    if (status && !STATUSES.has(status)) fail(abs, `unknown translation status "${status}" (expected ${[...STATUSES].join(', ')})`);
+    for (const at of mismatches(file, translatableShape(file, en.data), loc.data))
+      warnings.push(`${target}: layout differs from English at ${at}; English shows there until it's retranslated`);
+  }
+}
+if (warnings.length) console.warn(`Translation warnings (${warnings.length}):\n  ${warnings.join('\n  ')}`);
+
 if (errors.length) {
   console.error(`Content problems (${errors.length}):\n  ${errors.join('\n  ')}`);
   process.exit(1);
 }
-console.log(`Content OK: ${pageSlugs.size} pages, ${memberSlugs.size} members, ${files('news').length} news items.`);
+console.log(
+  `Content OK: ${pageSlugs.size} pages, ${memberSlugs.size} members, ${files('news').length} news items, ${translationCount} translations.`,
+);

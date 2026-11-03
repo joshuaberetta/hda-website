@@ -1,4 +1,5 @@
 import { Title } from '@mantine/core';
+import { useT } from '../../lib/i18n';
 import type { SplitData } from '../../lib/types';
 import { asset } from '../../lib/url';
 import { Contours, LayerStack, WorldMap } from '../brand/Graphics';
@@ -10,6 +11,7 @@ import classes from './SplitSection.module.css';
 
 /** Text beside a photo (or, until there's a photo, one of the brand graphics). */
 export function SplitSection({ section }: { section: SplitData }) {
+  const t = useT();
   const onDark = isDark(section.background);
   return (
     <SectionShell id={section.id} background={section.background}>
@@ -28,9 +30,9 @@ export function SplitSection({ section }: { section: SplitData }) {
           {section.image ? (
             <img src={asset(section.image)} alt={section.imageAlt ?? ''} loading="lazy" />
           ) : section.graphic === 'worldmap' ? (
-            <WorldMap step={3} arcs />
+            <WorldMap step={3} arcs label={t('graphics.worldMap')} />
           ) : section.graphic === 'stack' ? (
-            <LayerStack label="Four map layers stacked into one picture" />
+            <LayerStack label={t('graphics.stack')} />
           ) : (
             <Contours seed={14} levels={12} className={classes.texture} />
           )}

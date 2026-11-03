@@ -44,6 +44,24 @@ body {
   color: #c3d0df;
 }
 
+/*
+ * Arabic is a joined script: letter-spacing pulls the letters apart, and
+ * uppercase labels (eyebrows, kickers) have no meaning. A little more line
+ * height suits its taller letterforms.
+ */
+:root[lang='ar'] {
+  --mantine-line-height: 1.8;
+
+  & * {
+    letter-spacing: normal !important;
+  }
+}
+
+/* Arrows that point "forward" turn around in right-to-left languages. */
+[dir='rtl'] .rtl-flip {
+  transform: scaleX(-1);
+}
+
 .skip-link {
   position: absolute;
   inset-inline-start: -9999px;
