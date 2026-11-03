@@ -31,6 +31,7 @@ npm run preview        # serve dist/ at http://localhost:4173
 | `public/designs/` | The design review site, served unchanged at `/designs/` |
 | `public/admin/` | The website editor (Sveltia CMS) and its field definitions, `config.yml` |
 | `public/images/uploads/` | Photos uploaded through the editor |
+| `cms-auth/` | DigitalOcean Function that handles the editor's GitHub sign-in |
 
 Links from before the move (`/themes/…`, `/logos/…`, `/palettes/…`, `/results/…`) forward to the same page under `/designs/`, query string included. The voting doc's links keep working, and the results page tallies both old and new links.
 

@@ -1,0 +1,16 @@
+# DigitalOcean Functions project: GitHub sign-in for the website editor.
+# Deploy with:  doctl serverless deploy cms-auth
+# Placeholder values come from cms-auth/.env (not committed; see cms-auth/README.md).
+packages:
+  - name: cms
+    functions:
+      - name: auth
+        runtime: nodejs:18
+        web: true
+        limits:
+          timeout: 10000
+          memory: 128
+        environment:
+          GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID}
+          GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET}
+          ALLOWED_DOMAINS: ${ALLOWED_DOMAINS}

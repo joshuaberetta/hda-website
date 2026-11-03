@@ -15,7 +15,7 @@ Text boxes accept simple formatting: **bold**, *italic*, links and bullet lists.
 
 Every save is a commit on GitHub, so nothing is lost: any change can be undone from the repository's history.
 
-> **One-time setup (developer):** GitHub sign-in goes through a small DigitalOcean Function shared with kobo.ngo (`../kobo.ngo/cms-auth/README.md`). `hda.kobolabs.dev` must be in its `ALLOWED_DOMAINS`. Until it is, use *Sign in with access token* with a GitHub [fine-grained token](https://github.com/settings/personal-access-tokens) that has *Contents: read and write* on this repository.
+> **One-time setup (developer):** GitHub sign-in goes through a small DigitalOcean Function. Setup steps are in [`cms-auth/README.md`](cms-auth/README.md). Until it's deployed, use *Sign in with access token* with a GitHub [fine-grained token](https://github.com/settings/personal-access-tokens) that has *Contents: read and write* on this repository.
 
 ## 2. Directly on GitHub
 

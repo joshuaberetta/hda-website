@@ -189,7 +189,7 @@ static_sites:
 ## Phase 2 (not in this build)
 
 - ~~**Translations**~~: done, brought forward on 3 Nov 2026 (see `LOCALISATION.md`). Machine drafts for FR/ES/AR are awaiting review: CartONG for French and Spanish, iMMAP for Arabic.
-- ~~**Sveltia CMS** for editors~~: done on 3 Nov 2026, at `/admin/` (see `EDITING.md`). GitHub sign-in reuses kobo.ngo's DigitalOcean Function, once `hda.kobolabs.dev` is in its allowed domains.
+- ~~**Sveltia CMS** for editors~~: done on 3 Nov 2026, at `/admin/` (see `EDITING.md`). GitHub sign-in is its own DigitalOcean Function (`cms-auth/`), still to deploy with a new GitHub OAuth app.
 - **"Latest from our members"**: pull each member's RSS/JSON feed at build time if all four have one. To check per site.
 - **"They trust us"** partner logos page, a projects map (data formats differ between members), and job openings.
 - **Form routing** via a form service once the address and the CC rules are agreed.

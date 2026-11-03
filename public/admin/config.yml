@@ -9,9 +9,8 @@ backend:
   name: github
   repo: joshuaberetta/hda-website
   branch: main
-  # GitHub sign-in runs as a DigitalOcean Function, shared with kobo.ngo
-  # (../kobo.ngo/cms-auth). hda.kobolabs.dev must be in its ALLOWED_DOMAINS.
-  base_url: https://faas-nyc1-2ef2e6cc.doserverless.co/api/v1/web/fn-71a733d0-28ac-4549-8671-5325f39a0f1a/cms/auth
+  # GitHub sign-in runs as a DigitalOcean Function (see cms-auth/README.md).
+  base_url: https://faas-fra1-afec6ce7.doserverless.co/api/v1/web/fn-81cc2b29-d395-4728-9494-2c16f53bf4c0/cms/auth
   commit_messages:
     create: "Create {{collection}} “{{slug}}” (website editor)"
     update: "Update {{collection}} “{{slug}}” (website editor)"
