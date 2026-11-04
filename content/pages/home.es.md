@@ -25,6 +25,14 @@ sections:
       - title: Evaluación de necesidades
         body: 1,240 encuestas de hogares recopiladas sin conexión
         label: 4.9°S 29.6°E · datos de campo
+  - type: members
+    id: members
+    eyebrow: Una alianza más fuerte
+    title: Cuatro miembros. Un propósito común.
+    links:
+      - label: Más información sobre nuestros miembros
+        href: /members
+        variant: arrow
   - type: examples
     id: examples
     eyebrow: Nuestro trabajo
@@ -51,14 +59,6 @@ sections:
         title: Un ejemplo elegido por Kobo
         body: Una breve línea sobre el trabajo, los socios participantes y lo que hizo posible.
         placeholder: true
-  - type: members
-    id: members
-    eyebrow: Una alianza más fuerte
-    title: Cuatro miembros. Un propósito común.
-    links:
-      - label: Más información sobre nuestros miembros
-        href: /members
-        variant: arrow
   - type: layers
     id: services
     eyebrow: Qué hacemos

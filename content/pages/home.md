@@ -14,6 +14,13 @@ sections:
       - { title: Rapid mapping, body: Base map updated by community mappers, label: "12.6°N 8.0°W · 48 h" }
       - { title: Needs assessment, body: "1,240 household surveys collected offline", label: "4.9°S 29.6°E · field data" }
 
+  - type: members
+    id: members
+    eyebrow: A stronger alliance
+    title: Four members. One shared purpose.
+    links:
+      - { label: Read more about our members, href: /members, variant: arrow }
+
   # One piece of work picked by each member. Placeholders until each org sends theirs.
   - type: examples
     id: examples
@@ -41,13 +48,6 @@ sections:
         title: An example picked by Kobo
         body: A short line on the work, the partners involved and what it made possible.
         placeholder: true
-
-  - type: members
-    id: members
-    eyebrow: A stronger alliance
-    title: Four members. One shared purpose.
-    links:
-      - { label: Read more about our members, href: /members, variant: arrow }
 
   - type: layers
     id: services

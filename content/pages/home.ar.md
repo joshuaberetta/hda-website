@@ -25,6 +25,14 @@ sections:
       - title: تقييم الاحتياجات
         body: 1,240 استبيانًا أُسريًا جُمعت دون اتصال بالإنترنت
         label: 4.9°S 29.6°E · بيانات ميدانية
+  - type: members
+    id: members
+    eyebrow: تحالف أقوى
+    title: أربعة أعضاء. غاية واحدة مشتركة.
+    links:
+      - label: اقرأ المزيد عن أعضائنا
+        href: /members
+        variant: arrow
   - type: examples
     id: examples
     eyebrow: أعمالنا
@@ -51,14 +59,6 @@ sections:
         title: مثال اختارته Kobo
         body: سطر موجز عن العمل والشركاء المشاركين وما أتاحه.
         placeholder: true
-  - type: members
-    id: members
-    eyebrow: تحالف أقوى
-    title: أربعة أعضاء. غاية واحدة مشتركة.
-    links:
-      - label: اقرأ المزيد عن أعضائنا
-        href: /members
-        variant: arrow
   - type: layers
     id: services
     eyebrow: ما نقوم به
