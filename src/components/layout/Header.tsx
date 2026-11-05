@@ -7,7 +7,8 @@ import { LOCALES, type Locale } from '../../lib/content';
 import { localeInfo, localePrefix, useContent, useLocale, useT } from '../../lib/i18n';
 import { Logo } from '../brand/Logo';
 import { trimSlash } from '../../lib/url';
-import { linkProps } from '../SmartLink';
+import type { NavItem } from '../../lib/types';
+import { isOffsite, linkProps, OffsiteIcon } from '../SmartLink';
 import { rememberLanguage } from './LanguageSuggestion';
 import classes from './Header.module.css';
 
@@ -62,6 +63,27 @@ function LanguageMenu() {
   );
 }
 
+/** A menu entry that opens a dropdown of links rather than linking itself. */
+function NavDropdown({ item, isCurrent }: { item: Extract<NavItem, { items: unknown[] }>; isCurrent: (href: string) => boolean }) {
+  return (
+    <Menu trigger="click-hover" position="bottom-start" radius="md" shadow="md" offset={0}>
+      <Menu.Target>
+        <UnstyledButton className={classes.link} aria-current={item.items.some((l) => isCurrent(l.href)) ? 'page' : undefined}>
+          {item.label}
+          <IconChevronDown size={14} stroke={2.5} aria-hidden />
+        </UnstyledButton>
+      </Menu.Target>
+      <Menu.Dropdown miw={180}>
+        {item.items.map((l) => (
+          <Menu.Item key={l.href} {...linkProps(l.href)} rightSection={isOffsite(l.href) ? <OffsiteIcon /> : undefined}>
+            {l.label}
+          </Menu.Item>
+        ))}
+      </Menu.Dropdown>
+    </Menu>
+  );
+}
+
 export function Header() {
   const t = useT();
   const { site } = useContent();
@@ -83,19 +105,23 @@ export function Header() {
           <Link to="/" className={classes.brand} aria-label={t('header.home', { name: site.name })}>
             <Logo />
           </Link>
-          <Group component="nav" aria-label={t('header.mainMenu')} gap={30} visibleFrom="md" className={classes.nav} wrap="nowrap">
-            {site.nav.map((item) => (
-              <Link key={item.href} to={item.href} className={classes.link} aria-current={isCurrent(item.href) ? 'page' : undefined}>
-                {item.label}
-              </Link>
-            ))}
+          <Group component="nav" aria-label={t('header.mainMenu')} visibleFrom="xl" className={classes.nav} wrap="nowrap">
+            {site.nav.map((item) =>
+              item.items ? (
+                <NavDropdown key={item.label} item={item} isCurrent={isCurrent} />
+              ) : (
+                <Link key={item.href} to={item.href} className={classes.link} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+                  {item.label}
+                </Link>
+              ),
+            )}
           </Group>
           <Group gap="sm" wrap="nowrap">
             <LanguageMenu />
             <Button size="sm" {...linkProps(site.cta.href)} className={classes.cta}>
               {site.cta.label}
             </Button>
-            <Burger opened={opened} onClick={toggle} hiddenFrom="md" size="sm" aria-label={t('header.openMenu')} />
+            <Burger opened={opened} onClick={toggle} hiddenFrom="xl" size="sm" aria-label={t('header.openMenu')} />
           </Group>
         </Group>
       </Container>
@@ -106,15 +132,27 @@ export function Header() {
         position={dir === 'rtl' ? 'left' : 'right'}
         size={300}
         title={<Logo size={14} />}
-        hiddenFrom="md"
+        hiddenFrom="xl"
         overlayProps={{ backgroundOpacity: 0.2, blur: 10, color: '#0e2a47' }}
       >
         <Stack component="nav" aria-label={t('header.mainMenu')} gap={4}>
-          {site.nav.map((item) => (
-            <UnstyledButton key={item.href} component={Link} to={item.href} className={classes.drawerLink} aria-current={isCurrent(item.href) ? 'page' : undefined}>
-              {item.label}
-            </UnstyledButton>
-          ))}
+          {site.nav.map((item) =>
+            item.items ? (
+              <div key={item.label}>
+                <div className={classes.drawerGroup}>{item.label}</div>
+                {item.items.map((l) => (
+                  <UnstyledButton key={l.href} {...linkProps(l.href)} className={classes.drawerSubLink} aria-current={isCurrent(l.href) ? 'page' : undefined}>
+                    {l.label}
+                    {isOffsite(l.href) && <OffsiteIcon />}
+                  </UnstyledButton>
+                ))}
+              </div>
+            ) : (
+              <UnstyledButton key={item.href} component={Link} to={item.href} className={classes.drawerLink} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+                {item.label}
+              </UnstyledButton>
+            ),
+          )}
           <Button mt="lg" {...linkProps(site.cta.href)}>
             {site.cta.label}
           </Button>

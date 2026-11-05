@@ -125,7 +125,13 @@ for (const file of files('news')) {
 const siteFile = path.join(content, 'settings/site.yml');
 const site = YAML.parse(fs.readFileSync(siteFile, 'utf8'));
 for (const key of ['name', 'description', 'email', 'nav', 'cta', 'footer']) if (site[key] === undefined) fail(siteFile, `missing "${key}"`);
-checkLinks(siteFile, 'nav', site.nav);
+// Menu entries link somewhere, or open a dropdown of links ("items").
+for (const item of site.nav ?? []) {
+  if (item?.items) {
+    if (!item.label || item.href) fail(siteFile, `nav: "${item.label}" has items, so it needs a label and no href`);
+    checkLinks(siteFile, `nav "${item.label}"`, item.items);
+  } else checkLinks(siteFile, 'nav', [item]);
+}
 checkLinks(siteFile, 'cta', site.cta ? [site.cta] : []);
 for (const col of site.footer?.columns ?? []) checkLinks(siteFile, `footer "${col.title}"`, col.links);
 

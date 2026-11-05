@@ -198,13 +198,16 @@ export interface NewsItem {
   translation?: TranslationStatus;
 }
 
+export type NavItem = { label: string; href: string; items?: undefined } | { label: string; href?: undefined; items: { label: string; href: string }[] };
+
 export interface SiteSettings {
   name: string;
   description: string;
   email: string;
   /** False until the shared address is agreed; the contact section flags it. */
   emailConfirmed?: boolean;
-  nav: { label: string; href: string }[];
+  /** An entry with `items` opens a dropdown of those links instead of linking itself. */
+  nav: NavItem[];
   cta: LinkItem;
   footer: {
     blurb: string;

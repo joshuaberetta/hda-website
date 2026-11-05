@@ -454,10 +454,21 @@ collections:
             i18n: true
             label: Main menu
             widget: list
-            summary: "{{label}} → {{href}}"
+            summary: "{{label}}"
             fields:
               - { name: label, label: Label, widget: string, i18n: true }
-              - { name: href, label: Link, widget: string, i18n: duplicate }
+              - { name: href, label: Link, widget: string, required: false, i18n: duplicate,
+                  hint: "Leave empty if this entry opens a dropdown" }
+              - name: items
+                i18n: true
+                label: Dropdown links
+                widget: list
+                required: false
+                hint: "Links shown in a dropdown under this entry. Use either these or a link, not both"
+                summary: "{{label}} → {{href}}"
+                fields:
+                  - { name: label, label: Label, widget: string, i18n: true }
+                  - { name: href, label: Link, widget: string, i18n: duplicate }
           - name: cta
             i18n: true
             label: Header button

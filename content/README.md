@@ -31,6 +31,8 @@ Search for `placeholder`, `tbc` and `TBC` before launch.
 - `href` is a page (`/members`), a section of the home page (`/#contact`), or a full URL. Full URLs open in a new tab with ↗.
 - `variant` is `filled` (default, red button), `outline` (navy outline) or `arrow` (text link with →).
 
+In the main menu (`nav` in `site.yml`), an entry can have `items` (a list of links) instead of an `href`. It then opens a dropdown of those links, like *Our work*.
+
 ## Pages
 
 ```yaml

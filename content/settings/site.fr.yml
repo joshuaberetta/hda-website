@@ -1,6 +1,6 @@
 translation:
   status: machine
-  source: 97ecde44cc75
+  source: bffa097b334d
   model: claude-opus-5-5
   updated: 2026-11-03
 name: Humanitarian Data Alliance
@@ -12,6 +12,10 @@ nav:
     href: /members
   - label: Ce que nous faisons
     href: /what-we-do
+  - label: Nos réalisations
+    items:
+      - label: HILA
+        href: https://hila-survey.org
   - label: Engagements
     href: /commitments
   - label: Actualités et événements

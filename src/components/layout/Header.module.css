@@ -25,8 +25,11 @@
   }
 }
 
+/* Shown from xl, the narrowest width the French and Spanish labels fit at;
+   the burger takes over below. */
 .nav {
   align-self: stretch;
+  gap: 24px;
   margin-inline-start: auto;
 }
 
@@ -40,6 +43,7 @@
   font-weight: 500;
   color: var(--hda-ink);
   text-decoration: none;
+  gap: 4px;
   white-space: nowrap;
 
   &::after {
@@ -70,6 +74,28 @@
   padding: 10px 0;
   font-size: 19px;
   font-weight: 500;
+  color: var(--hda-ink);
+
+  &[aria-current='page'] {
+    color: var(--mantine-color-red-6);
+  }
+}
+
+/* A dropdown entry in the drawer: its name as a small heading, its links indented under it. */
+.drawerGroup {
+  padding: 10px 0 2px;
+  font-size: 19px;
+  font-weight: 500;
+  color: var(--hda-ink);
+}
+
+.drawerSubLink {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 0;
+  padding-inline-start: 16px;
+  font-size: 17px;
   color: var(--hda-ink);
 
   &[aria-current='page'] {

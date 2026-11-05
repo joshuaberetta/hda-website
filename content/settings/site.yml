@@ -8,6 +8,10 @@ nav:
   - { label: About, href: "/#about" }
   - { label: Members, href: /members }
   - { label: What we do, href: /what-we-do }
+  # An entry with "items" opens a dropdown instead of linking.
+  - label: Our work
+    items:
+      - { label: HILA, href: "https://hila-survey.org" }
   - { label: Commitments, href: /commitments }
   - { label: News & events, href: "/#news" }
 cta: { label: Work with us, href: "/#contact" }
